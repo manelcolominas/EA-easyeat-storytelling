@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Secret del Sukashi — Capítol 4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --paper:       #F9F8F4;
+      --ink:         #1C1A17;
+      --coral:       #D94F3A;
+      --teal:        #2A8C7A;
+      --teal-light:  #4DB8A4;
+      --amber:       #C8943A;
+      --muted:       #9A9589;
+      --warm-white:  #FDFCF9;
+      --sushi-empty: #DDD9D0;
+      --sushi-fill:  #D94F3A;
+      --dash-bg:     #161412;
+      --dash-card:   #1E1C19;
+      --dash-border: rgba(255,255,255,0.07);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.6;
+    }
+
+    /* ═══ SUSHI BAR ═══ */
+    #sushi-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,248,244,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(28,26,23,0.08);
+      padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .bar-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .sushi-pieces { display: flex; gap: 10px; align-items: center; }
+    .sushi-piece { width: 38px; height: 22px; }
+    .sushi-piece svg { width: 100%; height: 100%; transition: transform 0.3s ease; }
+    .sushi-piece.filled svg { transform: scale(1.08); }
+    .sushi-piece .rice    { fill: var(--sushi-empty); transition: fill 0.5s ease; }
+    .sushi-piece .nori    { fill: #C8C4BB;            transition: fill 0.5s ease; }
+    .sushi-piece .topping { fill: var(--sushi-empty); transition: fill 0.5s ease; }
+    .sushi-piece.filled .rice    { fill: #F5E6D5; }
+    .sushi-piece.filled .nori    { fill: #2C2820; }
+    .sushi-piece.filled .topping { fill: var(--sushi-fill); }
+
+    /* ═══ HERO ═══ */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-rows: 1fr auto;
+      position: relative; overflow: hidden;
+    }
+    .hero-image-wrap { position: absolute; inset: 0; z-index: 0; }
+    .hero-image-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+      filter: brightness(0.3) saturate(0.4);
+    }
+    .hero-image-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(155deg,
+        rgba(42,140,122,0.15) 0%,
+        rgba(28,26,23,0.5) 50%,
+        rgba(249,248,244,1) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 28px 60px;
+    }
+    .chapter-badge {
+      display: inline-block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2);
+      padding: 6px 18px; border-radius: 100px; margin-bottom: 36px;
+      font-weight: 500; backdrop-filter: blur(4px);
+    }
+    .hero-icon-wrap {
+      width: 72px; height: 72px; margin: 0 auto 28px;
+      border: 1px solid rgba(77,184,164,0.4);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: rgba(42,140,122,0.12);
+      animation: pulseRing 3s ease-in-out infinite;
+    }
+    @keyframes pulseRing {
+      0%,100% { box-shadow: 0 0 0 0 rgba(77,184,164,0.2), 0 0 0 12px rgba(77,184,164,0.05); }
+      50%      { box-shadow: 0 0 0 12px rgba(77,184,164,0.12), 0 0 0 28px rgba(77,184,164,0); }
+    }
+    .hero-icon-wrap i { font-size: 1.8rem; color: var(--teal-light); }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem,6vw,4.3rem); font-weight: 600; line-height: 1.1;
+      color: #fff; margin-bottom: 20px; max-width: 680px;
+      text-shadow: 0 2px 28px rgba(0,0,0,0.5);
+    }
+    h1 em { font-style: italic; color: #7EDECE; }
+    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.5); max-width: 440px; line-height: 1.7; }
+    .scroll-hint {
+      position: relative; z-index: 1; padding-bottom: 48px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.35); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .scroll-arrow {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+    /* ═══ STORY ═══ */
+    #story { max-width: 700px; margin: 0 auto; padding: 0 28px 160px; }
+
+    .story-block {
+      margin-bottom: 80px;
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .story-block.visible { opacity: 1; transform: translateY(0); }
+
+    .block-icon {
+      font-size: 1.4rem; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px; color: var(--muted);
+    }
+    .block-icon::after { content: ''; display: block; height: 1px; width: 40px; background: var(--muted); opacity: 0.35; }
+    .block-icon .icon-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
+
+    p { font-size: clamp(1rem,2.2vw,1.12rem); color: #3A3730; line-height: 1.9; }
+    p + p { margin-top: 18px; }
+
+    /* ═══ TIME STAMP ═══ */
+    .time-stamp {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 56px; padding-top: 16px;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .time-stamp.visible { opacity: 1; transform: translateY(0); }
+    .time-stamp::before {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(42,140,122,0.4));
+    }
+    .time-stamp::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to left, transparent, rgba(42,140,122,0.4));
+    }
+    .time-stamp-inner {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 8px 20px;
+      border: 1px solid rgba(42,140,122,0.25); border-radius: 100px;
+      background: rgba(42,140,122,0.04);
+    }
+    .time-stamp-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+    .time-stamp-text  { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--ink); }
+
+    /* ═══ DASHBOARD INTERACTIU ═══ */
+    .dashboard-wrap {
+      background: var(--dash-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 36px 0;
+      border: 1px solid var(--dash-border);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+      opacity: 0; transform: translateY(28px) scale(0.97);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .dashboard-wrap.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* Barra superior del dashboard */
+    .dash-topbar {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--dash-border);
+      padding: 12px 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.red   { background: #FF5F57; }
+    .dot.yellow{ background: #FEBC2E; }
+    .dot.green { background: #28C840; }
+    .dash-title { margin-left: 8px; font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
+
+    /* KPI row */
+    .dash-kpi-row {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      border-bottom: 1px solid var(--dash-border);
+    }
+    .dash-kpi {
+      padding: 20px 22px;
+      border-right: 1px solid var(--dash-border);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .dash-kpi:last-child { border-right: none; }
+    .kpi-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .kpi-value {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 500;
+      color: #fff; line-height: 1;
+    }
+    .kpi-delta { font-size: 10px; display: flex; align-items: center; gap: 4px; }
+    .kpi-delta.up   { color: var(--teal-light); }
+    .kpi-delta.warn { color: var(--coral); }
+
+    /* Gràfica de barres */
+    .dash-chart-area {
+      padding: 24px 20px 20px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .dash-chart-section { display: flex; flex-direction: column; gap: 12px; }
+    .dash-chart-title { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+    /* Bar chart */
+    .bar-chart { display: flex; flex-direction: column; gap: 8px; }
+    .bar-row { display: grid; grid-template-columns: 56px 1fr 36px; gap: 8px; align-items: center; }
+    .bar-name { font-size: 10px; color: rgba(255,255,255,0.45); font-family: 'DM Mono', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { background: rgba(255,255,255,0.05); border-radius: 2px; height: 6px; overflow: hidden; }
+    .bar-fill {
+      height: 100%; border-radius: 2px;
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
+    }
+    .bar-fill.teal   { background: linear-gradient(to right, var(--teal), var(--teal-light)); }
+    .bar-fill.coral  { background: linear-gradient(to right, #A03828, var(--coral)); }
+    .bar-fill.amber  { background: linear-gradient(to right, #8C6020, var(--amber)); }
+    .bar-val { font-size: 10px; color: rgba(255,255,255,0.4); font-family: 'DM Mono', monospace; text-align: right; }
+
+    /* Activity list */
+    .activity-list { display: flex; flex-direction: column; gap: 0; }
+    .activity-item {
+      display: grid; grid-template-columns: 28px 1fr auto;
+      gap: 10px; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--dash-border);
+      opacity: 0; transform: translateX(12px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .activity-item.visible { opacity: 1; transform: translateX(0); }
+    .activity-item:last-child { border-bottom: none; }
+    .act-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .act-dot.green  { background: var(--teal-light); }
+    .act-dot.orange { background: var(--coral); }
+    .act-dot.yellow { background: var(--amber); }
+    .act-name { font-size: 11px; color: rgba(255,255,255,0.65); }
+    .act-name small { display: block; font-size: 9px; color: rgba(255,255,255,0.25); margin-top: 1px; }
+    .act-badge {
+      font-size: 9px; padding: 2px 8px; border-radius: 100px; white-space: nowrap;
+      font-family: 'DM Mono', monospace;
+    }
+    .act-badge.active  { background: rgba(42,140,122,0.2); color: var(--teal-light); }
+    .act-badge.cold    { background: rgba(217,79,58,0.2);  color: var(--coral); }
+    .act-badge.regular { background: rgba(200,148,58,0.2); color: var(--amber); }
+
+    /* ═══ NOTIFICACIÓ ANIMADA ═══ */
+    .notif-demo {
+      background: var(--dash-bg);
+      border: 1px solid var(--dash-border);
+      border-radius: 10px; padding: 28px;
+      margin: 36px 0;
+      display: flex; flex-direction: column; gap: 16px; align-items: center;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .notif-demo.visible { opacity: 1; transform: translateY(0); }
+    .notif-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.25); align-self: flex-start; }
+
+    .phone-notif {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 16px 18px;
+      display: flex; gap: 14px; align-items: flex-start;
+      width: 100%; max-width: 360px;
+      position: relative;
+      transform: scale(0.95); opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.6s ease;
+    }
+    .phone-notif.ping {
+      transform: scale(1); opacity: 1;
+    }
+    .notif-app-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1rem;
+    }
+    .notif-content { flex: 1; }
+    .notif-app-name { font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; margin-bottom: 3px; }
+    .notif-title    { font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 2px; }
+    .notif-body     { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+    .notif-time     { font-size: 9px; color: rgba(255,255,255,0.2); align-self: flex-start; margin-top: 2px; font-family: 'DM Mono', monospace; }
+
+    /* Pulsing dot */
+    .notif-ping-dot {
+      position: absolute; top: -4px; right: -4px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--coral);
+    }
+    .notif-ping-dot::before {
+      content: ''; position: absolute; inset: -4px;
+      border-radius: 50%; background: rgba(217,79,58,0.3);
+      animation: pingAnim 1.5s ease-out infinite;
+    }
+    @keyframes pingAnim { 0% { opacity:1; transform:scale(1); } 100% { opacity:0; transform:scale(2.5); } }
+
+    /* ═══ ESCENA IMATGE ═══ */
+    .scene-image {
+      width: 100%; border-radius: 4px; overflow: hidden; margin: 28px 0;
+      position: relative;
+      opacity: 0; transform: translateY(20px) scale(0.98);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .scene-image.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .scene-image img {
+      width: 100%; display: block; aspect-ratio: 16/7; object-fit: cover;
+      filter: saturate(0.68) brightness(0.88);
+      transition: filter 0.6s ease, transform 0.6s ease;
+    }
+    .scene-image:hover img { filter: saturate(0.88) brightness(1); transform: scale(1.01); }
+    .scene-image figcaption {
+      position: absolute; bottom: 12px; right: 16px;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ═══ CINEMATIC ═══ */
+    .cinematic-image {
+      width: calc(100% + 56px); margin-left: -28px; margin-right: -28px; margin-bottom: 64px;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1);
+    }
+    .cinematic-image.visible { opacity: 1; transform: translateY(0); }
+    .cinematic-image img {
+      width: 100%; display: block; aspect-ratio: 21/9; object-fit: cover;
+      filter: saturate(0.5) brightness(0.65);
+    }
+    .cinematic-image .cine-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(249,248,244,0.95) 100%);
+    }
+    .cinematic-image .cine-caption {
+      position: absolute; bottom: 20px; left: 28px;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(0.95rem,2.5vw,1.2rem); color: rgba(255,255,255,0.9);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 420px; line-height: 1.5;
+    }
+
+    /* ═══ TIQUET ANIMAT ═══ */
+    .ticket-demo {
+      background: var(--warm-white);
+      border: 1px solid rgba(28,26,23,0.1);
+      border-radius: 4px; padding: 28px 32px;
+      margin: 36px 0;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .ticket-demo.visible { opacity: 1; transform: translateY(0); }
+    .ticket-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; padding-bottom: 16px;
+      border-bottom: 1px dashed rgba(28,26,23,0.12);
+    }
+    .ticket-title { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .ticket-date  { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); }
+
+    .ticket-lines { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .ticket-line  { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .ticket-item  { font-size: clamp(0.88rem,1.8vw,0.98rem); color: var(--ink); }
+    .ticket-dots  { flex: 1; border-bottom: 1px dotted rgba(28,26,23,0.15); margin-bottom: 3px; }
+    .ticket-price { font-family: 'DM Mono', monospace; font-size: 0.9rem; color: var(--ink); }
+    .ticket-extra { color: var(--teal); font-style: italic; }
+
+    .ticket-footer {
+      border-top: 1px dashed rgba(28,26,23,0.12); padding-top: 16px;
+      display: flex; align-items: baseline; justify-content: space-between;
+    }
+    .ticket-total-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .ticket-total-value { font-family: 'DM Mono', monospace; font-size: 1.3rem; font-weight: 500; color: var(--ink); }
+
+    /* Progress bar de punts */
+    .points-progress-wrap { margin-top: 16px; }
+    .pp-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .pp-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .pp-count  { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--teal); }
+    .pp-track  { height: 5px; background: rgba(28,26,23,0.08); border-radius: 3px; overflow: hidden; }
+    .pp-fill   { height: 100%; border-radius: 3px; width: 0%; background: linear-gradient(to right, var(--teal), var(--teal-light)); transition: width 1.4s cubic-bezier(0.22,1,0.36,1); }
+    .pp-milestone { font-size: 9px; color: var(--teal); margin-top: 5px; text-align: right; font-style: italic; }
+
+    /* ═══ CALLOUT ═══ */
+    .insight-callout {
+      border: 1px solid rgba(42,140,122,0.25); border-left: 3px solid var(--teal);
+      background: rgba(42,140,122,0.04);
+      padding: 28px 32px; border-radius: 0 8px 8px 0; margin: 28px 0;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem,2.5vw,1.3rem);
+      font-style: italic; color: var(--ink); line-height: 1.65; position: relative;
+    }
+    .insight-callout::before {
+      content: '\201C'; position: absolute; top: -14px; left: 24px;
+      font-size: 5rem; color: var(--teal); opacity: 0.1;
+      font-family: 'Cormorant Garamond', serif; line-height: 1;
+    }
+
+    /* ═══ GANXO FINAL ═══ */
+    .ganxo-card {
+      background: var(--ink); border-radius: 8px;
+      padding: 56px 44px; text-align: center;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1);
+      margin: 48px 0;
+    }
+    .ganxo-card.visible { opacity: 1; transform: translateY(0); }
+    .ganxo-card::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--teal), transparent);
+    }
+    .ganxo-card::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--teal), transparent);
+    }
+    /* Decorative grid bg */
+    .ganxo-card-bg {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .ganxo-card-bg svg { width: 100%; height: 100%; opacity: 0.03; }
+
+    .ganxo-label { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 24px; display: block; }
+    .ganxo-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem,3vw,1.65rem); font-style: italic; font-weight: 400;
+      color: #fff; line-height: 1.6; max-width: 520px; margin: 0 auto 20px;
+      position: relative; z-index: 1;
+    }
+    .ganxo-quote strong { font-style: normal; color: #7EDECE; font-weight: 600; }
+    .ganxo-subtext { font-size: clamp(0.82rem,1.7vw,0.92rem); color: rgba(255,255,255,0.3); position: relative; z-index: 1; }
+
+    /* ═══ DIVIDER ═══ */
+    .chapter-divider {
+      display: flex; align-items: center; gap: 16px; margin: 48px 0;
+      opacity: 0; transform: scaleX(0.5);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .chapter-divider.visible { opacity: 1; transform: scaleX(1); }
+    .chapter-divider::before, .chapter-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right,transparent,var(--muted),transparent); opacity: 0.25;
+    }
+    .chapter-divider span { font-size: 1.1rem; color: var(--muted); }
+
+    /* ═══ FINAL ═══ */
+    .final-line {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+      text-align: center; margin-top: 64px; padding: 0 16px;
+    }
+    .final-line.visible { opacity: 1; transform: translateY(0); }
+    .final-line p { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem,2.4vw,1.25rem); font-style: italic; color: var(--muted); }
+    .next-chapter-hint {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: pointer;
+      transition: border-color 0.3s, color 0.3s;
+      text-decoration: none;
+    }
+    .next-chapter-hint:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 640px) {
+      #sushi-bar { padding: 12px 16px; }
+      .sushi-piece { width: 30px; height: 18px; }
+      .bar-label { font-size: 9px; }
+      #story { padding: 0 20px 120px; }
+      .story-block { margin-bottom: 56px; }
+      .dash-kpi-row { grid-template-columns: 1fr 1fr; }
+      .dash-kpi:nth-child(3) { grid-column: span 2; border-right: none; }
+      .dash-chart-area { grid-template-columns: 1fr; }
+      .cinematic-image { width: calc(100% + 40px); margin-left: -20px; }
+      .ganxo-card { padding: 36px 24px; }
+      .ticket-demo { padding: 20px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="sushi-bar">
+  <span class="bar-label">Capítol 4</span>
+  <div class="sushi-pieces" id="sushiPieces"></div>
+  <span class="bar-label" id="progressLabel">0%</span>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-image-wrap">
+    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&fit=crop&crop=center" alt="Dashboard analytics" loading="eager"/>
+  </div>
+  <div class="hero-content">
+    <span class="chapter-badge">Capítol 4 · El Secret del Sukashi</span>
+    <div class="hero-icon-wrap">
+      <i class="fa-solid fa-chart-line"></i>
+    </div>
+    <h1>L'estratègia<br><em>invisible</em></h1>
+    <p class="hero-subtitle">Quan les dades deixaran de ser números i es convertiran en la manera de cuidar millor cada client.</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Continua llegint</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<main id="story">
+
+  <!-- TIME STAMP -->
+  <div class="time-stamp" data-reveal>
+    <div class="time-stamp-inner">
+      <span class="time-stamp-label">Tres mesos després</span>
+      <span class="time-stamp-text">El Sukashi ja no suposa. Sap.</span>
+    </div>
+  </div>
+
+  <!-- BLOC 1: De la intuïció a la certesa -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-magnifying-glass-chart" style="color:var(--teal);font-size:1.2rem;"></i>
+      <span class="icon-label">De la intuïció a la certesa</span>
+    </div>
+    <p>Durant anys, l'Alicia ha gestionat el Sukashi a base d'instint. "Sembla que el Joan no ve tant últimament." "Crec que la Maria sempre demana el mateix." "Diria que els dijous anem fluixos."</p>
+    <p>Creia. Suposava. Sentia.</p>
+    <p>Tres mesos després d'implementar el sistema, tot ha canviat. Cada matí, abans de servir el primer cafè, l'Alicia obre el dashboard. I el que veu no és un full de càlcul fred. Veu persones.</p>
+  </div>
+
+  <!-- DASHBOARD INTERACTIU -->
+  <div class="dashboard-wrap" data-reveal id="dashWrap">
+    <div class="dash-topbar">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <span class="dash-title">Sukashi · Tauler de clients · Avui</span>
+    </div>
+
+    <div class="dash-kpi-row">
+      <div class="dash-kpi">
+        <span class="kpi-label">Clients actius</span>
+        <span class="kpi-value" id="kpiClients">0</span>
+        <span class="kpi-delta up"><i class="fa-solid fa-arrow-trend-up" style="font-size:9px;"></i> +23% vs mes passat</span>
+      </div>
+      <div class="dash-kpi">
+        <span class="kpi-label">Tiquet mitjà</span>
+        <span class="kpi-value">€<span id="kpiTicket">0</span></span>
+        <span class="kpi-delta up"><i class="fa-solid fa-arrow-trend-up" style="font-size:9px;"></i> +8.4 euros</span>
+      </div>
+      <div class="dash-kpi">
+        <span class="kpi-label">En risc de refredar</span>
+        <span class="kpi-value" id="kpiCold">0</span>
+        <span class="kpi-delta warn"><i class="fa-solid fa-triangle-exclamation" style="font-size:9px;"></i> Sense visita &gt;14 dies</span>
+      </div>
+    </div>
+
+    <div class="dash-chart-area">
+      <!-- Bar chart: dies de la setmana -->
+      <div class="dash-chart-section">
+        <span class="dash-chart-title">Visites per dia (últimes 4 setmanes)</span>
+        <div class="bar-chart" id="barChart">
+          <div class="bar-row">
+            <span class="bar-name">Dil.</span>
+            <div class="bar-track"><div class="bar-fill teal" data-width="42"></div></div>
+            <span class="bar-val">42</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Dim.</span>
+            <div class="bar-track"><div class="bar-fill teal" data-width="38"></div></div>
+            <span class="bar-val">38</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Dmc.</span>
+            <div class="bar-track"><div class="bar-fill teal" data-width="55"></div></div>
+            <span class="bar-val">55</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Dij.</span>
+            <div class="bar-track"><div class="bar-fill amber" data-width="31"></div></div>
+            <span class="bar-val">31</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Div.</span>
+            <div class="bar-track"><div class="bar-fill teal" data-width="88"></div></div>
+            <span class="bar-val">88</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Dis.</span>
+            <div class="bar-track"><div class="bar-fill teal" data-width="95"></div></div>
+            <span class="bar-val">95</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">Diu.</span>
+            <div class="bar-track"><div class="bar-fill coral" data-width="22"></div></div>
+            <span class="bar-val">22</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity list -->
+      <div class="dash-chart-section">
+        <span class="dash-chart-title">Clients · Últim accés</span>
+        <div class="activity-list">
+          <div class="activity-item" data-act-delay="0">
+            <div class="act-dot green"></div>
+            <div class="act-name">Maria R.<small>Salmó + maki · ahir</small></div>
+            <span class="act-badge active">Actiu</span>
+          </div>
+          <div class="activity-item" data-act-delay="120">
+            <div class="act-dot orange"></div>
+            <div class="act-name">Joan M.<small>Última visita fa 15 dies</small></div>
+            <span class="act-badge cold">Risc</span>
+          </div>
+          <div class="activity-item" data-act-delay="240">
+            <div class="act-dot yellow"></div>
+            <div class="act-name">Carles B.<small>Menú omakase · cada dijous</small></div>
+            <span class="act-badge regular">Regular</span>
+          </div>
+          <div class="activity-item" data-act-delay="360">
+            <div class="act-dot green"></div>
+            <div class="act-name">Laia G.<small>Primera visita fa 3 dies</small></div>
+            <span class="act-badge active">Nou</span>
+          </div>
+          <div class="activity-item" data-act-delay="480">
+            <div class="act-dot orange"></div>
+            <div class="act-name">Pau T.<small>Última visita fa 18 dies</small></div>
+            <span class="act-badge cold">Risc</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <p>El Joan no ha vingut en 15 dies. Quan l'Alicia ho veu, no pensa "potser ha anat al veí." Pensa: <em>"El Joan hauria de saber que té 180 punts esperant-lo."</em></p>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 2: L'impuls invisible -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-mobile-screen-button" style="color:var(--teal);font-size:1.2rem;"></i>
+      <span class="icon-label">L'impuls invisible</span>
+    </div>
+    <p>El dimarts al migdia, el Joan rep un missatge. No és un anunci de publicitat massiva. No és un correu de "oferta especial per a tothom". És un missatge que sembla escrit a mà, perquè en el fons ho és: l'Alicia ha activat la seqüència just per a ell.</p>
+  </div>
+
+  <!-- NOTIFICACIÓ ANIMADA -->
+  <div class="notif-demo" data-reveal id="notifDemo">
+    <span class="notif-label">Missatge rebut · 12:34</span>
+    <div class="phone-notif" id="phoneNotif">
+      <div class="notif-app-icon">🍣</div>
+      <div class="notif-content">
+        <p class="notif-app-name">SUKASHI</p>
+        <p class="notif-title">Joan, et trobem a faltar.</p>
+        <p class="notif-body">Tens 180 punts esperant-te. Suficient per a un Sake de la casa. Quan vols que et reservem taula?</p>
+      </div>
+      <span class="notif-time">ara</span>
+      <div class="notif-ping-dot"></div>
+    </div>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <p>El Joan no ha vist cap anunci. No li han ofert un descompte. Li han recordat que <strong style="color:var(--ink);">té quelcom seu guardant-li</strong> en un lloc on sap que l'aprecien.</p>
+    <div class="insight-callout">
+      L'impuls invisible no és una tàctica de màrqueting. És un gest de cura, activat pel moment exacte en què el client ho necessita.
+    </div>
+  </div>
+
+  <!-- Imatge: parella sopant íntim sushi -->
+  <figure class="cinematic-image" data-reveal>
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&fit=crop&crop=center" alt="Sopar íntim restaurant" loading="lazy"/>
+    <div class="cine-overlay"></div>
+    <figcaption class="cine-caption">El Joan reserva taula dues hores després de rebre el missatge.</figcaption>
+  </figure>
+
+  <!-- BLOC 3: L'últim esforç / tiquet mitjà -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-chart-line" style="color:var(--teal);font-size:1.2rem;"></i>
+      <span class="icon-label">L'augment del tiquet mitjà</span>
+    </div>
+    <p>Però el sistema guarda una altra sorpresa. Tres mesos de dades revelen un patró que l'Alicia no havia anticipat.</p>
+    <p>Els clients que estan a punt d'assolir una xifra rodona de punts —una recompensa— gasten de mitjana un 22% més en aquella visita. No perquè els ho hagin demanat. Ho fan per iniciativa pròpia.</p>
+  </div>
+
+  <!-- TIQUET SIMULAT -->
+  <div class="ticket-demo" data-reveal id="ticketDemo">
+    <div class="ticket-header">
+      <span class="ticket-title">Comanda · Mesa 4</span>
+      <span class="ticket-date">Divendres 21:47</span>
+    </div>
+    <div class="ticket-lines">
+      <div class="ticket-line">
+        <span class="ticket-item">Omakase 12 peces</span>
+        <span class="ticket-dots"></span>
+        <span class="ticket-price">€28.00</span>
+      </div>
+      <div class="ticket-line">
+        <span class="ticket-item">Cervesa japonesa ×2</span>
+        <span class="ticket-dots"></span>
+        <span class="ticket-price">€9.00</span>
+      </div>
+      <div class="ticket-line">
+        <span class="ticket-item ticket-extra">+ Edamames (afegit)</span>
+        <span class="ticket-dots"></span>
+        <span class="ticket-price ticket-extra">€4.50</span>
+      </div>
+      <div class="ticket-line">
+        <span class="ticket-item ticket-extra">+ Mochi de postres</span>
+        <span class="ticket-dots"></span>
+        <span class="ticket-price ticket-extra">€5.50</span>
+      </div>
+    </div>
+    <div class="ticket-footer">
+      <span class="ticket-total-label">Total</span>
+      <span class="ticket-total-value">€47.00</span>
+    </div>
+    <div class="points-progress-wrap">
+      <div class="pp-header">
+        <span class="pp-label">Punts acumulats avui</span>
+        <span class="pp-count" id="ppCount">0 / 500</span>
+      </div>
+      <div class="pp-track"><div class="pp-fill" id="ppFill"></div></div>
+      <p class="pp-milestone" id="ppMilestone"></p>
+    </div>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <p>"Ja que estem a punt... demanem unes postres i arribem als 500."</p>
+    <p>Els edamames i el mochi de gel no estaven al pla original. Però la lògica dels punts ha convertit un sopar de 37 euros en un de 47. Sense pressió. Sense vendes creuades forçades. <strong style="color:var(--ink);">El client ha volgut gastar més.</strong></p>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- Imatge: analítica amb llum càlida -->
+  <figure class="scene-image" data-reveal>
+    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop&crop=center" alt="Revisió de dades equip" loading="lazy"/>
+    <figcaption>Les dades no menteixen. Però tampoc expliquen tota la història soles.</figcaption>
+  </figure>
+
+  <!-- BLOC 4: Humanitzar la tecnologia -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-heart" style="color:var(--teal);font-size:1.2rem;"></i>
+      <span class="icon-label">Humanitzar la tecnologia</span>
+    </div>
+    <p>Algú podria pensar que tot això és fred. Que reduir les persones a patrons de consum és deshumanitzador. Que el Joan no és un "client en risc de refredar-se", és una persona.</p>
+    <p>I té raó. Precisament per això funciona.</p>
+    <p>L'Alicia no utilitza les dades per manipular. Les utilitza per <strong style="color:var(--ink);">recordar</strong>. Perquè quan el Joan entra i ella li diu "Joan, he guardat el teu Sake preferit", no ho sap per màgia. Ho sap perquè s'ha pres la molèstia d'escoltar, de registrar, de recordar.</p>
+    <p>La tecnologia fa possible allò que la memòria humana no pot sostenir sola: <em>conèixer de veritat cada persona que seu a la teva taula.</em></p>
+  </div>
+
+  <!-- GANXO FINAL -->
+  <div class="ganxo-card" data-reveal>
+    <div class="ganxo-card-bg">
+      <svg viewBox="0 0 700 280" preserveAspectRatio="xMidYMid slice">
+        <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs>
+        <rect width="700" height="280" fill="url(#grid)"/>
+      </svg>
+    </div>
+    <span class="ganxo-label">✦ La clau del capítol</span>
+    <p class="ganxo-quote">
+      "La tecnologia no ha de ser freda;<br>ha de servir per <strong>conèixer millor</strong><br>qui seu a la teva taula."
+    </p>
+    <p class="ganxo-subtext">Les dades no substitueixen l'afecte. L'amplifiquen.</p>
+  </div>
+
+  <div class="final-line" data-reveal>
+    <p>Però conèixer el client no és el final del camí.<br>El repte és convertir aquest coneixement en una experiència que no es pugui trobar enlloc més.</p>
+    <div style="display: flex; justify-content: center; gap: 16px; align-items: center; margin-top: 40px; flex-wrap: wrap;">
+        <a href="sukashi-capitol3.html" class="next-chapter-hint">
+            <i class="fa-solid fa-chevron-left" style="font-size:0.8rem;"></i>
+            Capítol 3
+        </a>
+        <a href="sukashi-capitol5.html" class="next-chapter-hint">
+            Capítol 5
+            <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
+        </a>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  /* SUSHI BAR */
+  const TOTAL = 6;
+  const piecesEl = document.getElementById('sushiPieces');
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'sushi-piece'; d.id = 'sp-' + i;
+    d.innerHTML = '<svg viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg"><ellipse class="rice" cx="19" cy="16" rx="17" ry="6"/><rect class="nori" x="5" y="12" width="28" height="5" rx="1"/><ellipse class="topping" cx="19" cy="10" rx="14" ry="5"/><ellipse fill="rgba(255,255,255,0.15)" cx="15" cy="8" rx="5" ry="2"/></svg>';
+    piecesEl.appendChild(d);
+  }
+
+  const progressLabel = document.getElementById('progressLabel');
+  function updateProgress() {
+    const pct = Math.min(1, window.scrollY / (document.documentElement.scrollHeight - window.innerHeight));
+    const filled = Math.round(pct * TOTAL);
+    for (let i = 0; i < TOTAL; i++) document.getElementById('sp-' + i).classList.toggle('filled', i < filled);
+    progressLabel.textContent = Math.round(pct * 100) + '%';
+  }
+
+  /* COUNTER ANIMATION */
+  function animCount(id, to, duration, prefix) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (prefix || '') + Math.round(to * e);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* INTERSECTION OBSERVER */
+  var triggered = {};
+  var allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line, .time-stamp, .ganxo-card, .notif-demo, .ticket-demo');
+
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      el.classList.add('visible');
+      var id = el.id || el.className;
+
+      /* Dashboard */
+      if (el.id === 'dashWrap' && !triggered.dash) {
+        triggered.dash = true;
+        animCount('kpiClients', 247, 1400);
+        animCount('kpiTicket', 47, 1400);
+        animCount('kpiCold', 12, 1200);
+        /* Bars */
+        setTimeout(function() {
+          el.querySelectorAll('.bar-fill').forEach(function(b) {
+            b.style.width = b.getAttribute('data-width') + '%';
+          });
+        }, 300);
+        /* Activity items */
+        el.querySelectorAll('[data-act-delay]').forEach(function(item) {
+          var delay = parseInt(item.getAttribute('data-act-delay'));
+          setTimeout(function() { item.classList.add('visible'); }, 600 + delay);
+        });
+      }
+
+      /* Notification ping */
+      if (el.id === 'notifDemo' && !triggered.notif) {
+        triggered.notif = true;
+        setTimeout(function() {
+          document.getElementById('phoneNotif').classList.add('ping');
+        }, 500);
+      }
+
+      /* Ticket */
+      if (el.id === 'ticketDemo' && !triggered.ticket) {
+        triggered.ticket = true;
+        setTimeout(function() {
+          var fill = document.getElementById('ppFill');
+          var count = document.getElementById('ppCount');
+          var milestone = document.getElementById('ppMilestone');
+          var val = 0;
+          var target = 470;
+          var dur = 1600;
+          var start = null;
+          function step(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / dur, 1);
+            var e = 1 - Math.pow(1 - p, 3);
+            val = Math.round(target * e);
+            fill.style.width = (val / 500 * 100) + '%';
+            count.textContent = val + ' / 500';
+            if (val >= 440 && !milestone.textContent) milestone.textContent = 'Quasi! Afegeix unes postres i arribes al premi.';
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }, 400);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  allReveal.forEach(function(el) { io.observe(el); });
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+</body>
+</html>

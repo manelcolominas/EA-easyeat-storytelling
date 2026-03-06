@@ -46,8 +46,8 @@ git push origin v1.0	# Pujar la versió a GitHub
 
 mkdir <project name>
 cd <project name>/
-git init  # Inicia un nou repositori local (a l'ordinador)
-rm -rf .git   # ⚠️ Elimina el repositori Git localment, a l'ordinador (no els fitxers!)
+git init	# Inicia un nou repositori local (a l'ordinador)
+rm -rf .git	# ⚠️ Elimina el repositori Git localment, a l'ordinador (no els fitxers!)
 
 
 
@@ -57,7 +57,7 @@ rm -rf .git   # ⚠️ Elimina el repositori Git localment, a l'ordinador (no el
 ## …or push an existing repository from the command line
 
 
-git init # Inicia un nou repositori local (a l'ordinador)
+git init	# Inicia un nou repositori local (a l'ordinador)
 git remote add origin https://github.com/manelcolominas/PRIMER_MINIM_EXEMPLE_1_SERVEI_BANCARI.git
 git branch -M main
 git add .	# Afegir tots els fitxers al commit
@@ -75,7 +75,7 @@ git remote add origin https://github.com/manelcolominas/EA-TS.git
 
 git checkout develop		# Canviar a la branca develop
 git checkout -b nom_branca		# Crea la nova branca
-git push -u origin nom_branca	# Puja-la a GitHub
+git push -u origin nom_branca		# Puja-la a GitHub
 
 
 ### MERGE
@@ -104,10 +104,3 @@ merge -> juntar els canvis fets pel teu company i tu, unificar branques
 git tindra problemes   quan treballem en el mateix arxiu
 
 © Manel Colominas - Tots els drets reservats
-
-
-
-
-
-
-

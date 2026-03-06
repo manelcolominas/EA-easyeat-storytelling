@@ -271,7 +271,7 @@
     .next-chapter-hint {
       display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
       font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
-      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: default;
+      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: pointer;
       transition: border-color 0.3s, color 0.3s;
     }
     .next-chapter-hint:hover { border-color: var(--coral); color: var(--coral); }
@@ -423,9 +423,9 @@
 
   <div class="final-line" data-reveal>
     <p>Quan tothom marxa, l'Alicia es queda sola<br>amb un full en blanc i una sola frase escrita al mig.</p>
-    <div class="next-chapter-hint">
+    <div class="next-chapter-hint" onclick="window.location.href='sukashi-capitol2.html'">
       <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
-      Capítol 2 · Ben aviat
+      Capítol 2
     </div>
   </div>
 

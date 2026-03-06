@@ -392,8 +392,9 @@
     .next-chapter-hint {
       display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
       font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
-      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: default;
+      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: pointer;
       transition: border-color 0.3s, color 0.3s;
+      text-decoration: none;
     }
     .next-chapter-hint:hover { border-color: var(--coral); color: var(--coral); }
 
@@ -591,9 +592,15 @@
 
   <div class="final-line" data-reveal>
     <p>Però per ser la més valorada,<br>primer cal entendre per a qui s'és indispensable.</p>
-    <div class="next-chapter-hint">
-      <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
-      Capítol 3 · Ben aviat
+    <div style="display: flex; justify-content: center; gap: 16px; align-items: center; margin-top: 40px; flex-wrap: wrap;">
+        <a href="sukashi-capitol1.html" class="next-chapter-hint">
+            <i class="fa-solid fa-chevron-left" style="font-size:0.8rem;"></i>
+            Capítol 1
+        </a>
+        <a href="sukashi-capitol3.html" class="next-chapter-hint">
+            Capítol 3
+            <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
+        </a>
     </div>
   </div>
 
