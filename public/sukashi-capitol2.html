@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Secret del Sukashi — Capítol 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --paper: #F9F8F4;
+      --ink: #1C1A17;
+      --coral: #D94F3A;
+      --muted: #9A9589;
+      --warm-white: #FDFCF9;
+      --sushi-empty: #DDD9D0;
+      --sushi-fill: #D94F3A;
+      --danger: #B03020;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* GRAIN */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.6;
+    }
+
+    /* SUSHI BAR */
+    #sushi-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,248,244,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(28,26,23,0.08);
+      padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .bar-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .sushi-pieces { display: flex; gap: 10px; align-items: center; }
+    .sushi-piece { width: 38px; height: 22px; }
+    .sushi-piece svg { width: 100%; height: 100%; transition: transform 0.3s ease; }
+    .sushi-piece.filled svg { transform: scale(1.08); }
+    .sushi-piece .rice    { fill: var(--sushi-empty); transition: fill 0.5s ease; }
+    .sushi-piece .nori    { fill: #C8C4BB;            transition: fill 0.5s ease; }
+    .sushi-piece .topping { fill: var(--sushi-empty); transition: fill 0.5s ease; }
+    .sushi-piece.filled .rice    { fill: #F5E6D5; }
+    .sushi-piece.filled .nori    { fill: #2C2820; }
+    .sushi-piece.filled .topping { fill: var(--sushi-fill); }
+
+    /* CHAPTER NAV */
+    .chapter-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    }
+    .prev-chapter {
+      position: absolute; top: 50%; left: 28px; transform: translateY(-50%);
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+    }
+    .prev-chapter:hover { color: var(--coral); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-rows: 1fr auto;
+      position: relative; overflow: hidden;
+    }
+    .hero-image-wrap { position: absolute; inset: 0; z-index: 0; }
+    .hero-image-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 50%;
+      filter: brightness(0.38) saturate(0.5);
+    }
+    .hero-image-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(180,30,10,0.15) 0%, rgba(28,26,23,0.4) 50%, rgba(249,248,244,1) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 28px 60px;
+    }
+    .chapter-badge {
+      display: inline-block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25);
+      padding: 6px 18px; border-radius: 100px; margin-bottom: 36px;
+      font-weight: 500; backdrop-filter: blur(4px);
+    }
+    .hero-emoji {
+      font-size: clamp(3rem,8vw,5rem); margin-bottom: 24px; display: block;
+      animation: floatEmoji 4s ease-in-out infinite;
+    }
+    @keyframes floatEmoji {
+      0%,100% { transform: translateY(0px) rotate(2deg); }
+      50%      { transform: translateY(-10px) rotate(-2deg); }
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem,6vw,4.4rem); font-weight: 600; line-height: 1.12;
+      color: #fff; margin-bottom: 20px; max-width: 680px;
+      text-shadow: 0 2px 28px rgba(0,0,0,0.5);
+    }
+    h1 em { font-style: italic; color: #F5A58C; }
+    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.55); max-width: 440px; line-height: 1.7; }
+    .scroll-hint {
+      position: relative; z-index: 1; padding-bottom: 48px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .scroll-arrow {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+    /* STORY */
+    #story { max-width: 700px; margin: 0 auto; padding: 0 28px 160px; }
+
+    /* STORY BLOCK */
+    .story-block {
+      margin-bottom: 80px;
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .story-block.visible { opacity: 1; transform: translateY(0); }
+
+    .block-icon {
+      font-size: 1.4rem; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px; color: var(--muted);
+    }
+    .block-icon::after { content: ''; display: block; height: 1px; width: 40px; background: var(--muted); opacity: 0.35; }
+    .block-icon .icon-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
+
+    p { font-size: clamp(1rem,2.2vw,1.12rem); color: #3A3730; line-height: 1.9; }
+    p + p { margin-top: 18px; }
+
+    /* SCENE IMAGE */
+    .scene-image {
+      width: 100%; border-radius: 4px; overflow: hidden; margin: 28px 0;
+      position: relative;
+      opacity: 0; transform: translateY(20px) scale(0.98);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .scene-image.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .scene-image img {
+      width: 100%; display: block; aspect-ratio: 16/7; object-fit: cover;
+      filter: saturate(0.7) brightness(0.9);
+      transition: filter 0.6s ease, transform 0.6s ease;
+    }
+    .scene-image:hover img { filter: saturate(0.88) brightness(1); transform: scale(1.01); }
+    .scene-image figcaption {
+      position: absolute; bottom: 12px; right: 16px;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* CINEMATIC */
+    .cinematic-image {
+      width: calc(100% + 56px); margin-left: -28px; margin-right: -28px; margin-bottom: 64px;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1);
+    }
+    .cinematic-image.visible { opacity: 1; transform: translateY(0); }
+    .cinematic-image img {
+      width: 100%; display: block; aspect-ratio: 21/9; object-fit: cover;
+      filter: saturate(0.5) brightness(0.72);
+    }
+    .cinematic-image .cine-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(249,248,244,0.95) 100%);
+    }
+    .cinematic-image .cine-caption {
+      position: absolute; bottom: 20px; left: 28px;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(0.95rem,2.5vw,1.2rem); color: rgba(255,255,255,0.9);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 400px; line-height: 1.5;
+    }
+
+    /* SPLIT BLOCK */
+    .split-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center;
+      margin-bottom: 80px;
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .split-block.visible { opacity: 1; transform: translateY(0); }
+    .split-block.reverse { direction: rtl; }
+    .split-block.reverse > * { direction: ltr; }
+    .split-image { border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; }
+    .split-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: saturate(0.72) brightness(0.88);
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+    .split-image:hover img { transform: scale(1.03); filter: saturate(0.9) brightness(1); }
+    .split-text { display: flex; flex-direction: column; gap: 16px; }
+
+    /* NUMBERED DANGER LIST */
+    .danger-list {
+      list-style: none; margin: 28px 0; padding: 0;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .danger-list li {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 0 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(28,26,23,0.07);
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .danger-list li.visible { opacity: 1; transform: translateX(0); }
+    .danger-list li:last-child { border-bottom: none; }
+
+    .danger-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 600;
+      color: rgba(217,79,58,0.18);
+      line-height: 1.2;
+      align-self: start;
+    }
+    .danger-content { display: flex; flex-direction: column; gap: 4px; }
+    .danger-title {
+      font-weight: 500; font-size: clamp(0.95rem,2vw,1.05rem);
+      color: var(--ink); line-height: 1.4;
+    }
+    .danger-desc {
+      font-size: clamp(0.85rem,1.8vw,0.95rem); color: var(--muted); line-height: 1.65;
+    }
+
+    /* PAM MOMENT */
+    .pam-moment {
+      background: var(--ink);
+      color: var(--warm-white);
+      border-radius: 4px;
+      padding: 40px 36px;
+      margin: 40px 0;
+      position: relative;
+      overflow: hidden;
+      opacity: 0; transform: translateY(28px) scale(0.97);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .pam-moment.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    .pam-moment::before {
+      content: 'PAM';
+      position: absolute; top: -16px; left: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem; font-weight: 600; line-height: 1;
+      color: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+
+    .pam-label {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 16px; display: block;
+    }
+
+    .pam-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem,2.5vw,1.3rem); font-style: italic;
+      color: rgba(255,255,255,0.85); line-height: 1.65;
+      border-left: 2px solid var(--coral);
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    .pam-attribution {
+      font-size: 11px; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35); text-align: right;
+    }
+
+    /* INSIGHT CALLOUT */
+    .insight-callout {
+      border: 1px solid rgba(217,79,58,0.2);
+      border-left: 3px solid var(--coral);
+      background: var(--warm-white);
+      padding: 28px 32px; border-radius: 0 8px 8px 0; margin: 28px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem,2.5vw,1.35rem); font-style: italic;
+      color: var(--ink); line-height: 1.65; position: relative;
+    }
+    .insight-callout::before {
+      content: '\201C'; position: absolute; top: -14px; left: 24px;
+      font-size: 5rem; color: var(--coral); opacity: 0.12;
+      font-family: 'Cormorant Garamond', serif; line-height: 1;
+    }
+
+    /* CONTRAST ROW */
+    .contrast-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin: 28px 0;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .contrast-row.visible { opacity: 1; transform: translateY(0); }
+
+    .contrast-card {
+      padding: 24px 20px; border-radius: 4px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .contrast-card.bad {
+      background: rgba(180,30,10,0.05);
+      border: 1px solid rgba(180,30,10,0.15);
+    }
+    .contrast-card.good {
+      background: rgba(28,26,23,0.04);
+      border: 1px solid rgba(28,26,23,0.12);
+    }
+    .contrast-label {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+    }
+    .contrast-card.bad .contrast-label { color: var(--danger); }
+    .contrast-card.good .contrast-label { color: var(--coral); }
+    .contrast-text {
+      font-size: clamp(0.88rem,1.8vw,0.96rem); color: #3A3730; line-height: 1.6;
+      font-style: italic; font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* TRASH ENDING */
+    .trash-section {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
+      text-align: center; padding: 20px 0 40px;
+    }
+    .trash-section.visible { opacity: 1; transform: translateY(0); }
+
+    .trash-image { width: 100%; border-radius: 4px; overflow: hidden; margin-bottom: 40px; }
+    .trash-image img {
+      width: 100%; display: block; aspect-ratio: 16/6; object-fit: cover; object-position: center 40%;
+      filter: saturate(0.4) brightness(0.78);
+    }
+
+    .decision-card {
+      display: inline-block; background: var(--ink);
+      border-radius: 4px; padding: 48px 44px;
+      max-width: 440px; width: 100%; text-align: left;
+      position: relative; overflow: hidden;
+    }
+    .decision-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--coral), transparent);
+    }
+    .decision-card-label {
+      font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 20px; display: block;
+    }
+    .decision-card-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem,2.8vw,1.35rem); font-style: italic;
+      color: rgba(255,255,255,0.9); line-height: 1.6;
+    }
+    .decision-card-text strong { font-style: normal; color: var(--coral); }
+
+    /* DIVIDER */
+    .chapter-divider {
+      display: flex; align-items: center; gap: 16px; margin: 48px 0;
+      opacity: 0; transform: scaleX(0.5);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .chapter-divider.visible { opacity: 1; transform: scaleX(1); }
+    .chapter-divider::before, .chapter-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right,transparent,var(--muted),transparent); opacity: 0.25;
+    }
+    .chapter-divider span { font-size: 1.1rem; color: var(--muted); }
+
+    /* FINAL */
+    .final-line {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+      text-align: center; margin-top: 64px; padding: 0 16px;
+    }
+    .final-line.visible { opacity: 1; transform: translateY(0); }
+    .final-line p { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem,2.4vw,1.25rem); font-style: italic; color: var(--muted); }
+    .next-chapter-hint {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: default;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .next-chapter-hint:hover { border-color: var(--coral); color: var(--coral); }
+
+    @media (max-width: 640px) {
+      #sushi-bar { padding: 12px 16px; }
+      .sushi-piece { width: 30px; height: 18px; }
+      .bar-label { font-size: 9px; }
+      #story { padding: 0 20px 120px; }
+      .story-block, .split-block { margin-bottom: 56px; }
+      .split-block { grid-template-columns: 1fr; }
+      .split-block.reverse { direction: ltr; }
+      .split-image { aspect-ratio: 16/7; }
+      .contrast-row { grid-template-columns: 1fr; }
+      .cinematic-image { width: calc(100% + 40px); margin-left: -20px; }
+      .pam-moment { padding: 28px 24px; }
+      .decision-card { padding: 36px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="sushi-bar">
+  <span class="bar-label">Capítol 2</span>
+  <div class="sushi-pieces" id="sushiPieces"></div>
+  <span class="bar-label" id="progressLabel">0%</span>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-image-wrap">
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80&fit=crop&crop=center" alt="Calculadora i números" loading="eager"/>
+  </div>
+  <div class="hero-content">
+    <span class="chapter-badge">Capítol 2 · El Secret del Sukashi</span>
+    <span class="hero-emoji">🏷️</span>
+    <h1>La trampa del<br><em>descompte</em></h1>
+    <p class="hero-subtitle">La solució que sembla obvia és, sovint, la trampa més perillosa.</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Continua llegint</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<main id="story">
+
+  <!-- BLOC 1: La idea -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-lightbulb" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">La idea</span>
+    </div>
+    <p>L'endemà de la seva revelació, l'Alicia arriba al Sukashi amb una idea que li crema a les mans:</p>
+    <div class="insight-callout">
+      "I si fem un 2x1 els dimarts? O un descompte del 30% per a tothom qui vingui al migdia?"
+    </div>
+    <p>Sembla la solució lògica. Si el veí està ple i ella no, el preu ha de ser la clau.</p>
+  </div>
+
+  <!-- Imatge: calculadora i números -->
+  <figure class="scene-image" data-reveal>
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&fit=crop&crop=center" alt="Càlculs i números" loading="lazy"/>
+    <figcaption>La calculadora no menteix</figcaption>
+  </figure>
+
+  <!-- BLOC 2: Els números -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-calculator" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">Els números</span>
+    </div>
+    <p>Agafa la calculadora i comença a fer números. Però, a mesura que resta euros del seu marge, la cara se li va omplint d'ombres.</p>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 3: Les 3 trampes (llista numerada animada) -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-triangle-exclamation" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">Abaixar el preu significa...</span>
+    </div>
+    <ul class="danger-list" id="dangerList">
+      <li data-danger>
+        <span class="danger-num">1</span>
+        <div class="danger-content">
+          <span class="danger-title">Atreure el client "caçador"</span>
+          <span class="danger-desc">Aquell que ve avui perquè és barat, però que demà anirà al davant si el veí és un cèntim més econòmic.</span>
+        </div>
+      </li>
+      <li data-danger>
+        <span class="danger-num">2</span>
+        <div class="danger-content">
+          <span class="danger-title">Sacrificar la qualitat</span>
+          <span class="danger-desc">Perquè els números surtin, hauria de buscar un proveïdor de peix més barat. I el sushi del Sukashi no es toca.</span>
+        </div>
+      </li>
+      <li data-danger>
+        <span class="danger-num">3</span>
+        <div class="danger-content">
+          <span class="danger-title">Treballar el doble per guanyar el mateix</span>
+          <span class="danger-desc">El local estarà ple, sí, però ella estarà esgotada i la caixa no ho notarà.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Salmó fresc — qualitat que no es toca -->
+  <div class="split-block" data-reveal>
+    <div class="split-image">
+      <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80&fit=crop&crop=center" alt="Salmó fresc qualitat" loading="lazy"/>
+    </div>
+    <div class="split-text">
+      <div class="block-icon">
+        <i class="fa-solid fa-fish" style="color:var(--coral);font-size:1.2rem;"></i>
+        <span class="icon-label">La qualitat</span>
+      </div>
+      <p>El sushi del Sukashi no és una línia de producció. És la tria personal de cada peix, cada matí. Aquí és on es construeix la diferència.</p>
+      <p style="color:var(--muted); font-style:italic; font-family:'Cormorant Garamond',serif; font-size:1.05rem;">Sacrificar l'ingredient és sacrificar la identitat.</p>
+    </div>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 4: El client habitual — PAM moment -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-comment-dots" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">El moment clau</span>
+    </div>
+    <p>Mentre ratlla el paper amb frustració, un client habitual entra i li diu:</p>
+  </div>
+
+  <div class="pam-moment" data-reveal>
+    <span class="pam-label">✦ Client habitual del Sukashi</span>
+    <p class="pam-quote">"Alicia, el sushi d'ahir estava increïble, llàstima que només puguem venir un cop al mes per celebrar coses..."</p>
+    <p class="pam-attribution">— Inesperadament, la clau de tot</p>
+  </div>
+
+  <!-- Imatge: sopar de celebració -->
+  <figure class="cinematic-image" data-reveal>
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&fit=crop&crop=center" alt="Restaurant sopar celebració" loading="lazy"/>
+    <div class="cine-overlay"></div>
+    <figcaption class="cine-caption">Venen per celebrar. Però podrien venir per molt més.</figcaption>
+  </figure>
+
+  <!-- BLOC 5: La revelació -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-bolt" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">La revelació</span>
+    </div>
+    <p><strong style="color:var(--ink);">PAM.</strong> Aquí ho veu clar.</p>
+    <p>El problema no és que el seu sushi sigui car. El problema és que <strong style="color:var(--ink);">no està donant una raó al client per venir un dimarts qualsevol.</strong></p>
+  </div>
+
+  <!-- Contrast: descompte vs valor -->
+  <div class="contrast-row" data-reveal>
+    <div class="contrast-card bad">
+      <span class="contrast-label">❌ La trampa</span>
+      <p class="contrast-text">El descompte és pa per avui i gana per demà.</p>
+    </div>
+    <div class="contrast-card good">
+      <span class="contrast-label">✓ La clau</span>
+      <p class="contrast-text">No que el client pagui menys, sinó que senti que guanya més.</p>
+    </div>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <p>El descompte és pa per avui i gana per demà. El que ella necessita no és que el client pagui menys, sinó que el client <em>senti que guanya més</em> cada vegada que la tria a ella.</p>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC FINAL: La decisió -->
+  <div class="trash-section" data-reveal>
+    <div class="block-icon" style="justify-content:center; margin-bottom:28px;">
+      <i class="fa-solid fa-trash-can" style="color:var(--muted);font-size:1.2rem;"></i>
+      <span class="icon-label" style="color:var(--muted);">La decisió</span>
+    </div>
+
+    <div class="trash-image">
+      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80&fit=crop&crop=center" alt="Paper i bolígraf" loading="lazy"/>
+    </div>
+
+    <div class="decision-card">
+      <span class="decision-card-label">Sukashi · L'endemà de la revelació</span>
+      <p class="decision-card-text">
+        L'Alicia llença la llista de descomptes a la paperera.<br><br>
+        No competirà per ser la <strong>més barata</strong>.<br>
+        Competirà per ser la <strong>més valorada</strong>.
+      </p>
+    </div>
+  </div>
+
+  <div class="final-line" data-reveal>
+    <p>Però per ser la més valorada,<br>primer cal entendre per a qui s'és indispensable.</p>
+    <div class="next-chapter-hint">
+      <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
+      Capítol 3 · Ben aviat
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // SUSHI BAR
+  const TOTAL = 6;
+  const piecesEl = document.getElementById('sushiPieces');
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'sushi-piece'; d.id = 'sp-' + i;
+    d.innerHTML = '<svg viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg"><ellipse class="rice" cx="19" cy="16" rx="17" ry="6"/><rect class="nori" x="5" y="12" width="28" height="5" rx="1"/><ellipse class="topping" cx="19" cy="10" rx="14" ry="5"/><ellipse fill="rgba(255,255,255,0.15)" cx="15" cy="8" rx="5" ry="2"/></svg>';
+    piecesEl.appendChild(d);
+  }
+
+  const progressLabel = document.getElementById('progressLabel');
+  function updateProgress() {
+    const pct = Math.min(1, window.scrollY / (document.documentElement.scrollHeight - window.innerHeight));
+    const filled = Math.round(pct * TOTAL);
+    for (let i = 0; i < TOTAL; i++) document.getElementById('sp-' + i).classList.toggle('filled', i < filled);
+    progressLabel.textContent = Math.round(pct * 100) + '%';
+  }
+
+  // INTERSECTION OBSERVER — blocks
+  const allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line, .pam-moment, .contrast-row');
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  allReveal.forEach(function(el) { io.observe(el); });
+
+  // STAGGERED DANGER LIST ITEMS
+  const dangerItems = document.querySelectorAll('[data-danger]');
+  const ioList = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        const idx = Array.from(dangerItems).indexOf(e.target);
+        setTimeout(function() { e.target.classList.add('visible'); }, idx * 180);
+      }
+    });
+  }, { threshold: 0.15 });
+  dangerItems.forEach(function(el) { ioList.observe(el); });
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+</body>
+</html>

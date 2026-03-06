@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Secret del Sukashi — Capítol 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --paper: #F9F8F4;
+      --ink: #1C1A17;
+      --coral: #D94F3A;
+      --muted: #9A9589;
+      --warm-white: #FDFCF9;
+      --sushi-empty: #DDD9D0;
+      --sushi-fill: #D94F3A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.6;
+    }
+
+    /* SUSHI BAR */
+    #sushi-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,248,244,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(28,26,23,0.08);
+      padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .bar-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .sushi-pieces { display: flex; gap: 10px; align-items: center; }
+    .sushi-piece { width: 38px; height: 22px; }
+    .sushi-piece svg { width: 100%; height: 100%; transition: transform 0.3s ease; }
+    .sushi-piece.filled svg { transform: scale(1.08); }
+    .sushi-piece .rice    { fill: var(--sushi-empty); transition: fill 0.5s ease; }
+    .sushi-piece .nori    { fill: #C8C4BB;            transition: fill 0.5s ease; }
+    .sushi-piece .topping { fill: var(--sushi-empty); transition: fill 0.5s ease; }
+    .sushi-piece.filled .rice    { fill: #F5E6D5; }
+    .sushi-piece.filled .nori    { fill: #2C2820; }
+    .sushi-piece.filled .topping { fill: var(--sushi-fill); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-rows: 1fr auto;
+      position: relative; overflow: hidden;
+    }
+    .hero-image-wrap { position: absolute; inset: 0; z-index: 0; }
+    .hero-image-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+      filter: brightness(0.42) saturate(0.65);
+    }
+    .hero-image-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(28,26,23,0.1) 0%, rgba(28,26,23,0.3) 50%, rgba(249,248,244,1) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 28px 60px;
+    }
+    .chapter-badge {
+      display: inline-block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.3);
+      padding: 6px 18px; border-radius: 100px; margin-bottom: 36px;
+      font-weight: 500; backdrop-filter: blur(4px);
+    }
+    .hero-emoji {
+      font-size: clamp(3rem,8vw,5rem); margin-bottom: 24px; display: block;
+      animation: floatEmoji 4s ease-in-out infinite;
+    }
+    @keyframes floatEmoji {
+      0%,100% { transform: translateY(0px) rotate(-2deg); }
+      50%      { transform: translateY(-10px) rotate(2deg); }
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem,6vw,4.4rem); font-weight: 600; line-height: 1.12;
+      color: #fff; margin-bottom: 20px; max-width: 680px;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+    }
+    h1 em { font-style: italic; color: #F5A58C; }
+    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.6); max-width: 440px; line-height: 1.7; }
+    .scroll-hint {
+      position: relative; z-index: 1; padding-bottom: 48px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.45); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .scroll-arrow {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+    /* STORY */
+    #story { max-width: 700px; margin: 0 auto; padding: 0 28px 160px; }
+
+    /* STORY BLOCK */
+    .story-block {
+      margin-bottom: 80px;
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .story-block.visible { opacity: 1; transform: translateY(0); }
+
+    .block-icon {
+      font-size: 1.4rem; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px; color: var(--muted);
+    }
+    .block-icon::after { content: ''; display: block; height: 1px; width: 40px; background: var(--muted); opacity: 0.35; }
+    .block-icon .icon-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
+
+    p { font-size: clamp(1rem,2.2vw,1.12rem); color: #3A3730; line-height: 1.9; }
+
+    /* SCENE IMAGE */
+    .scene-image {
+      width: 100%; border-radius: 4px; overflow: hidden; margin: 28px 0;
+      position: relative;
+      opacity: 0; transform: translateY(20px) scale(0.98);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .scene-image.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .scene-image img {
+      width: 100%; display: block; aspect-ratio: 16/7; object-fit: cover;
+      filter: saturate(0.75) brightness(0.92);
+      transition: filter 0.6s ease, transform 0.6s ease;
+    }
+    .scene-image:hover img { filter: saturate(0.9) brightness(1); transform: scale(1.01); }
+    .scene-image figcaption {
+      position: absolute; bottom: 12px; right: 16px;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* CINEMATIC */
+    .cinematic-image {
+      width: calc(100% + 56px); margin-left: -28px; margin-right: -28px; margin-bottom: 64px;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1);
+    }
+    .cinematic-image.visible { opacity: 1; transform: translateY(0); }
+    .cinematic-image img {
+      width: 100%; display: block; aspect-ratio: 21/9; object-fit: cover;
+      filter: saturate(0.55) brightness(0.75);
+    }
+    .cinematic-image .cine-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 35%, rgba(249,248,244,0.95) 100%);
+    }
+    .cinematic-image .cine-caption {
+      position: absolute; bottom: 20px; left: 28px;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(0.95rem,2.5vw,1.2rem); color: rgba(255,255,255,0.85);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5); max-width: 380px; line-height: 1.5;
+    }
+
+    /* SPLIT BLOCK */
+    .split-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center;
+      margin-bottom: 80px;
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .split-block.visible { opacity: 1; transform: translateY(0); }
+    .split-block.reverse { direction: rtl; }
+    .split-block.reverse > * { direction: ltr; }
+    .split-image { border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; }
+    .split-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: saturate(0.75) brightness(0.9);
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+    .split-image:hover img { transform: scale(1.03); filter: saturate(0.9) brightness(1); }
+    .split-text { display: flex; flex-direction: column; gap: 16px; }
+
+    /* COMPARISON */
+    .comparison-list { list-style: none; margin: 24px 0; padding: 0; border-left: 2px solid var(--sushi-empty); padding-left: 24px; }
+    .comparison-list li { font-size: clamp(0.95rem,2vw,1.05rem); color: #3A3730; padding: 10px 0; border-bottom: 1px solid rgba(28,26,23,0.06); display: flex; align-items: center; gap: 12px; }
+    .comparison-list li:last-child { border-bottom: none; }
+    .comparison-list li::before { content: 'B7'; color: var(--coral); font-size: 1.4rem; line-height: 1; }
+
+    /* QUESTION */
+    .question-callout {
+      background: var(--warm-white); border: 1px solid rgba(217,79,58,0.2); border-left: 3px solid var(--coral);
+      padding: 28px 32px; border-radius: 0 8px 8px 0; margin: 28px 0;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem,2.5vw,1.35rem);
+      font-style: italic; color: var(--ink); line-height: 1.6; position: relative;
+    }
+    .question-callout::before {
+      content: '\201C'; position: absolute; top: -14px; left: 24px;
+      font-size: 5rem; color: var(--coral); opacity: 0.12;
+      font-family: 'Cormorant Garamond', serif; line-height: 1;
+    }
+
+    /* REVELATION */
+    .revelation-text {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.15rem,2.8vw,1.45rem);
+      font-style: italic; color: var(--ink); line-height: 1.65; margin: 24px 0;
+    }
+    .revelation-text strong { font-style: normal; color: var(--coral); font-weight: 600; }
+
+    /* DIVIDER */
+    .chapter-divider {
+      display: flex; align-items: center; gap: 16px; margin: 48px 0;
+      opacity: 0; transform: scaleX(0.5);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .chapter-divider.visible { opacity: 1; transform: scaleX(1); }
+    .chapter-divider::before, .chapter-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right,transparent,var(--muted),transparent); opacity: 0.25; }
+    .chapter-divider span { font-size: 1.1rem; color: var(--muted); }
+
+    /* ENDING */
+    .blank-page-section {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
+      text-align: center; padding: 20px 0 40px;
+    }
+    .blank-page-section.visible { opacity: 1; transform: translateY(0); }
+    .ending-image { width: 100%; border-radius: 4px; overflow: hidden; margin-bottom: 40px; }
+    .ending-image img {
+      width: 100%; display: block; aspect-ratio: 16/6; object-fit: cover; object-position: center 30%;
+      filter: saturate(0.45) brightness(0.82);
+    }
+    .blank-page-card {
+      display: inline-block; background: var(--warm-white);
+      border: 1px solid rgba(28,26,23,0.1); border-radius: 4px;
+      padding: 52px 48px;
+      box-shadow: 0 2px 8px rgba(28,26,23,0.05), 0 20px 60px rgba(28,26,23,0.06), 4px 4px 0 rgba(28,26,23,0.03);
+      position: relative; max-width: 400px; width: 100%;
+    }
+    .blank-page-card::before {
+      content: ''; position: absolute; top: 8px; left: 8px; right: -8px; bottom: -8px;
+      background: rgba(28,26,23,0.04); border-radius: 4px; z-index: -1;
+    }
+    .page-lines { display: flex; flex-direction: column; gap: 18px; margin-bottom: 32px; }
+    .page-line { height: 1px; background: rgba(28,26,23,0.1); border-radius: 1px; }
+    .page-line:nth-child(even) { opacity: 0.5; }
+    .page-question {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(0.95rem,2.5vw,1.1rem);
+      font-style: italic; color: var(--ink); line-height: 1.7;
+      border-top: 1px solid rgba(217,79,58,0.3); padding-top: 20px; margin-top: 12px;
+    }
+    .page-caption { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 20px; }
+
+    /* FINAL */
+    .final-line {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+      text-align: center; margin-top: 64px; padding: 0 16px;
+    }
+    .final-line.visible { opacity: 1; transform: translateY(0); }
+    .final-line p { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem,2.4vw,1.25rem); font-style: italic; color: var(--muted); }
+    .next-chapter-hint {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: default;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .next-chapter-hint:hover { border-color: var(--coral); color: var(--coral); }
+
+    @media (max-width: 640px) {
+      #sushi-bar { padding: 12px 16px; }
+      .sushi-piece { width: 30px; height: 18px; }
+      .bar-label { font-size: 9px; }
+      #story { padding: 0 20px 120px; }
+      .story-block, .split-block { margin-bottom: 56px; }
+      .split-block { grid-template-columns: 1fr; }
+      .split-block.reverse { direction: ltr; }
+      .split-image { aspect-ratio: 16/7; }
+      .question-callout { padding: 20px 20px; }
+      .blank-page-card { padding: 36px 24px; }
+      .cinematic-image { width: calc(100% + 40px); margin-left: -20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="sushi-bar">
+  <span class="bar-label">Progrés</span>
+  <div class="sushi-pieces" id="sushiPieces"></div>
+  <span class="bar-label" id="progressLabel">0%</span>
+</div>
+
+<section id="hero">
+  <div class="hero-image-wrap">
+    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=1600&q=80&fit=crop" alt="Sushi restaurant interior" loading="eager"/>
+  </div>
+  <div class="hero-content">
+    <span class="chapter-badge">Capítol 1</span>
+    <span class="hero-emoji">🍣</span>
+    <h1>La síndrome<br>del <em>mirall</em></h1>
+    <p class="hero-subtitle">Una història sobre diferenciació, identitat i la pregunta que canvia un negoci per sempre.</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Continua llegint</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<main id="story">
+
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-mug-hot" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">El matí</span>
+    </div>
+    <p>L'Alicia ha obert el Sukashi, el seu restaurant de sushi, com cada matí. Cafè a la mà, repassa les reserves i, inevitablement, la mirada se li n'escapa per la finestra.</p>
+  </div>
+
+  <figure class="scene-image" data-reveal>
+    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80&fit=crop&crop=center" alt="Cafè fumejant al matí" loading="lazy"/>
+    <figcaption>Cada matí, el mateix ritual</figcaption>
+  </figure>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <div class="split-block" data-reveal>
+    <div class="split-text">
+      <div class="block-icon">
+        <i class="fa-solid fa-bowl-rice" style="color:var(--coral);font-size:1.2rem;"></i>
+        <span class="icon-label">La comparació</span>
+      </div>
+      <p>Just davant, a l'altra banda del carrer, hi ha l'altre sushi del barri.</p>
+      <ul class="comparison-list">
+        <li>Mateix tipus de carta.</li>
+        <li>Preus gairebé calcats.</li>
+        <li>Qualitat molt semblant.</li>
+        <li>Fins i tot el fil musical sembla el mateix.</li>
+      </ul>
+    </div>
+    <div class="split-image">
+      <img src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=800&q=80&fit=crop&crop=center" alt="Sushi nigiri elegant" loading="lazy"/>
+    </div>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-circle-question" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">La crisi</span>
+    </div>
+    <p>I aquí arriba la pregunta que li crema per dins:</p>
+    <div class="question-callout">
+      Si oferim pràcticament el mateix... per què haurien de triar-nos a nosaltres?
+    </div>
+    <p>L'Alicia sap que competir només en preu és una sentència de mort. Si ella abaixa un euro, el veí n'abaixarà dos demà. Acabaran treballant més hores per guanyar menys diners, sacrificant la qualitat que tant li ha costat aconseguir.</p>
+  </div>
+
+  <figure class="cinematic-image" data-reveal>
+    <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=1600&q=80&fit=crop&crop=center" alt="Carrer japonès nocturn" loading="lazy"/>
+    <div class="cine-overlay"></div>
+    <figcaption class="cine-caption">A l'altra banda del carrer, el competidor espera.</figcaption>
+  </figure>
+
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-eye" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">La revelació</span>
+    </div>
+    <p>Mentre observa com els primers clients entren al local del davant, té una revelació dolorosa:</p>
+    <p class="revelation-text"><strong>Ser bo ja no és suficient.</strong> Avui dia, ser bo és el mínim que s'espera.</p>
+    <p>Si el Sukashi tanqués demà, aquells clients simplement creuarien el carrer. No hi ha res que els lligui a ella, a part de la gana d'aquell moment.</p>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <div class="split-block reverse" data-reveal>
+    <div class="split-text">
+      <div class="block-icon">
+        <i class="fa-solid fa-fire-flame-curved" style="color:var(--coral);font-size:1.2rem;"></i>
+        <span class="icon-label">La decisió</span>
+      </div>
+      <p>L'Alicia s'ha cansat de ser una opció intercanviable. Vol ser <em>la única opció</em>.</p>
+      <p>Però, com es passa de ser "un bon restaurant" a ser "un restaurant necessari"?</p>
+    </div>
+    <div class="split-image">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&fit=crop&crop=center" alt="Restaurant elegant nit" loading="lazy"/>
+    </div>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <div class="blank-page-section" data-reveal>
+    <div class="block-icon" style="justify-content:center; margin-bottom:28px;">
+      <i class="fa-regular fa-file-lines" style="color:var(--muted);font-size:1.2rem;"></i>
+      <span class="icon-label" style="color:var(--muted);">Aquella nit</span>
+    </div>
+    <div class="ending-image">
+      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80&fit=crop&crop=top" alt="Full en blanc i bolígraf" loading="lazy"/>
+    </div>
+    <div class="blank-page-card">
+      <div class="page-lines">
+        <div class="page-line"></div>
+        <div class="page-line"></div>
+        <div class="page-line"></div>
+        <div class="page-line"></div>
+        <div class="page-line"></div>
+        <div class="page-line"></div>
+      </div>
+      <p class="page-question">Per què hauria de tornar el client a aquest restaurant?</p>
+      <p class="page-caption">Sukashi · Nit del 3 de març</p>
+    </div>
+  </div>
+
+  <div class="final-line" data-reveal>
+    <p>Quan tothom marxa, l'Alicia es queda sola<br>amb un full en blanc i una sola frase escrita al mig.</p>
+    <div class="next-chapter-hint">
+      <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
+      Capítol 2 · Ben aviat
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const TOTAL = 6;
+  const piecesEl = document.getElementById('sushiPieces');
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'sushi-piece';
+    d.id = 'sp-' + i;
+    d.innerHTML = '<svg viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg"><ellipse class="rice" cx="19" cy="16" rx="17" ry="6"/><rect class="nori" x="5" y="12" width="28" height="5" rx="1"/><ellipse class="topping" cx="19" cy="10" rx="14" ry="5"/><ellipse fill="rgba(255,255,255,0.15)" cx="15" cy="8" rx="5" ry="2"/></svg>';
+    piecesEl.appendChild(d);
+  }
+
+  const progressLabel = document.getElementById('progressLabel');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(1, scrollTop / max);
+    const filled = Math.round(pct * TOTAL);
+    for (let i = 0; i < TOTAL; i++) {
+      document.getElementById('sp-' + i).classList.toggle('filled', i < filled);
+    }
+    progressLabel.textContent = Math.round(pct * 100) + '%';
+  }
+
+  const allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line');
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+  allReveal.forEach(function(el) { io.observe(el); });
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+</body>
+</html>
