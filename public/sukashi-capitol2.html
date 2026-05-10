@@ -16,7 +16,7 @@
       --warm-white: #FDFCF9;
       --sushi-empty: #DDD9D0;
       --sushi-fill: #D94F3A;
-      --danger: #B03020;
+      --system: #2A3240;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,8 +29,6 @@
       line-height: 1.8;
       overflow-x: hidden;
     }
-
-    /* GRAIN */
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -38,7 +36,7 @@
       pointer-events: none; z-index: 999; opacity: 0.6;
     }
 
-    /* SUSHI BAR */
+    /* ── SUSHI BAR ── */
     #sushi-bar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(249,248,244,0.92);
@@ -59,20 +57,7 @@
     .sushi-piece.filled .nori    { fill: #2C2820; }
     .sushi-piece.filled .topping { fill: var(--sushi-fill); }
 
-    /* CHAPTER NAV */
-    .chapter-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    }
-    .prev-chapter {
-      position: absolute; top: 50%; left: 28px; transform: translateY(-50%);
-      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none;
-      display: flex; align-items: center; gap: 8px;
-      transition: color 0.2s;
-    }
-    .prev-chapter:hover { color: var(--coral); }
-
-    /* HERO */
+    /* ── HERO ── */
     #hero {
       min-height: 100vh;
       display: grid; grid-template-rows: 1fr auto;
@@ -80,21 +65,24 @@
     }
     .hero-image-wrap { position: absolute; inset: 0; z-index: 0; }
     .hero-image-wrap img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center 50%;
-      filter: brightness(0.38) saturate(0.5);
+      width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+      filter: brightness(0.32) saturate(0.4);
     }
     .hero-image-wrap::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(180,30,10,0.15) 0%, rgba(28,26,23,0.4) 50%, rgba(249,248,244,1) 100%);
+      background: linear-gradient(160deg,
+      rgba(42,50,64,0.25) 0%,
+      rgba(28,26,23,0.5) 50%,
+      rgba(249,248,244,1) 100%);
     }
     .hero-content {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 120px 28px 60px;
+      text-align: center; padding: 130px 28px 60px;
     }
     .chapter-badge {
       display: inline-block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.22);
       padding: 6px 18px; border-radius: 100px; margin-bottom: 36px;
       font-weight: 500; backdrop-filter: blur(4px);
     }
@@ -110,14 +98,14 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2.6rem,6vw,4.4rem); font-weight: 600; line-height: 1.12;
       color: #fff; margin-bottom: 20px; max-width: 680px;
-      text-shadow: 0 2px 28px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 28px rgba(0,0,0,0.55);
     }
     h1 em { font-style: italic; color: #F5A58C; }
-    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.55); max-width: 440px; line-height: 1.7; }
+    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.5); max-width: 440px; line-height: 1.75; }
     .scroll-hint {
       position: relative; z-index: 1; padding-bottom: 48px;
       display: flex; flex-direction: column; align-items: center; gap: 8px;
-      color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
     }
     .scroll-arrow {
       width: 1px; height: 48px;
@@ -126,16 +114,17 @@
     }
     @keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-    /* STORY */
+    /* ── STORY ── */
     #story { max-width: 700px; margin: 0 auto; padding: 0 28px 160px; }
 
-    /* STORY BLOCK */
+    /* ── STORY BLOCK ── */
     .story-block {
       margin-bottom: 80px;
       opacity: 0; transform: translateY(36px);
       transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
     }
     .story-block.visible { opacity: 1; transform: translateY(0); }
+    .story-block p + p { margin-top: 18px; }
 
     .block-icon {
       font-size: 1.4rem; margin-bottom: 18px;
@@ -145,29 +134,34 @@
     .block-icon .icon-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
 
     p { font-size: clamp(1rem,2.2vw,1.12rem); color: #3A3730; line-height: 1.9; }
-    p + p { margin-top: 18px; }
 
-    /* SCENE IMAGE */
-    .scene-image {
-      width: 100%; border-radius: 4px; overflow: hidden; margin: 28px 0;
-      position: relative;
-      opacity: 0; transform: translateY(20px) scale(0.98);
+    /* ── IMAGE BLOCK (screenshots del sistema real) ── */
+    .image-block {
+      width: 100%; margin: 32px 0;
+      opacity: 0; transform: translateY(24px) scale(0.985);
       transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
     }
-    .scene-image.visible { opacity: 1; transform: translateY(0) scale(1); }
-    .scene-image img {
-      width: 100%; display: block; aspect-ratio: 16/7; object-fit: cover;
-      filter: saturate(0.7) brightness(0.9);
-      transition: filter 0.6s ease, transform 0.6s ease;
+    .image-block.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .image-block img {
+      width: 100%; display: block; border-radius: 6px;
+      border: 1px solid rgba(28,26,23,0.1);
+      box-shadow: 0 4px 24px rgba(28,26,23,0.1), 0 1px 4px rgba(28,26,23,0.08);
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
     }
-    .scene-image:hover img { filter: saturate(0.88) brightness(1); transform: scale(1.01); }
-    .scene-image figcaption {
-      position: absolute; bottom: 12px; right: 16px;
-      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+    .image-block:hover img {
+      box-shadow: 0 8px 40px rgba(28,26,23,0.15);
+      transform: translateY(-2px);
+    }
+    .image-block figcaption {
+      margin-top: 10px; font-size: 10px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .image-block figcaption::before {
+      content: '↑'; font-size: 0.7rem; color: var(--coral); opacity: 0.7;
     }
 
-    /* CINEMATIC */
+    /* ── CINEMATIC ── */
     .cinematic-image {
       width: calc(100% + 56px); margin-left: -28px; margin-right: -28px; margin-bottom: 64px;
       position: relative; overflow: hidden;
@@ -177,22 +171,22 @@
     .cinematic-image.visible { opacity: 1; transform: translateY(0); }
     .cinematic-image img {
       width: 100%; display: block; aspect-ratio: 21/9; object-fit: cover;
-      filter: saturate(0.5) brightness(0.72);
+      filter: saturate(0.4) brightness(0.62);
     }
     .cinematic-image .cine-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent 30%, rgba(249,248,244,0.95) 100%);
+      background: linear-gradient(to bottom, transparent 30%, rgba(249,248,244,0.97) 100%);
     }
     .cinematic-image .cine-caption {
-      position: absolute; bottom: 20px; left: 28px;
+      position: absolute; bottom: 22px; left: 28px;
       font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(0.95rem,2.5vw,1.2rem); color: rgba(255,255,255,0.9);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 400px; line-height: 1.5;
+      font-size: clamp(0.95rem,2.5vw,1.22rem); color: rgba(255,255,255,0.88);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 440px; line-height: 1.5;
     }
 
-    /* SPLIT BLOCK */
+    /* ── SPLIT BLOCK ── */
     .split-block {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start;
       margin-bottom: 80px;
       opacity: 0; transform: translateY(36px);
       transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
@@ -200,175 +194,150 @@
     .split-block.visible { opacity: 1; transform: translateY(0); }
     .split-block.reverse { direction: rtl; }
     .split-block.reverse > * { direction: ltr; }
-    .split-image { border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; }
-    .split-image img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      filter: saturate(0.72) brightness(0.88);
-      transition: transform 0.6s ease, filter 0.6s ease;
+    .split-screenshot {
+      border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(28,26,23,0.1);
+      box-shadow: 0 4px 20px rgba(28,26,23,0.1);
+      transition: box-shadow 0.4s ease;
     }
-    .split-image:hover img { transform: scale(1.03); filter: saturate(0.9) brightness(1); }
+    .split-screenshot:hover { box-shadow: 0 8px 32px rgba(28,26,23,0.15); }
+    .split-screenshot img { width: 100%; display: block; }
     .split-text { display: flex; flex-direction: column; gap: 16px; }
+    .split-text p + p { margin-top: 0; }
 
-    /* NUMBERED DANGER LIST */
-    .danger-list {
-      list-style: none; margin: 28px 0; padding: 0;
-      display: flex; flex-direction: column; gap: 0;
-    }
-    .danger-list li {
-      display: grid;
-      grid-template-columns: 40px 1fr;
-      gap: 0 16px;
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(28,26,23,0.07);
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .danger-list li.visible { opacity: 1; transform: translateX(0); }
-    .danger-list li:last-child { border-bottom: none; }
-
-    .danger-num {
+    /* ── RULE BLOCK ── */
+    .rule-block {
+      border: 1px solid rgba(217,79,58,0.18); border-left: 3px solid var(--coral);
+      background: var(--warm-white); padding: 28px 32px;
+      border-radius: 0 8px 8px 0; margin: 28px 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem; font-weight: 600;
-      color: rgba(217,79,58,0.18);
-      line-height: 1.2;
-      align-self: start;
-    }
-    .danger-content { display: flex; flex-direction: column; gap: 4px; }
-    .danger-title {
-      font-weight: 500; font-size: clamp(0.95rem,2vw,1.05rem);
-      color: var(--ink); line-height: 1.4;
-    }
-    .danger-desc {
-      font-size: clamp(0.85rem,1.8vw,0.95rem); color: var(--muted); line-height: 1.65;
-    }
-
-    /* PAM MOMENT */
-    .pam-moment {
-      background: var(--ink);
-      color: var(--warm-white);
-      border-radius: 4px;
-      padding: 40px 36px;
-      margin: 40px 0;
-      position: relative;
-      overflow: hidden;
-      opacity: 0; transform: translateY(28px) scale(0.97);
-      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
-    }
-    .pam-moment.visible { opacity: 1; transform: translateY(0) scale(1); }
-
-    .pam-moment::before {
-      content: 'PAM';
-      position: absolute; top: -16px; left: 24px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 7rem; font-weight: 600; line-height: 1;
-      color: rgba(255,255,255,0.04);
-      pointer-events: none;
-    }
-
-    .pam-label {
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--coral); margin-bottom: 16px; display: block;
-    }
-
-    .pam-quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.05rem,2.5vw,1.3rem); font-style: italic;
-      color: rgba(255,255,255,0.85); line-height: 1.65;
-      border-left: 2px solid var(--coral);
-      padding-left: 20px;
-      margin-bottom: 20px;
-    }
-
-    .pam-attribution {
-      font-size: 11px; letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.35); text-align: right;
-    }
-
-    /* INSIGHT CALLOUT */
-    .insight-callout {
-      border: 1px solid rgba(217,79,58,0.2);
-      border-left: 3px solid var(--coral);
-      background: var(--warm-white);
-      padding: 28px 32px; border-radius: 0 8px 8px 0; margin: 28px 0;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem,2.5vw,1.35rem); font-style: italic;
+      font-size: clamp(1.1rem,2.5vw,1.38rem); font-style: italic;
       color: var(--ink); line-height: 1.65; position: relative;
     }
-    .insight-callout::before {
+    .rule-block::before {
       content: '\201C'; position: absolute; top: -14px; left: 24px;
-      font-size: 5rem; color: var(--coral); opacity: 0.12;
+      font-size: 5rem; color: var(--coral); opacity: 0.1;
       font-family: 'Cormorant Garamond', serif; line-height: 1;
     }
 
-    /* CONTRAST ROW */
-    .contrast-row {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-      margin: 28px 0;
+    /* ── ACCESS BLOCK (les dues entitats) ── */
+    .access-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0;
       opacity: 0; transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .contrast-row.visible { opacity: 1; transform: translateY(0); }
-
-    .contrast-card {
-      padding: 24px 20px; border-radius: 4px;
-      display: flex; flex-direction: column; gap: 8px;
+    .access-block.visible { opacity: 1; transform: translateY(0); }
+    .access-card {
+      background: var(--warm-white); border: 1px solid rgba(28,26,23,0.09);
+      border-radius: 8px; padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
-    .contrast-card.bad {
-      background: rgba(180,30,10,0.05);
-      border: 1px solid rgba(180,30,10,0.15);
-    }
-    .contrast-card.good {
-      background: rgba(28,26,23,0.04);
-      border: 1px solid rgba(28,26,23,0.12);
-    }
-    .contrast-label {
-      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
-    }
-    .contrast-card.bad .contrast-label { color: var(--danger); }
-    .contrast-card.good .contrast-label { color: var(--coral); }
-    .contrast-text {
-      font-size: clamp(0.88rem,1.8vw,0.96rem); color: #3A3730; line-height: 1.6;
-      font-style: italic; font-family: 'Cormorant Garamond', serif;
+    .access-card:hover { border-color: rgba(217,79,58,0.3); box-shadow: 0 4px 20px rgba(28,26,23,0.06); }
+    .access-card-icon { font-size: 1.5rem; }
+    .access-card-title { font-size: 0.92rem; font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
+    .access-card-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.58; }
+    .access-card-tag {
+      display: inline-block; font-size: 9px; letter-spacing: 0.16em;
+      text-transform: uppercase; background: rgba(217,79,58,0.08);
+      color: var(--coral); border-radius: 100px; padding: 4px 10px; margin-top: 4px;
+      align-self: flex-start;
     }
 
-    /* TRASH ENDING */
-    .trash-section {
-      opacity: 0; transform: translateY(40px);
-      transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
-      text-align: center; padding: 20px 0 40px;
+    /* ── ENTITY BLOCK (camps d'entitat) ── */
+    .entity-block {
+      background: var(--warm-white); border: 1px solid rgba(28,26,23,0.08);
+      border-radius: 8px; margin: 28px 0; overflow: hidden;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
     }
-    .trash-section.visible { opacity: 1; transform: translateY(0); }
-
-    .trash-image { width: 100%; border-radius: 4px; overflow: hidden; margin-bottom: 40px; }
-    .trash-image img {
-      width: 100%; display: block; aspect-ratio: 16/6; object-fit: cover; object-position: center 40%;
-      filter: saturate(0.4) brightness(0.78);
+    .entity-block.visible { opacity: 1; transform: translateY(0); }
+    .entity-header {
+      padding: 18px 24px; border-bottom: 1px solid rgba(28,26,23,0.07);
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(28,26,23,0.025);
     }
+    .entity-header-icon { font-size: 1.1rem; }
+    .entity-header-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+    .entity-body { padding: 4px 0; }
+    .entity-field {
+      display: flex; align-items: baseline; gap: 12px;
+      padding: 12px 24px; border-bottom: 1px solid rgba(28,26,23,0.05);
+      transition: background 0.2s;
+    }
+    .entity-field:last-child { border-bottom: none; }
+    .entity-field:hover { background: rgba(217,79,58,0.03); }
+    .entity-field-name {
+      font-size: 0.82rem; color: var(--muted); font-weight: 500;
+      letter-spacing: 0.06em; min-width: 110px; flex-shrink: 0;
+    }
+    .entity-field-value { font-size: 0.88rem; color: #3A3730; line-height: 1.55; font-style: italic; }
+    .entity-field-value.live { color: var(--coral); font-style: normal; font-weight: 500; }
 
-    .decision-card {
-      display: inline-block; background: var(--ink);
-      border-radius: 4px; padding: 48px 44px;
-      max-width: 440px; width: 100%; text-align: left;
+    /* ── CLIMAX BLOCK ── */
+    .climax-block {
+      background: var(--ink); border-radius: 4px;
+      padding: 52px 44px; margin: 48px 0;
       position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(28px) scale(0.97);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+      text-align: center;
     }
-    .decision-card::before {
+    .climax-block.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .climax-block::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(to right, var(--coral), transparent);
+      background: linear-gradient(to right, transparent, var(--coral), transparent);
     }
-    .decision-card-label {
-      font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); margin-bottom: 20px; display: block;
-    }
-    .decision-card-text {
+    .climax-block::after {
+      content: 'ORDER';
+      position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem,2.8vw,1.35rem); font-style: italic;
-      color: rgba(255,255,255,0.9); line-height: 1.6;
+      font-size: 8rem; font-weight: 600; line-height: 1;
+      color: rgba(255,255,255,0.035); pointer-events: none; white-space: nowrap;
     }
-    .decision-card-text strong { font-style: normal; color: var(--coral); }
+    .climax-label {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 20px; display: block;
+    }
+    .climax-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem,3vw,1.65rem); font-style: italic;
+      color: rgba(255,255,255,0.9); line-height: 1.55;
+    }
+    .climax-text strong { font-style: normal; color: #F5A58C; }
 
-    /* DIVIDER */
+    /* ── SCOPE BLOCK ── */
+    .scope-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .scope-block.visible { opacity: 1; transform: translateY(0); }
+    .scope-card {
+      border-radius: 8px; padding: 24px 22px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .scope-card.out {
+      background: rgba(180,30,10,0.04); border: 1px solid rgba(180,30,10,0.12);
+    }
+    .scope-card.in {
+      background: rgba(28,26,23,0.04); border: 1px solid rgba(28,26,23,0.1);
+    }
+    .scope-card-label {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+    }
+    .scope-card.out .scope-card-label { color: #B03020; }
+    .scope-card.in .scope-card-label  { color: var(--coral); }
+    .scope-item {
+      font-size: 0.88rem; color: #3A3730; line-height: 1.55;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .scope-item::before { flex-shrink: 0; margin-top: 2px; }
+    .scope-card.out .scope-item::before { content: '—'; color: #B03020; opacity: 0.6; }
+    .scope-card.in  .scope-item::before { content: '·'; color: var(--coral); font-size: 1.2rem; line-height: 1; }
+
+    /* ── DIVIDER ── */
     .chapter-divider {
       display: flex; align-items: center; gap: 16px; margin: 48px 0;
       opacity: 0; transform: scaleX(0.5);
@@ -377,11 +346,27 @@
     .chapter-divider.visible { opacity: 1; transform: scaleX(1); }
     .chapter-divider::before, .chapter-divider::after {
       content: ''; flex: 1; height: 1px;
-      background: linear-gradient(to right,transparent,var(--muted),transparent); opacity: 0.25;
+      background: linear-gradient(to right,transparent,var(--muted),transparent); opacity: 0.22;
     }
     .chapter-divider span { font-size: 1.1rem; color: var(--muted); }
 
-    /* FINAL */
+    /* ── FINAL BLOCK ── */
+    .final-block {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
+      text-align: center; padding: 20px 0 40px;
+    }
+    .final-block.visible { opacity: 1; transform: translateY(0); }
+    .final-image { width: 100%; border-radius: 6px; overflow: hidden; margin-bottom: 40px;
+      border: 1px solid rgba(28,26,23,0.08);
+      box-shadow: 0 4px 24px rgba(28,26,23,0.1);
+    }
+    .final-image img {
+      width: 100%; display: block;
+      filter: saturate(0.2) brightness(0.72);
+    }
+
+    /* ── FINAL LINE ── */
     .final-line {
       opacity: 0; transform: translateY(24px);
       transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
@@ -393,24 +378,23 @@
       display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
       font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
       border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: pointer;
-      transition: border-color 0.3s, color 0.3s;
-      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s; text-decoration: none;
     }
     .next-chapter-hint:hover { border-color: var(--coral); color: var(--coral); }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       #sushi-bar { padding: 12px 16px; }
       .sushi-piece { width: 30px; height: 18px; }
       .bar-label { font-size: 9px; }
       #story { padding: 0 20px 120px; }
-      .story-block, .split-block { margin-bottom: 56px; }
-      .split-block { grid-template-columns: 1fr; }
+      .story-block { margin-bottom: 56px; }
+      .split-block { grid-template-columns: 1fr; margin-bottom: 56px; }
       .split-block.reverse { direction: ltr; }
-      .split-image { aspect-ratio: 16/7; }
-      .contrast-row { grid-template-columns: 1fr; }
+      .access-block, .scope-block { grid-template-columns: 1fr; }
       .cinematic-image { width: calc(100% + 40px); margin-left: -20px; }
-      .pam-moment { padding: 28px 24px; }
-      .decision-card { padding: 36px 28px; }
+      .climax-block { padding: 36px 24px; }
+      .rule-block { padding: 20px 20px; }
     }
   </style>
 </head>
@@ -422,16 +406,18 @@
   <span class="bar-label" id="progressLabel">0%</span>
 </div>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-image-wrap">
-    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80&fit=crop&crop=center" alt="Calculadora i números" loading="eager"/>
+    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80&fit=crop&crop=center" alt="Servidors i codi" loading="eager"/>
   </div>
   <div class="hero-content">
-    <span class="chapter-badge">Capítol 2 · El Secret del Sukashi</span>
-    <span class="hero-emoji">🏷️</span>
-    <h1>La trampa del<br><em>descompte</em></h1>
-    <p class="hero-subtitle">La solució que sembla obvia és, sovint, la trampa més perillosa.</p>
+    <span class="chapter-badge">Capítol 2 · El Backoffice</span>
+    <span class="hero-emoji">🖥️</span>
+    <h1>El sistema<br>ja <em>existeix</em>.</h1>
+    <p class="hero-subtitle">Algú l'ha de mantenir. Algú ha de vetllar perquè tot continuï coherent mentre el món del restaurant canvia cada dia.</p>
   </div>
   <div class="scroll-hint">
     <span>Continua llegint</span>
@@ -439,181 +425,238 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════════════
+     STORY
+══════════════════════════════════════════════ -->
 <main id="story">
 
-  <!-- BLOC 1: La idea -->
+  <!-- ── 1. CONTEXT: El sistema existeix ── -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-lightbulb" style="color:var(--coral);font-size:1.2rem;"></i>
-      <span class="icon-label">La idea</span>
+      <i class="fa-solid fa-database" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">El sistema</span>
     </div>
-    <p>L'endemà de la seva revelació, l'Alicia arriba al Sukashi amb una idea que li crema a les mans:</p>
-    <div class="insight-callout">
-      "I si fem un 2x1 els dimarts? O un descompte del 30% per a tothom qui vingui al migdia?"
-    </div>
-    <p>Sembla la solució lògica. Si el veí està ple i ella no, el preu ha de ser la clau.</p>
+    <p>Mentre l'Alicia pensa en els seus clients, en l'altra banda hi ha una realitat tècnica que ja existia abans que ella s'hi fixés: el sistema EasyEat. Restaurants registrats. Clients creats. Dades preparades.</p>
+    <p>No s'ha de construir des de zero. Ja hi és. El que cal ara és entendre qui el manté i com funciona per dins.</p>
   </div>
 
-  <!-- Imatge: calculadora i números -->
-  <figure class="scene-image" data-reveal>
-    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&fit=crop&crop=center" alt="Càlculs i números" loading="lazy"/>
-    <figcaption>La calculadora no menteix</figcaption>
+  <!-- Screenshot 1: Llista de restaurants — prova que el sistema existeix -->
+  <figure class="image-block" data-reveal>
+    <img src="capitol2/restaurants-list.png" alt="Llista de restaurants del sistema EasyEat">
+    <figcaption>El sistema ja existeix — restaurants reals amb dades seed</figcaption>
   </figure>
 
-  <!-- BLOC 2: Els números -->
   <div class="story-block" data-reveal>
-    <div class="block-icon">
-      <i class="fa-solid fa-calculator" style="color:var(--coral);font-size:1.2rem;"></i>
-      <span class="icon-label">Els números</span>
+    <p>El sistema no és conceptual. Té restaurants amb noms, horaris, categories, imatges i coordenades. Té clients registrats. Té visites i ressenyes. Quan parlem del Backoffice, parlem d'una interfície que opera sobre dades reals que ja existeixen.</p>
+    <div class="rule-block">
+      El Backoffice no crea el món. Entra en un món que ja existeix i l'ajuda a mantenir-se coherent.
     </div>
-    <p>Agafa la calculadora i comença a fer números. Però, a mesura que resta euros del seu marge, la cara se li va omplint d'ombres.</p>
   </div>
 
   <div class="chapter-divider" data-reveal><span>✦</span></div>
 
-  <!-- BLOC 3: Les 3 trampes (llista numerada animada) -->
+  <!-- ── 2. L'USUARI: L'administrador ── -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-triangle-exclamation" style="color:var(--coral);font-size:1.2rem;"></i>
-      <span class="icon-label">Abaixar el preu significa...</span>
+      <i class="fa-solid fa-user-shield" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">L'usuari</span>
     </div>
-    <ul class="danger-list" id="dangerList">
-      <li data-danger>
-        <span class="danger-num">1</span>
-        <div class="danger-content">
-          <span class="danger-title">Atreure el client "caçador"</span>
-          <span class="danger-desc">Aquell que ve avui perquè és barat, però que demà anirà al davant si el veí és un cèntim més econòmic.</span>
-        </div>
-      </li>
-      <li data-danger>
-        <span class="danger-num">2</span>
-        <div class="danger-content">
-          <span class="danger-title">Sacrificar la qualitat</span>
-          <span class="danger-desc">Perquè els números surtin, hauria de buscar un proveïdor de peix més barat. I el sushi del Sukashi no es toca.</span>
-        </div>
-      </li>
-      <li data-danger>
-        <span class="danger-num">3</span>
-        <div class="danger-content">
-          <span class="danger-title">Treballar el doble per guanyar el mateix</span>
-          <span class="danger-desc">El local estarà ple, sí, però ella estarà esgotada i la caixa no ho notarà.</span>
-        </div>
-      </li>
-    </ul>
+    <p>L'usuari del Backoffice no és l'Alicia. No és un client que fa una reserva ni algú que mira la carta.</p>
+    <p>És l'administrador intern del sistema EasyEat. La persona que, entre bastidors, s'assegura que les dades siguin correctes, que cap restaurant tingui un horari obsolet, que cap client hagi quedat orfe d'informació.</p>
   </div>
 
-  <!-- Salmó fresc — qualitat que no es toca -->
-  <div class="split-block" data-reveal>
-    <div class="split-image">
-      <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80&fit=crop&crop=center" alt="Salmó fresc qualitat" loading="lazy"/>
+  <div class="access-block" data-reveal>
+    <div class="access-card">
+      <div class="access-card-icon">🍣</div>
+      <div class="access-card-title">Restaurants</div>
+      <div class="access-card-desc">L'administrador accedeix a tots els restaurants del sistema, pot consultar els detalls complets i editar els camps necessaris.</div>
+      <span class="access-card-tag">Manteniment</span>
     </div>
+    <div class="access-card">
+      <div class="access-card-icon">👤</div>
+      <div class="access-card-title">Customers</div>
+      <div class="access-card-desc">Accedeix als clients registrats, consulta les seves dades, edita la informació i gestiona les ressenyes associades.</div>
+      <span class="access-card-tag">Supervisió</span>
+    </div>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <p>Dues seccions. Res més. El Backoffice és deliberadament senzill perquè la seva funció és clara: <em>mantenir, corregir, ajustar, supervisar.</em> No és el centre del sistema. És la capa invisible que fa que el centre funcioni.</p>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- ── 3. RESTAURANTS: L'entitat viva ── -->
+  <div class="split-block" data-reveal>
     <div class="split-text">
       <div class="block-icon">
-        <i class="fa-solid fa-fish" style="color:var(--coral);font-size:1.2rem;"></i>
-        <span class="icon-label">La qualitat</span>
+        <i class="fa-solid fa-store" style="color:var(--coral);font-size:1.2rem;"></i>
+        <span class="icon-label">Restaurants</span>
       </div>
-      <p>El sushi del Sukashi no és una línia de producció. És la tria personal de cada peix, cada matí. Aquí és on es construeix la diferència.</p>
-      <p style="color:var(--muted); font-style:italic; font-family:'Cormorant Garamond',serif; font-size:1.05rem;">Sacrificar l'ingredient és sacrificar la identitat.</p>
+      <p>Un restaurant no és un registre estàtic. Els horaris canvien. Les categories s'actualitzen. Una imatge nova, un número de telèfon diferent, una nova adreça. El restaurant és una entitat viva que requereix manteniment continu.</p>
+      <p>L'administrador pot obrir qualsevol restaurant de la llista, veure tots els detalls i editar el que calgui, camp per camp.</p>
+    </div>
+    <div class="split-screenshot">
+      <img src="capitol2/restaurants-list.png" alt="Llista de restaurants amb Show more" loading="lazy"/>
     </div>
   </div>
 
-  <div class="chapter-divider" data-reveal><span>✦</span></div>
-
-  <!-- BLOC 4: El client habitual — PAM moment -->
-  <div class="story-block" data-reveal>
-    <div class="block-icon">
-      <i class="fa-solid fa-comment-dots" style="color:var(--coral);font-size:1.2rem;"></i>
-      <span class="icon-label">El moment clau</span>
-    </div>
-    <p>Mentre ratlla el paper amb frustració, un client habitual entra i li diu:</p>
-  </div>
-
-  <div class="pam-moment" data-reveal>
-    <span class="pam-label">✦ Client habitual del Sukashi</span>
-    <p class="pam-quote">"Alicia, el sushi d'ahir estava increïble, llàstima que només puguem venir un cop al mes per celebrar coses..."</p>
-    <p class="pam-attribution">— Inesperadament, la clau de tot</p>
-  </div>
-
-  <!-- Imatge: sopar de celebració -->
-  <figure class="cinematic-image" data-reveal>
-    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&fit=crop&crop=center" alt="Restaurant sopar celebració" loading="lazy"/>
-    <div class="cine-overlay"></div>
-    <figcaption class="cine-caption">Venen per celebrar. Però podrien venir per molt més.</figcaption>
+  <!-- Screenshot: detall restaurant expandit -->
+  <figure class="image-block" data-reveal>
+    <img src="capitol2/restaurant-detail.png" alt="Detall d'un restaurant expandit amb descripció, rating i categories">
+    <figcaption>Restaurant expandit — descripció, rating, categories i horaris editables</figcaption>
   </figure>
 
-  <!-- BLOC 5: La revelació -->
-  <div class="story-block" data-reveal>
-    <div class="block-icon">
-      <i class="fa-solid fa-bolt" style="color:var(--coral);font-size:1.2rem;"></i>
-      <span class="icon-label">La revelació</span>
+  <!-- Els camps de l'entitat restaurant -->
+  <div class="entity-block" data-reveal>
+    <div class="entity-header">
+      <span class="entity-header-icon">🍣</span>
+      <span class="entity-header-title">Camps de l'entitat Restaurant</span>
     </div>
-    <p><strong style="color:var(--ink);">PAM.</strong> Aquí ho veu clar.</p>
-    <p>El problema no és que el seu sushi sigui car. El problema és que <strong style="color:var(--ink);">no està donant una raó al client per venir un dimarts qualsevol.</strong></p>
+    <div class="entity-body">
+      <div class="entity-field"><span class="entity-field-name">Nom</span><span class="entity-field-value live">L'Art de la Pizza</span></div>
+      <div class="entity-field"><span class="entity-field-name">Descripció</span><span class="entity-field-value">Wood-fired neapolitan pizzas following traditional 18th-century recipes.</span></div>
+      <div class="entity-field"><span class="entity-field-name">Rating</span><span class="entity-field-value live">4.9</span></div>
+      <div class="entity-field"><span class="entity-field-name">Categories</span><span class="entity-field-value">Italià, Pizzeria, Gourmet</span></div>
+      <div class="entity-field"><span class="entity-field-name">Horaris</span><span class="entity-field-value">Dilluns 19:30–23:30 · Dimecres 19:30–23:30 · ...</span></div>
+      <div class="entity-field"><span class="entity-field-name">Imatge</span><span class="entity-field-value">URL d'imatge principal del restaurant</span></div>
+      <div class="entity-field"><span class="entity-field-name">Contacte</span><span class="entity-field-value">+34 93 888 99 00</span></div>
+      <div class="entity-field"><span class="entity-field-name">Ubicació</span><span class="entity-field-value">Carrer d'Enric Granados, 45, 08008 Barcelona</span></div>
+      <div class="entity-field"><span class="entity-field-name">Coordinates</span><span class="entity-field-value">Lng 2.1578 · Lat 41.3915</span></div>
+      <div class="entity-field"><span class="entity-field-name">Google Place ID</span><span class="entity-field-value">Identificador extern del mapa</span></div>
+      <div class="entity-field"><span class="entity-field-name">Employees</span><span class="entity-field-value">IDs dels empleats associats</span></div>
+      <div class="entity-field"><span class="entity-field-name">Dishes</span><span class="entity-field-value">IDs dels plats del restaurant</span></div>
+      <div class="entity-field"><span class="entity-field-name">Badges · Statistics</span><span class="entity-field-value">Relacions amb el sistema de fidelització</span></div>
+    </div>
   </div>
 
-  <!-- Contrast: descompte vs valor -->
-  <div class="contrast-row" data-reveal>
-    <div class="contrast-card bad">
-      <span class="contrast-label">❌ La trampa</span>
-      <p class="contrast-text">El descompte és pa per avui i gana per demà.</p>
+  <!-- Screenshot: camps inferiors amb Rewards, Statistics, Badges, Visites -->
+  <figure class="image-block" data-reveal>
+    <img src="capitol2/restaurant-fields.png" alt="Camps inferiors del restaurant: Employees IDs, Dishs IDs, Rewards, Statistics, Badges, Visites">
+    <figcaption>L'entitat restaurant completa — relacions, recompenses i visites registrades</figcaption>
+  </figure>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- ── 4. CUSTOMERS: La identitat existent ── -->
+  <div class="split-block reverse" data-reveal>
+    <div class="split-text">
+      <div class="block-icon">
+        <i class="fa-solid fa-id-card" style="color:var(--coral);font-size:1.2rem;"></i>
+        <span class="icon-label">Customers</span>
+      </div>
+      <p>Cada customer és una identitat existent al sistema. Té nom, email, historial. I té una cosa especialment valuosa per al projecte de fidelització: les seves ressenyes.</p>
+      <p>L'administrador pot consultar cada client, editar les dades bàsiques quan calgui, i veure les ressenyes que ha deixat als restaurants.</p>
     </div>
-    <div class="contrast-card good">
-      <span class="contrast-label">✓ La clau</span>
-      <p class="contrast-text">No que el client pagui menys, sinó que senti que guanya més.</p>
+    <div class="split-screenshot">
+      <img src="capitol2/customers-list.png" alt="Llista de customers del sistema" loading="lazy"/>
     </div>
   </div>
 
-  <div class="story-block" data-reveal>
-    <p>El descompte és pa per avui i gana per demà. El que ella necessita no és que el client pagui menys, sinó que el client <em>senti que guanya més</em> cada vegada que la tria a ella.</p>
+  <!-- Screenshot: detall customer amb reviews -->
+  <figure class="image-block" data-reveal>
+    <img src="capitol2/customer-detail.png" alt="Fitxa de customer amb email, ID i reviews paginades">
+    <figcaption>Identitat existent — dades editables i historial de ressenyes</figcaption>
+  </figure>
+
+  <!-- Camps del customer -->
+  <div class="entity-block" data-reveal>
+    <div class="entity-header">
+      <span class="entity-header-icon">👤</span>
+      <span class="entity-header-title">Camps de l'entitat Customer</span>
+    </div>
+    <div class="entity-body">
+      <div class="entity-field"><span class="entity-field-name">Nom</span><span class="entity-field-value live">Maria García</span></div>
+      <div class="entity-field"><span class="entity-field-name">Email</span><span class="entity-field-value">maria.garcia@gmail.com</span></div>
+      <div class="entity-field"><span class="entity-field-name">Password</span><span class="entity-field-value">Gestionat per l'administrador si cal</span></div>
+      <div class="entity-field"><span class="entity-field-name">Reviews</span><span class="entity-field-value">Paginades · Filtrables per rating · Ordenables per likes</span></div>
+    </div>
   </div>
 
   <div class="chapter-divider" data-reveal><span>✦</span></div>
 
-  <!-- BLOC FINAL: La decisió -->
-  <div class="trash-section" data-reveal>
-    <div class="block-icon" style="justify-content:center; margin-bottom:28px;">
-      <i class="fa-solid fa-trash-can" style="color:var(--muted);font-size:1.2rem;"></i>
-      <span class="icon-label" style="color:var(--muted);">La decisió</span>
+  <!-- ── 5. LA NATURALESA DEL BACKOFFICE ── -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-gears" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">La naturalesa</span>
     </div>
+    <p>El Backoffice no és un taulell de control ni un dashboard executiu. No genera clients. No crea restaurants. No inventa dades.</p>
+    <p>És la interfície de manteniment. La capa que garanteix que allò que el sistema presenta als clients sigui fidel a la realitat que existeix fora de la pantalla.</p>
+  </div>
 
-    <div class="trash-image">
-      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80&fit=crop&crop=center" alt="Paper i bolígraf" loading="lazy"/>
+  <div class="scope-block" data-reveal>
+    <div class="scope-card out">
+      <div class="scope-card-label">❌ Fora de l'abast</div>
+      <div class="scope-item">Crear restaurants nous</div>
+      <div class="scope-item">Generar usuaris des de zero</div>
+      <div class="scope-item">Produir dades sintètiques</div>
+      <div class="scope-item">Gestionar reserves o comandes</div>
+      <div class="scope-item">Accions de màrqueting directe</div>
     </div>
+    <div class="scope-card in">
+      <div class="scope-card-label">✓ Dins de l'abast</div>
+      <div class="scope-item">Editar camps existents</div>
+      <div class="scope-item">Mantenir dades operatives</div>
+      <div class="scope-item">Corregir informació incorrecta</div>
+      <div class="scope-item">Supervisar ressenyes</div>
+      <div class="scope-item">Ajustar horaris i categories</div>
+    </div>
+  </div>
 
-    <div class="decision-card">
-      <span class="decision-card-label">Sukashi · L'endemà de la revelació</span>
-      <p class="decision-card-text">
-        L'Alicia llença la llista de descomptes a la paperera.<br><br>
-        No competirà per ser la <strong>més barata</strong>.<br>
-        Competirà per ser la <strong>més valorada</strong>.
-      </p>
+  <!-- Imatge cinematic: servidors / sistema en funcionament -->
+  <figure class="cinematic-image" data-reveal>
+    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80&fit=crop&crop=center" alt="Servidors i infraestructura digital" loading="lazy"/>
+    <div class="cine-overlay"></div>
+    <figcaption class="cine-caption">El sistema funciona. El Backoffice s'assegura que continuï funcionant.</figcaption>
+  </figure>
+
+  <!-- ── 6. CLÍMAX ── -->
+  <div class="climax-block" data-reveal>
+    <span class="climax-label">✦ El paper del Backoffice</span>
+    <p class="climax-text">
+      El Backoffice <strong>no crea el sistema</strong>.<br>
+      El manté <strong>coherent</strong>.
+    </p>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <p>Quan el sistema creix —més restaurants, més clients, més visites, més ressenyes— el desordre creix amb ell. Una categoria mal escrita. Un horari que no s'ha actualitzat. Un restaurant amb la imatge obsoleta.</p>
+    <p>El Backoffice és la capa invisible que absorbeix aquest desordre. L'administrador entra, corregeix, ajusta i surt. El sistema continua coherent. L'Alicia continua confiada en les dades que veu.</p>
+    <div class="rule-block">
+      Sense manteniment, un sistema de fidelització perd credibilitat. I un sistema sense credibilitat deixa de ser útil per a tothom.
     </div>
   </div>
 
   <div class="final-line" data-reveal>
-    <p>Però per ser la més valorada,<br>primer cal entendre per a qui s'és indispensable.</p>
-    <div style="display: flex; justify-content: center; gap: 16px; align-items: center; margin-top: 40px; flex-wrap: wrap;">
-        <a href="sukashi-capitol1.html" class="next-chapter-hint">
-            <i class="fa-solid fa-chevron-left" style="font-size:0.8rem;"></i>
-            Capítol 1
-        </a>
-        <a href="sukashi-capitol3.html" class="next-chapter-hint">
-            Capítol 3
-            <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
-        </a>
+    <p>El sistema ja existeix. Ara cal entendre<br>com creix amb cada visita, cada punt, cada retorn.</p>
+    <div style="display:flex;justify-content:center;gap:16px;align-items:center;margin-top:40px;flex-wrap:wrap;">
+      <a href="sukashi-capitol1.html" class="next-chapter-hint">
+        <i class="fa-solid fa-chevron-left" style="font-size:0.8rem;"></i>
+        Capítol 1
+      </a>
+      <a href="sukashi-capitol3.html" class="next-chapter-hint">
+        Capítol 3
+        <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
+      </a>
     </div>
   </div>
 
 </main>
 
 <script>
-  // SUSHI BAR
+  // ── Sushi progress bar ──
   const TOTAL = 6;
   const piecesEl = document.getElementById('sushiPieces');
   for (let i = 0; i < TOTAL; i++) {
     const d = document.createElement('div');
     d.className = 'sushi-piece'; d.id = 'sp-' + i;
-    d.innerHTML = '<svg viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg"><ellipse class="rice" cx="19" cy="16" rx="17" ry="6"/><rect class="nori" x="5" y="12" width="28" height="5" rx="1"/><ellipse class="topping" cx="19" cy="10" rx="14" ry="5"/><ellipse fill="rgba(255,255,255,0.15)" cx="15" cy="8" rx="5" ry="2"/></svg>';
+    d.innerHTML = '<svg viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg">' +
+            '<ellipse class="rice" cx="19" cy="16" rx="17" ry="6"/>' +
+            '<rect class="nori" x="5" y="12" width="28" height="5" rx="1"/>' +
+            '<ellipse class="topping" cx="19" cy="10" rx="14" ry="5"/>' +
+            '<ellipse fill="rgba(255,255,255,0.15)" cx="15" cy="8" rx="5" ry="2"/>' +
+            '</svg>';
     piecesEl.appendChild(d);
   }
 
@@ -625,24 +668,14 @@
     progressLabel.textContent = Math.round(pct * 100) + '%';
   }
 
-  // INTERSECTION OBSERVER — blocks
-  const allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line, .pam-moment, .contrast-row');
+  // ── Intersection observer ──
+  const allReveal = document.querySelectorAll(
+          '[data-reveal], .chapter-divider, .final-line, .access-block, .entity-block, .scope-block, .climax-block, .final-block'
+  );
   const io = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
   allReveal.forEach(function(el) { io.observe(el); });
-
-  // STAGGERED DANGER LIST ITEMS
-  const dangerItems = document.querySelectorAll('[data-danger]');
-  const ioList = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        const idx = Array.from(dangerItems).indexOf(e.target);
-        setTimeout(function() { e.target.classList.add('visible'); }, idx * 180);
-      }
-    });
-  }, { threshold: 0.15 });
-  dangerItems.forEach(function(el) { ioList.observe(el); });
 
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
