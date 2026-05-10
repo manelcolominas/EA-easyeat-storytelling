@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>El Secret del Sukashi — Capítol 3</title>
+  <title>El Secret del Sukashi — Capítol 3 · El Sistema Madura</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,6 +18,9 @@
       --warm-white: #FDFCF9;
       --sushi-empty: #DDD9D0;
       --sushi-fill: #D94F3A;
+      --green: #3A9E6F;
+      --green-light: #E8F5EF;
+      --blue: #2D6A9F;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,14 +70,14 @@
     }
     .hero-image-wrap { position: absolute; inset: 0; z-index: 0; }
     .hero-image-wrap img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center 55%;
-      filter: brightness(0.35) saturate(0.55);
+      width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+      filter: brightness(0.28) saturate(0.45);
     }
     .hero-image-wrap::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(160deg,
-        rgba(200,148,58,0.18) 0%,
-        rgba(28,26,23,0.45) 55%,
+        rgba(58,158,111,0.15) 0%,
+        rgba(28,26,23,0.55) 55%,
         rgba(249,248,244,1) 100%);
     }
     .hero-content {
@@ -88,16 +91,17 @@
       padding: 6px 18px; border-radius: 100px; margin-bottom: 36px;
       font-weight: 500; backdrop-filter: blur(4px);
     }
-    .hero-coin {
-      width: 88px; height: 88px; margin: 0 auto 28px;
-      position: relative;
-      animation: coinFloat 4s ease-in-out infinite;
+
+    /* Ecosystem icon animated */
+    .hero-ecosystem {
+      width: 96px; height: 96px; margin: 0 auto 28px;
+      animation: ecosystemFloat 5s ease-in-out infinite;
     }
-    @keyframes coinFloat {
-      0%,100% { transform: translateY(0) rotateY(0deg); }
-      50%      { transform: translateY(-12px) rotateY(12deg); }
+    @keyframes ecosystemFloat {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-10px) rotate(4deg); }
     }
-    .hero-coin svg { width: 100%; height: 100%; }
+    .hero-ecosystem svg { width: 100%; height: 100%; }
 
     h1 {
       font-family: 'Cormorant Garamond', serif;
@@ -106,7 +110,7 @@
       text-shadow: 0 2px 28px rgba(0,0,0,0.5);
     }
     h1 em { font-style: italic; color: #F0C96B; }
-    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.55); max-width: 440px; line-height: 1.7; }
+    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.55); max-width: 460px; line-height: 1.7; }
 
     .scroll-hint {
       position: relative; z-index: 1; padding-bottom: 48px;
@@ -140,70 +144,99 @@
     p { font-size: clamp(1rem,2.2vw,1.12rem); color: #3A3730; line-height: 1.9; }
     p + p { margin-top: 18px; }
 
-    /* ── COIN CARD (la moneda visual) ── */
-    .coin-explainer {
+    /* ── SCENE IMAGE (screenshot style) ── */
+    .scene-image {
+      width: 100%; border-radius: 8px; overflow: hidden; margin: 32px 0;
+      position: relative;
+      opacity: 0; transform: translateY(20px) scale(0.98);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 8px 40px rgba(28,26,23,0.14), 0 2px 8px rgba(28,26,23,0.08);
+    }
+    .scene-image.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .scene-image img {
+      width: 100%; display: block;
+      transition: transform 0.6s ease;
+    }
+    .scene-image:hover img { transform: scale(1.01); }
+    .scene-image figcaption {
+      padding: 10px 16px;
+      background: rgba(28,26,23,0.04);
+      border-top: 1px solid rgba(28,26,23,0.06);
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Browser chrome mockup */
+    .browser-chrome {
+      background: #E8E7E3;
+      border-radius: 8px 8px 0 0;
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid rgba(28,26,23,0.08);
+    }
+    .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .browser-dot.red   { background: #FF5F56; }
+    .browser-dot.yellow{ background: #FFBD2E; }
+    .browser-dot.green { background: #27C93F; }
+    .browser-url {
+      flex: 1; background: rgba(255,255,255,0.7); border-radius: 4px;
+      padding: 3px 10px; font-size: 10px; letter-spacing: 0.03em; color: var(--muted);
+      margin-left: 8px;
+    }
+
+    /* ── FEATURE CARD GRID ── */
+    .feature-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin: 32px 0;
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .feature-grid.visible { opacity: 1; transform: translateY(0); }
+    .feature-card {
+      background: var(--warm-white);
+      border: 1px solid rgba(28,26,23,0.08);
+      border-radius: 8px; padding: 24px 20px;
+    }
+    .feature-card .fc-icon { font-size: 1.4rem; margin-bottom: 12px; }
+    .feature-card .fc-title {
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      font-weight: 500; color: var(--ink); margin-bottom: 8px;
+    }
+    .feature-card .fc-desc { font-size: 0.88rem; color: #6A6560; line-height: 1.6; }
+
+    /* ── DARK CARD (sistemes / seguretat) ── */
+    .dark-card {
       background: linear-gradient(135deg, #1C1A17 0%, #2C2820 100%);
-      border-radius: 8px;
-      padding: 44px 40px;
-      margin: 36px 0;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 32px;
-      align-items: center;
+      border-radius: 8px; padding: 44px 40px; margin: 36px 0;
       opacity: 0; transform: translateY(28px) scale(0.97);
       transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
       position: relative; overflow: hidden;
     }
-    .coin-explainer::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, var(--gold), transparent);
+    .dark-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, var(--green), transparent);
     }
-    .coin-explainer.visible { opacity: 1; transform: translateY(0) scale(1); }
-
-    .coin-svg-wrap { flex-shrink: 0; }
-
-    .coin-text-wrap { display: flex; flex-direction: column; gap: 10px; }
-    .coin-kicker { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
-    .coin-headline {
+    .dark-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .dark-card .dc-kicker { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--green); font-weight: 500; margin-bottom: 16px; }
+    .dark-card .dc-headline {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem,2.5vw,1.4rem); font-weight: 600;
-      color: #fff; line-height: 1.3;
+      font-size: clamp(1.2rem,2.8vw,1.55rem); font-weight: 600;
+      color: #fff; line-height: 1.3; margin-bottom: 20px;
     }
-    .coin-desc { font-size: clamp(0.85rem,1.8vw,0.95rem); color: rgba(255,255,255,0.55); line-height: 1.65; }
+    .dark-card .dc-body { font-size: clamp(0.85rem,1.8vw,0.96rem); color: rgba(255,255,255,0.55); line-height: 1.7; }
 
-    /* ── ANIMACIÓ CONTADOR DE PUNTS ── */
-    .points-counter {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 4px;
+    /* JWT / RBAC badge row */
+    .role-row {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px;
     }
-    .points-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem; font-weight: 600; line-height: 1;
-      color: var(--gold-light);
-      transition: all 0.4s ease;
+    .role-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px; padding: 10px 16px;
     }
-    .points-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
-
-    /* ── SCENE IMAGE ── */
-    .scene-image {
-      width: 100%; border-radius: 4px; overflow: hidden; margin: 28px 0;
-      position: relative;
-      opacity: 0; transform: translateY(20px) scale(0.98);
-      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
-    }
-    .scene-image.visible { opacity: 1; transform: translateY(0) scale(1); }
-    .scene-image img {
-      width: 100%; display: block; aspect-ratio: 16/7; object-fit: cover;
-      filter: saturate(0.7) brightness(0.9);
-      transition: filter 0.6s ease, transform 0.6s ease;
-    }
-    .scene-image:hover img { filter: saturate(0.88) brightness(1); transform: scale(1.01); }
-    .scene-image figcaption {
-      position: absolute; bottom: 12px; right: 16px;
-      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-    }
+    .role-badge .rb-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .role-badge .rb-name { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-weight: 500; }
+    .role-badge .rb-desc { font-size: 10px; color: rgba(255,255,255,0.35); }
 
     /* ── CINEMATIC ── */
     .cinematic-image {
@@ -211,6 +244,7 @@
       position: relative; overflow: hidden;
       opacity: 0; transform: translateY(30px);
       transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 20px 60px rgba(28,26,23,0.18);
     }
     .cinematic-image.visible { opacity: 1; transform: translateY(0); }
     .cinematic-image img {
@@ -225,12 +259,12 @@
       position: absolute; bottom: 20px; left: 28px;
       font-family: 'Cormorant Garamond', serif; font-style: italic;
       font-size: clamp(0.95rem,2.5vw,1.2rem); color: rgba(255,255,255,0.9);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 400px; line-height: 1.5;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 460px; line-height: 1.5;
     }
 
     /* ── SPLIT BLOCK ── */
     .split-block {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
       margin-bottom: 80px;
       opacity: 0; transform: translateY(36px);
       transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
@@ -238,68 +272,67 @@
     .split-block.visible { opacity: 1; transform: translateY(0); }
     .split-block.reverse { direction: rtl; }
     .split-block.reverse > * { direction: ltr; }
-    .split-image { border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; }
-    .split-image img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      filter: saturate(0.72) brightness(0.88);
-      transition: transform 0.6s ease, filter 0.6s ease;
-    }
-    .split-image:hover img { transform: scale(1.03); filter: saturate(0.9) brightness(1); }
-    .split-text { display: flex; flex-direction: column; gap: 16px; }
+    .split-screenshot { border-radius: 8px; overflow: hidden; box-shadow: 0 8px 32px rgba(28,26,23,0.14); }
+    .split-screenshot img { width: 100%; display: block; }
+    .split-text { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
 
-    /* ── PSYCHOLOGICAL SHIFT DIAGRAM ── */
-    .psych-shift {
-      margin: 36px 0;
+    /* ── BEFORE / AFTER TABLE ── */
+    .before-after {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border-radius: 8px; overflow: hidden; margin: 36px 0;
       opacity: 0; transform: translateY(24px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .psych-shift.visible { opacity: 1; transform: translateY(0); }
+    .before-after.visible { opacity: 1; transform: translateY(0); }
+    .ba-col { padding: 28px 24px; }
+    .ba-col.before { background: rgba(28,26,23,0.05); border: 1px solid rgba(28,26,23,0.1); border-right: none; }
+    .ba-col.after  { background: rgba(58,158,111,0.07); border: 1px solid rgba(58,158,111,0.2); }
+    .ba-label {
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500;
+      margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .ba-col.before .ba-label { color: var(--muted); }
+    .ba-col.after  .ba-label { color: var(--green); }
+    .ba-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .ba-list li { font-size: 0.9rem; color: #5A5650; display: flex; gap: 8px; align-items: baseline; line-height: 1.5; }
+    .ba-list li::before { content: '—'; color: var(--muted); flex-shrink: 0; }
+    .ba-col.after .ba-list li::before { content: '✓'; color: var(--green); font-weight: 500; }
+    .ba-col.after .ba-list li { color: var(--ink); }
 
-    .psych-label {
+    /* ── ECOSYSTEM DIAGRAM ── */
+    .ecosystem-diagram {
+      margin: 36px 0;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .ecosystem-diagram.visible { opacity: 1; transform: translateY(0); }
+    .eco-label {
       font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 16px; text-align: center;
+      color: var(--muted); margin-bottom: 20px; text-align: center;
     }
+    .eco-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .eco-node {
+      background: var(--warm-white); border-radius: 8px; padding: 20px 16px; text-align: center;
+      border: 1px solid rgba(28,26,23,0.08);
+      position: relative;
+    }
+    .eco-node .en-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .eco-node .en-name { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+    .eco-node .en-role { font-size: 0.8rem; color: var(--muted); }
+    .eco-node.highlight { background: var(--ink); border-color: var(--ink); }
+    .eco-node.highlight .en-name { color: rgba(255,255,255,0.9); }
+    .eco-node.highlight .en-role { color: rgba(255,255,255,0.4); }
+    .eco-connector {
+      grid-column: 1 / -1; display: flex; align-items: center; gap: 0;
+      margin: 4px 0;
+    }
+    .eco-line { flex: 1; height: 1px; background: rgba(28,26,23,0.12); }
+    .eco-line-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0 12px; }
 
-    .psych-before-after {
-      display: grid; grid-template-columns: 1fr auto 1fr; gap: 0;
-      align-items: center;
-    }
-
-    .psych-card {
-      padding: 22px 20px; border-radius: 4px; text-align: center;
-    }
-    .psych-card.before {
-      background: rgba(28,26,23,0.05); border: 1px solid rgba(28,26,23,0.1);
-    }
-    .psych-card.after {
-      background: rgba(200,148,58,0.08); border: 1px solid rgba(200,148,58,0.25);
-    }
-    .psych-card-label {
-      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px;
-      font-weight: 500;
-    }
-    .psych-card.before .psych-card-label { color: var(--muted); }
-    .psych-card.after  .psych-card-label { color: var(--gold); }
-    .psych-thought {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(0.9rem,2vw,1.05rem); line-height: 1.55;
-    }
-    .psych-card.before .psych-thought { color: #5A5650; }
-    .psych-card.after  .psych-thought { color: var(--ink); }
-
-    .psych-arrow {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      padding: 0 16px; color: var(--gold);
-    }
-    .psych-arrow i { font-size: 1.2rem; }
-    .psych-arrow span { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-
-    /* ── GANXO CARD (la cita final del capítol) ── */
+    /* ── GANXO CARD (clímax del capítol) ── */
     .ganxo-card {
       background: var(--ink);
-      border-radius: 8px;
-      padding: 52px 44px;
-      text-align: center;
+      border-radius: 8px; padding: 52px 44px; text-align: center;
       position: relative; overflow: hidden;
       opacity: 0; transform: translateY(32px);
       transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1);
@@ -307,27 +340,22 @@
     }
     .ganxo-card.visible { opacity: 1; transform: translateY(0); }
     .ganxo-card::before {
-      content: '';
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
       width: 60%; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      background: linear-gradient(to right, transparent, var(--green), transparent);
     }
     .ganxo-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
       width: 60%; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      background: linear-gradient(to right, transparent, var(--green), transparent);
     }
-
-    /* Decorative coin watermark */
     .ganxo-watermark {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       opacity: 0.04; pointer-events: none;
     }
-
     .ganxo-label {
       font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 24px; display: block;
+      color: var(--green); margin-bottom: 24px; display: block;
     }
     .ganxo-quote {
       font-family: 'Cormorant Garamond', serif;
@@ -341,63 +369,11 @@
       letter-spacing: 0.04em; position: relative; z-index: 1;
     }
 
-    /* ── THOUGHT BUBBLE (efecte psicològic) ── */
-    .thought-sequence {
-      display: flex; flex-direction: column; gap: 12px;
-      margin: 28px 0;
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .thought-sequence.visible { opacity: 1; transform: translateY(0); }
-
-    .thought-bubble {
-      background: var(--warm-white);
-      border: 1px solid rgba(28,26,23,0.1);
-      border-radius: 12px;
-      padding: 16px 20px;
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(0.92rem,2vw,1.05rem); color: var(--ink); line-height: 1.55;
-      position: relative; align-self: flex-start; max-width: 82%;
-      opacity: 0; transform: translateX(-16px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .thought-bubble.visible { opacity: 1; transform: translateX(0); }
-    .thought-bubble::before {
-      content: ''; position: absolute;
-      bottom: -8px; left: 20px;
-      width: 0; height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 8px solid rgba(28,26,23,0.1);
-    }
-    .thought-bubble::after {
-      content: ''; position: absolute;
-      bottom: -7px; left: 21px;
-      width: 0; height: 0;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-top: 7px solid var(--warm-white);
-    }
-    .thought-bubble.highlight {
-      background: rgba(200,148,58,0.08);
-      border-color: rgba(200,148,58,0.3);
-      color: #2C2200;
-      align-self: flex-end;
-    }
-    .thought-bubble.highlight::before { border-top-color: rgba(200,148,58,0.3); left: auto; right: 20px; }
-    .thought-bubble.highlight::after  { border-top-color: rgba(200,148,58,0.08); left: auto; right: 21px; }
-
-    .thought-source {
-      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); margin-top: 4px; padding: 0 4px;
-    }
-    .thought-source.right { text-align: right; }
-
-    /* ── CALLOUT ── */
+    /* ── INSIGHT CALLOUT ── */
     .insight-callout {
-      border: 1px solid rgba(200,148,58,0.25);
-      border-left: 3px solid var(--gold);
-      background: rgba(200,148,58,0.05);
+      border: 1px solid rgba(58,158,111,0.25);
+      border-left: 3px solid var(--green);
+      background: rgba(58,158,111,0.05);
       padding: 28px 32px; border-radius: 0 8px 8px 0; margin: 28px 0;
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.1rem,2.5vw,1.3rem); font-style: italic;
@@ -405,7 +381,7 @@
     }
     .insight-callout::before {
       content: '\201C'; position: absolute; top: -14px; left: 24px;
-      font-size: 5rem; color: var(--gold); opacity: 0.15;
+      font-size: 5rem; color: var(--green); opacity: 0.12;
       font-family: 'Cormorant Garamond', serif; line-height: 1;
     }
 
@@ -434,10 +410,38 @@
       display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
       font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
       border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: pointer;
-      transition: border-color 0.3s, color 0.3s;
-      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s; text-decoration: none;
     }
-    .next-chapter-hint:hover { border-color: var(--gold); color: var(--gold); }
+    .next-chapter-hint:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── SCREENSHOT CAPTION STRIP ── */
+    .screenshot-wrap {
+      margin: 28px 0;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .screenshot-wrap.visible { opacity: 1; transform: translateY(0); }
+    .screenshot-wrap .browser-chrome + img,
+    .screenshot-wrap img {
+      width: 100%; display: block; border-radius: 0 0 8px 8px;
+      box-shadow: 0 8px 32px rgba(28,26,23,0.14);
+    }
+    .screenshot-wrap figcaption {
+      margin-top: 10px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-align: center;
+    }
+
+    /* ── DUAL SCREENSHOTS ── */
+    .dual-screens {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .dual-screens.visible { opacity: 1; transform: translateY(0); }
+    .dual-screens figure { display: flex; flex-direction: column; gap: 0; }
+    .dual-screens figure .browser-chrome { border-radius: 8px 8px 0 0; }
+    .dual-screens figure img { border-radius: 0 0 8px 8px; width: 100%; display: block; box-shadow: 0 6px 24px rgba(28,26,23,0.12); }
+    .dual-screens figure figcaption { margin-top: 8px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: center; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
@@ -445,16 +449,17 @@
       .sushi-piece { width: 30px; height: 18px; }
       .bar-label { font-size: 9px; }
       #story { padding: 0 20px 120px; }
-      .story-block, .split-block { margin-bottom: 56px; }
-      .split-block { grid-template-columns: 1fr; }
+      .story-block { margin-bottom: 56px; }
+      .split-block { grid-template-columns: 1fr; gap: 20px; }
       .split-block.reverse { direction: ltr; }
-      .split-image { aspect-ratio: 16/7; }
-      .coin-explainer { grid-template-columns: 1fr; text-align: center; gap: 20px; padding: 32px 24px; }
-      .psych-before-after { grid-template-columns: 1fr; gap: 12px; }
-      .psych-arrow { flex-direction: row; padding: 0; transform: rotate(90deg); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .before-after { grid-template-columns: 1fr; }
+      .ba-col.before { border-right: 1px solid rgba(28,26,23,0.1); border-bottom: none; }
+      .eco-grid { grid-template-columns: 1fr; }
       .cinematic-image { width: calc(100% + 40px); margin-left: -20px; }
       .ganxo-card { padding: 36px 24px; }
-      .thought-bubble { max-width: 95%; }
+      .dark-card { padding: 28px 20px; }
+      .dual-screens { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -469,40 +474,39 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-image-wrap">
-    <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1600&q=80&fit=crop&crop=center" alt="Monedes i inversió" loading="eager"/>
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&fit=crop&crop=center" alt="Arquitectura de sistema digital" loading="eager"/>
   </div>
   <div class="hero-content">
     <span class="chapter-badge">Capítol 3 · El Secret del Sukashi</span>
-    <!-- Coin SVG animat -->
-    <div class="hero-coin">
-      <svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+    <!-- Ecosystem icon -->
+    <div class="hero-ecosystem">
+      <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="coinGrad" cx="38%" cy="35%">
-            <stop offset="0%"   stop-color="#F0C96B"/>
-            <stop offset="55%"  stop-color="#C8943A"/>
-            <stop offset="100%" stop-color="#8C6020"/>
-          </radialGradient>
-          <radialGradient id="coinEdge" cx="50%" cy="50%">
-            <stop offset="70%"  stop-color="rgba(0,0,0,0)"/>
-            <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
+          <radialGradient id="ecoGrad" cx="40%" cy="35%">
+            <stop offset="0%"   stop-color="#3A9E6F"/>
+            <stop offset="100%" stop-color="#1a5c3f"/>
           </radialGradient>
         </defs>
-        <!-- Ombra -->
-        <ellipse cx="44" cy="82" rx="22" ry="5" fill="rgba(0,0,0,0.25)"/>
-        <!-- Cos principal -->
-        <circle cx="44" cy="42" r="38" fill="url(#coinGrad)"/>
-        <!-- Bord -->
-        <circle cx="44" cy="42" r="38" fill="url(#coinEdge)"/>
-        <!-- Cercle interior -->
-        <circle cx="44" cy="42" r="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-        <!-- Ideograma sushi simplificat -->
-        <text x="44" y="50" text-anchor="middle" font-size="26" fill="rgba(255,255,255,0.85)" font-family="serif">寿</text>
-        <!-- Brillantor -->
-        <ellipse cx="34" cy="28" rx="9" ry="5" fill="rgba(255,255,255,0.18)" transform="rotate(-20,34,28)"/>
+        <ellipse cx="48" cy="90" rx="24" ry="5" fill="rgba(0,0,0,0.2)"/>
+        <!-- Central hub -->
+        <circle cx="48" cy="46" r="22" fill="url(#ecoGrad)" opacity="0.9"/>
+        <circle cx="48" cy="46" r="16" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+        <!-- Nodes -->
+        <circle cx="12" cy="20" r="10" fill="rgba(200,148,58,0.85)"/>
+        <circle cx="84" cy="20" r="10" fill="rgba(200,148,58,0.85)"/>
+        <circle cx="12" cy="72" r="10" fill="rgba(200,148,58,0.55)"/>
+        <circle cx="84" cy="72" r="10" fill="rgba(200,148,58,0.55)"/>
+        <!-- Connections -->
+        <line x1="22" y1="24" x2="30" y2="34" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+        <line x1="74" y1="24" x2="66" y2="34" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+        <line x1="22" y1="68" x2="30" y2="58" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <line x1="74" y1="68" x2="66" y2="58" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <!-- Lock icon inside -->
+        <text x="48" y="52" text-anchor="middle" font-size="16" fill="rgba(255,255,255,0.85)" font-family="serif">⚙</text>
       </svg>
     </div>
-    <h1>El Naixement de la<br><em>"Moneda del Sukashi"</em></h1>
-    <p class="hero-subtitle">Quan el client deixa de triar on sopar i comença a triar quan cobrar la seva recompensa.</p>
+    <h1>El Sistema<br><em>Madura</em></h1>
+    <p class="hero-subtitle">EasyEat deixa de ser una eina de gestió interna. Es converteix en un ecosistema complet amb múltiples capes, rols i aplicacions.</p>
   </div>
   <div class="scroll-hint">
     <span>Continua llegint</span>
@@ -512,169 +516,358 @@
 
 <main id="story">
 
-  <!-- BLOC 1: La solució -->
+  <!-- BLOC 1: Context general -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-coins" style="color:var(--gold);font-size:1.2rem;"></i>
-      <span class="icon-label">La solució</span>
+      <i class="fa-solid fa-layer-group" style="color:var(--green);font-size:1.2rem;"></i>
+      <span class="icon-label">Context general</span>
     </div>
-    <p>L'Alicia no vol abaixar preus. Vol crear un motiu per tornar. I ha trobat la resposta en un concepte tan antic com el comerç: la lleialtat recompensada.</p>
-    <p>Però ho farà diferent. No serà un segell de cartró. Serà una <strong style="color:var(--ink);">moneda pròpia</strong>. Una inversió que el client fa al Sukashi cada cop que hi entra.</p>
+    <p>En les versions anteriors, EasyEat era una base de dades amb una interfície. Funcionava. Però era estàtic, limitat, unidimensional.</p>
+    <p>En el Capítol 3, tot canvia. El sistema es converteix en un <strong style="color:var(--ink);">ecosistema complet</strong>: tres interfícies, tres tipus d'usuaris, un únic nucli de dades que ho vertebra tot.</p>
   </div>
 
-  <!-- COIN EXPLAINER CARD -->
-  <div class="coin-explainer" data-reveal>
-    <div class="coin-svg-wrap">
-      <div class="points-counter">
-        <span class="points-num" id="pointsAnim">0</span>
-        <span class="points-label">Punts Sukashi</span>
+  <!-- ECOSYSTEM DIAGRAM -->
+  <div class="ecosystem-diagram" data-reveal>
+    <p class="eco-label">L'ecosistema EasyEat</p>
+    <div class="eco-grid">
+      <div class="eco-node highlight">
+        <div class="en-icon">🖥️</div>
+        <div class="en-name">Backoffice</div>
+        <div class="en-role">Angular · Admin intern</div>
+      </div>
+      <div class="eco-node">
+        <div class="en-icon">🍽️</div>
+        <div class="en-name">Customer App</div>
+        <div class="en-role">React · Clients finals</div>
+      </div>
+      <div class="eco-node">
+        <div class="en-icon">👨‍🍳</div>
+        <div class="en-name">Employee App</div>
+        <div class="en-role">React · Personal del local</div>
       </div>
     </div>
-    <div class="coin-text-wrap">
-      <span class="coin-kicker">Com funciona</span>
-      <p class="coin-headline">Cada euro gastat = 1 punt.<br>Els punts es canvien per experiències.</p>
-      <p class="coin-desc">No és un descompte diferit. És una <em style="color:rgba(240,201,107,0.85);">reserva de valor</em> que el client acumula al restaurant. Com tenir diners guardats en un lloc especial.</p>
+    <div style="text-align:center; margin-top:14px; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted);">
+      Tres interfícies · Un sol ecosistema · JWT + RBAC
     </div>
   </div>
 
   <div class="chapter-divider" data-reveal><span>✦</span></div>
 
-  <!-- BLOC 2: El canvi psicològic -->
+  <!-- BLOC 2: Backoffice millorat -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-brain" style="color:var(--gold);font-size:1.2rem;"></i>
-      <span class="icon-label">El canvi psicològic</span>
+      <i class="fa-solid fa-desktop" style="color:var(--green);font-size:1.2rem;"></i>
+      <span class="icon-label">Evolució del Backoffice</span>
     </div>
-    <p>Aquí és on passa la màgia. En el moment que el client té punts acumulats, canvia tota la lògica de la decisió. Deixa de preguntar-se <em>"On seré millor?"</em> i comença a pensar:</p>
+    <p>El Backoffice era funcional. Ara és <em>professional</em>. La mateixa base Angular, però amb una capa de UX que transforma l'experiència de l'administrador.</p>
+    <p>Ja no és una llista de text pla. Cada restaurant s'expandeix en un panell ric: ubicació en mapa, horaris, categories, estadístiques, plats, empleats i recompenses, tot paginat i controlat.</p>
   </div>
 
-  <!-- THOUGHT BUBBLES -->
-  <div class="thought-sequence" data-reveal id="thoughtSeq">
-    <div class="thought-bubble" data-thought-delay="0">
-      "Aquest divendres tenim sopar... On anem?"
+  <!-- Screenshot: Restaurant list with pagination -->
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:4200/restaurants · Backoffice EasyEat</span>
     </div>
-    <div class="thought-source">La parella, dijous a la nit</div>
+    <img src="capitol3/restaurants-list.png" alt="Backoffice — Llista de restaurants amb paginació" loading="lazy"/>
+    <figcaption>Llista de restaurants · Paginació integrada · Soft delete activat</figcaption>
+  </figure>
 
-    <div style="height:8px"></div>
-
-    <div class="thought-bubble" data-thought-delay="300">
-      "Al japonès del carrer? O al Sukashi?"
+  <!-- FEATURE GRID -->
+  <div class="feature-grid" data-reveal>
+    <div class="feature-card">
+      <div class="fc-icon">📄</div>
+      <div class="fc-title">Paginació universal</div>
+      <div class="fc-desc">Totes les entitats principals disposen de paginació. Millor rendiment, escalabilitat garantida i cap sobrecàrrega de dades.</div>
     </div>
-    <div class="thought-source">La mateixa parella</div>
-
-    <div style="height:8px"></div>
-
-    <div class="thought-bubble highlight" data-thought-delay="700">
-      "Espera, al Sukashi tenim 340 punts... ja que hi tenim diners, anem-hi i els fem servir!"
+    <div class="feature-card">
+      <div class="fc-icon">🗑️</div>
+      <div class="fc-title">Soft & Hard Delete</div>
+      <div class="fc-desc">Sistema dual d'eliminació: Soft Delete per desactivar sense borrar, Hard Delete per eliminació permanent. Control total sobre les dades.</div>
     </div>
-    <div class="thought-source right">La decisió canvia</div>
+    <div class="feature-card">
+      <div class="fc-icon">🗺️</div>
+      <div class="fc-title">Google Maps integrat</div>
+      <div class="fc-desc">Widget de mapa en cada restaurant. Context geogràfic real, coordenades, i accés directe a Google Maps amb un sol clic.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">✨</div>
+      <div class="fc-title">UI/UX redissenyada</div>
+      <div class="fc-desc">Interfície optimitzada i professional. Visualització millorada, edició d'entitats millorada i optimització general del sistema.</div>
+    </div>
   </div>
 
-  <!-- Imatge: sushi fet a mà -->
-  <figure class="scene-image" data-reveal>
-    <img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=1200&q=80&fit=crop&crop=center" alt="Sushi preparat a mà" loading="lazy"/>
-
-    <figcaption>Cada peça, una raó per tornar</figcaption>
+  <!-- Screenshot: Restaurant detail amb mapa -->
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:4200/restaurants · Detall de restaurant</span>
+    </div>
+    <img src="capitol3/maps.png" alt="Backoffice — Detall restaurant amb Google Maps" loading="lazy"/>
+    <figcaption>Detall de restaurant · Google Maps integrat · Dades geogràfiques reals</figcaption>
   </figure>
 
   <div class="chapter-divider" data-reveal><span>✦</span></div>
 
-  <!-- BLOC 3: El diagrama de canvi psicològic -->
+  <!-- BLOC 3: Categories, horaris, estadístiques -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-arrows-left-right" style="color:var(--gold);font-size:1.2rem;"></i>
-      <span class="icon-label">Abans i després</span>
+      <i class="fa-solid fa-chart-pie" style="color:var(--green);font-size:1.2rem;"></i>
+      <span class="icon-label">Dades enriquides</span>
     </div>
-    <p>El sistema de punts no canvia l'experiència dins del restaurant. Canvia la conversa que el client té <em>abans</em> d'arribar-hi.</p>
+    <p>El panell de restaurant ja no mostra un nom i un ID. Mostra estadístiques reals: punts distribuïts, clients fidels, valoració mitjana. Afegeix categories visuals, horari setmanal complet i una galeria d'imatges del local.</p>
   </div>
 
-  <div class="psych-shift" data-reveal>
-    <p class="psych-label">El canvi en la ment del client</p>
-    <div class="psych-before-after">
-      <div class="psych-card before">
-        <p class="psych-card-label">Sense punts</p>
-        <p class="psych-thought">"On soparé avui? Tots dos semblen iguals. Potser provo el nou..."</p>
-      </div>
-      <div class="psych-arrow">
-        <i class="fa-solid fa-arrow-right"></i>
-        <span>Punts</span>
-      </div>
-      <div class="psych-card after">
-        <p class="psych-card-label">Amb punts</p>
-        <p class="psych-thought">"Tenim 280 punts al Sukashi. Anem-hi i veiem si podem fer servir la recompensa."</p>
-      </div>
+  <!-- Screenshot: Statistics + categories + horari -->
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:4200/restaurants · Estadístiques i horaris</span>
     </div>
-  </div>
-
-  <!-- Imatge: sushi bar interior càlid -->
-  <figure class="cinematic-image" data-reveal>
-    <!--<img
-            src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=1200&q=80&fit=crop&crop=center"
-            alt="Sushi restaurant bar interior"
-            loading="lazy"
-    />-->
-    <img src="https://images.unsplash.com/photo-1651977560880-2c9f8626f00b?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    alt="Sushi restaurant bar interior"
-    loading="lazy"/>
-    <div class="cine-overlay"></div>
-    <figcaption class="cine-caption">El Sukashi ja no és una opció. És on el client té la seva recompensa esperant.</figcaption>
+    <img src="capitol3/images.png" alt="Backoffice — Categories i horari" loading="lazy"/>
+    <figcaption>Categories · Horari setmanal · Galeria d'imatges</figcaption>
   </figure>
 
-  <!-- BLOC 4: L'efecte "ja que" -->
+  <!-- Split: rewards + visits paginated -->
   <div class="split-block" data-reveal>
     <div class="split-text">
       <div class="block-icon">
-        <i class="fa-solid fa-magnet" style="color:var(--gold);font-size:1.2rem;"></i>
-        <span class="icon-label">L'efecte "ja que"</span>
+        <i class="fa-solid fa-gift" style="color:var(--green);font-size:1.1rem;"></i>
+        <span class="icon-label">Recompenses i Visites</span>
       </div>
-      <p>Els economistes conductuals en diuen <em>l'efecte de la inversió irrecuperable</em>. En el món real, el client ho sent així:</p>
-      <div class="insight-callout" style="margin-top:16px;">
-        "Ja que hi tinc punts, anem-hi i els aprofitem."
-      </div>
-      <p style="color:var(--muted); font-size:0.92rem;">Cinc paraules que valen més que qualsevol anunci publicitari.</p>
+      <p>Es poden veure totes les recompenses i visites d'un restaurant, amb paginació independent per a cada secció.</p>
+      <p>Les visites mostren data, import gastat i punts obtinguts. Les recompenses, el llindar i les opcions de bescanvi.</p>
     </div>
-    <div class="split-image">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&fit=crop&crop=center" alt="Restaurant sopar especial" loading="lazy"/>
+    <figure class="split-screenshot">
+      <img src="capitol3/rewards.png" alt="Rewards i visites paginades" loading="lazy"/>
+    </figure>
+  </div>
+
+  <!-- Split: dishes + employees -->
+  <div class="split-block reverse" data-reveal>
+    <div class="split-text">
+      <div class="block-icon">
+        <i class="fa-solid fa-utensils" style="color:var(--gold);font-size:1.1rem;"></i>
+        <span class="icon-label">Plats i Empleats</span>
+      </div>
+      <p>El backoffice incorpora gestió de la carta completa: categories, descripció, preu, serveis i el plat millor valorat destacat automàticament.</p>
+      <p>La gestió d'empleats inclou rols, estat i dades de contacte, tot amb paginació i accions directes.</p>
+    </div>
+    <figure class="split-screenshot">
+      <img src="capitol3/dishes.png" alt="Gestió de plats i empleats" loading="lazy"/>
+    </figure>
+  </div>
+
+  <!-- Screenshot: Customers amb soft delete visible -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-users" style="color:var(--green);font-size:1.2rem;"></i>
+      <span class="icon-label">Gestió de clients</span>
+    </div>
+    <p>La secció de Customers revela el poder del sistema dual d'eliminació. Els clients actius apareixen amb les accions habituals. Els clients amb Soft Delete apareixen en una secció separada, en taronja, recuperables amb un clic.</p>
+  </div>
+
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:4200/customers · Clientes actius i eliminats</span>
+    </div>
+    <img src="capitol3/customers.png" alt="Backoffice — Clients amb soft delete" loading="lazy"/>
+    <figcaption>Soft Delete · Clientes recuperables · Paginació per secció</figcaption>
+  </figure>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 4: SEGURETAT JWT + RBAC -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-shield-halved" style="color:var(--green);font-size:1.2rem;"></i>
+      <span class="icon-label">Seguretat avançada</span>
+    </div>
+    <p>Fins ara el sistema era obert. Tothom podia accedir a tot. En el Capítol 3, el sistema adquireix consciència de <em>qui és qui</em>.</p>
+    <p>S'incorpora autenticació amb JWT i un sistema de control d'accés basat en rols (RBAC). Cada acció, cada ruta, cada pantalla té un propietari definit.</p>
+  </div>
+
+  <!-- Security dark card -->
+  <div class="dark-card" data-reveal>
+    <div class="dc-kicker">🔐 JWT + RBAC — Control d'accés complet</div>
+    <div class="dc-headline">Cada usuari veu exactament el que ha de veure. Ni més, ni menys.</div>
+    <div class="dc-body">JSON Web Token garanteix sessions segures i validades. El sistema RBAC defineix les zones d'accés per cada tipus d'usuari, des del primer login fins a cada crida a l'API.</div>
+    <div class="role-row">
+      <div class="role-badge">
+        <div class="rb-dot" style="background:#3A9E6F;"></div>
+        <div>
+          <div class="rb-name">Admin</div>
+          <div class="rb-desc">Accés total al Backoffice</div>
+        </div>
+      </div>
+      <div class="role-badge">
+        <div class="rb-dot" style="background:#C8943A;"></div>
+        <div>
+          <div class="rb-name">Employee</div>
+          <div class="rb-desc">Panell d'empleat (React)</div>
+        </div>
+      </div>
+      <div class="role-badge">
+        <div class="rb-dot" style="background:#6A6560;"></div>
+        <div>
+          <div class="rb-name">Customer</div>
+          <div class="rb-desc">Web App de clients</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="chapter-divider" data-reveal><span>✦</span></div>
 
-  <!-- BLOC 5: No és un regal, és una inversió -->
+  <!-- BLOC 5: Web App clients (React) -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-scale-balanced" style="color:var(--gold);font-size:1.2rem;"></i>
-      <span class="icon-label">La clau conceptual</span>
+      <i class="fa-solid fa-mobile-screen" style="color:var(--gold);font-size:1.2rem;"></i>
+      <span class="icon-label">Nova Web App — Clients</span>
     </div>
-    <p>L'Alicia ha entès quelcom fonamental: la diferència entre un regal i una inversió.</p>
-    <p>Un <strong style="color:var(--ink);">regal</strong> és quelcom que el negoci dóna sense condicions. El client ho accepta i se'n va. No hi ha vincle, no hi ha motiu per tornar.</p>
-    <p>Una <strong style="color:var(--ink);">inversió</strong> és quelcom que el client fa en el negoci. Té "diners" allà dins. Hi té un interès, una raó emocional i econòmica per mantenir la relació activa.</p>
+    <p>Per primer cop, els clients finals tenen la seva pròpia interfície. Una Web App construïda en React que posa el sistema de fidelització a l'abast de tothom.</p>
+    <p>El dashboard de client és un espai personal de descoberta: punts acumulats, visites, badges guanyats i restaurants favorits. Un mirall de la seva relació amb l'ecosistema EasyEat.</p>
   </div>
 
-  <!-- THE HOOK — GANXO CARD -->
+  <!-- Screenshot: Customer dashboard -->
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:5173/dashboard · Customer View — Maria</span>
+    </div>
+    <img src="capitol3/customers_web.png" alt="Customer dashboard React" loading="lazy"/>
+    <figcaption>Customer Dashboard · Punts · Visites · Badges · Favorits</figcaption>
+  </figure>
+
+  <div class="insight-callout" data-reveal>
+    El client no gestiona res. Viu la seva experiència. Descobreix, acumula, torna.
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 6: Web App empleats -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-store" style="color:var(--gold);font-size:1.2rem;"></i>
+      <span class="icon-label">Nova Web App — Empleats</span>
+    </div>
+    <p>Paral·lelament, el personal del restaurant rep la seva pròpia eina operativa. Una app React centrada en la gestió del local en temps real: visites recents, clients únics, valoració mitjana i accions ràpides.</p>
+    <p>L'empleat no necessita el Backoffice. Té tot el que necessita en el seu propi panell, adaptat al seu rol i al seu restaurant assignat.</p>
+  </div>
+
+  <!-- Screenshot: Employee dashboard -->
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:5173/dashboard · Employee View — Carlos (Owner)</span>
+    </div>
+    <img src="capitol3/employees_web.png" alt="Employee dashboard React" loading="lazy"/>
+    <figcaption>Employee Dashboard · Accions ràpides · Estadístiques en temps real</figcaption>
+  </figure>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 7: Revisits del backoffice - clients detall + badges -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-medal" style="color:var(--gold);font-size:1.2rem;"></i>
+      <span class="icon-label">Historial i Badges</span>
+    </div>
+    <p>El Backoffice també guanya profunditat en la vista de clients. Cada client mostra el seu historial complet de visites, els badges guanyats i totes les seves ressenyes, paginades i ordenables.</p>
+  </div>
+
+  <!-- Dual screenshots: customer detail + reviews -->
+  <div class="dual-screens" data-reveal>
+    <figure>
+      <div class="browser-chrome">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <span class="browser-url">Ressenyes del client</span>
+      </div>
+      <img src="capitol3/reviews_backoffice.png" alt="Reviews del client paginades" loading="lazy"/>
+      <figcaption>Reviews paginades · Likes · Editar</figcaption>
+    </figure>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 8: Badges i gestió avançada -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-arrows-left-right" style="color:var(--gold);font-size:1.2rem;"></i>
+      <span class="icon-label">Abans i ara</span>
+    </div>
+    <p>La diferència entre el sistema inicial i el sistema madur no és incremental. És estructural. No és la mateixa eina amb més botons. És un producte diferent, dissenyat per escalar.</p>
+  </div>
+
+  <!-- Before / After -->
+  <div class="before-after" data-reveal>
+    <div class="ba-col before">
+      <div class="ba-label">❌ Abans</div>
+      <ul class="ba-list">
+        <li>Sistema bàsic de gestió</li>
+        <li>UI simple, sense profunditat</li>
+        <li>Sense autenticació avançada</li>
+        <li>Sense paginació</li>
+        <li>Eliminació directa, irrecuperable</li>
+        <li>Una sola interfície</li>
+        <li>Sense context geogràfic</li>
+        <li>Sense rols ni control d'accés</li>
+      </ul>
+    </div>
+    <div class="ba-col after">
+      <div class="ba-label">✅ Ara</div>
+      <ul class="ba-list">
+        <li>Ecosistema escalable i complet</li>
+        <li>UI optimitzada i professional</li>
+        <li>JWT + autenticació segura</li>
+        <li>Paginació a totes les entitats</li>
+        <li>Soft Delete + Hard Delete + Restore</li>
+        <li>Backoffice + 2 Web Apps React</li>
+        <li>Google Maps integrat</li>
+        <li>RBAC per admin, empleat i client</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- GANXO CARD — clímax -->
   <div class="ganxo-card" data-reveal>
-    <svg class="ganxo-watermark" width="320" height="320" viewBox="0 0 88 88">
-      <circle cx="44" cy="44" r="40" fill="none" stroke="white" stroke-width="8"/>
-      <text x="44" y="54" text-anchor="middle" font-size="42" fill="white" font-family="serif">寿</text>
+    <svg class="ganxo-watermark" width="320" height="320" viewBox="0 0 96 96">
+      <circle cx="48" cy="48" r="44" fill="none" stroke="white" stroke-width="6"/>
+      <text x="48" y="58" text-anchor="middle" font-size="36" fill="white" font-family="serif">⚙</text>
     </svg>
-    <span class="ganxo-label">✦ El Ganxo</span>
+    <span class="ganxo-label">✦ El Clímax</span>
     <p class="ganxo-quote">
-      "El client ja no tria<br><strong>on sopar.</strong><br>Tria <strong>quan vol cobrar<br>la seva recompensa.</strong>"
+      "El sistema deixa de ser<br><strong>una eina.</strong><br>Es converteix en<br><strong>una plataforma."</strong>
     </p>
-    <p class="ganxo-subtext">La lleialtat no es compra. Es construeix punt a punt.</p>
+    <p class="ganxo-subtext">Cada rol té la seva experiència. Cada dada té el seu control. Cada accés, protegit.</p>
   </div>
 
   <div class="final-line" data-reveal>
-    <p>Però saber crear lleialtat és només la meitat del camí.<br>L'altra meitat és saber a qui te l'adreces.</p>
+    <p>EasyEat ja no és gestió.<br>És arquitectura completa de producte.</p>
     <div style="display: flex; justify-content: center; gap: 16px; align-items: center; margin-top: 40px; flex-wrap: wrap;">
-        <a href="sukashi-capitol2.html" class="next-chapter-hint">
-            <i class="fa-solid fa-chevron-left" style="font-size:0.8rem;"></i>
-            Capítol 2
-        </a>
-        <a href="sukashi-capitol4.html" class="next-chapter-hint">
-            Capítol 4
-            <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
-        </a>
+      <a href="sukashi-capitol2.html" class="next-chapter-hint">
+        <i class="fa-solid fa-chevron-left" style="font-size:0.8rem;"></i>
+        Capítol 2
+      </a>
+      <a href="sukashi-capitol4.html" class="next-chapter-hint">
+        Capítol 4
+        <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
+      </a>
     </div>
   </div>
 
@@ -700,41 +893,15 @@
   }
 
   // INTERSECTION OBSERVER — general reveals
-  const allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line, .coin-explainer, .psych-shift, .ganxo-card, .thought-sequence');
+  const allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line, .dark-card, .before-after, .ganxo-card, .feature-grid, .ecosystem-diagram, .screenshot-wrap, .dual-screens, .split-block, .insight-callout');
   const io = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        // Animar comptador de punts
-        if (e.target.classList.contains('coin-explainer')) {
-          animatePoints(0, 350, 1800);
-        }
-        // Thought bubbles escalonades
-        if (e.target.id === 'thoughtSeq') {
-          e.target.querySelectorAll('[data-thought-delay]').forEach(function(b) {
-            var delay = parseInt(b.getAttribute('data-thought-delay'));
-            setTimeout(function() { b.classList.add('visible'); }, delay + 200);
-          });
-        }
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
   allReveal.forEach(function(el) { io.observe(el); });
-
-  // ANIMACIÓ COMPTADOR PUNTS
-  function animatePoints(from, to, duration) {
-    var el = document.getElementById('pointsAnim');
-    if (!el) return;
-    var start = null;
-    function step(ts) {
-      if (!start) start = ts;
-      var progress = Math.min((ts - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(from + (to - from) * eased);
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
 
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
