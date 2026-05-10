@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>El Secret del Sukashi — Capítol 4</title>
+  <title>El Secret del Sukashi — Capítol 4 · El Sistema Pren Vida</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,16 +12,16 @@
       --paper:       #F9F8F4;
       --ink:         #1C1A17;
       --coral:       #D94F3A;
-      --teal:        #2A8C7A;
-      --teal-light:  #4DB8A4;
+      --orange:      #E8703A;
+      --orange-light:#F5A27A;
       --amber:       #C8943A;
+      --amber-light: #F0C96B;
+      --teal:        #2A8C7A;
+      --navy:        #1a2540;
       --muted:       #9A9589;
       --warm-white:  #FDFCF9;
       --sushi-empty: #DDD9D0;
       --sushi-fill:  #D94F3A;
-      --dash-bg:     #161412;
-      --dash-card:   #1E1C19;
-      --dash-border: rgba(255,255,255,0.07);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -70,15 +70,15 @@
     }
     .hero-image-wrap { position: absolute; inset: 0; z-index: 0; }
     .hero-image-wrap img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
-      filter: brightness(0.3) saturate(0.4);
+      width: 100%; height: 100%; object-fit: cover; object-position: center 45%;
+      filter: brightness(0.27) saturate(0.5);
     }
     .hero-image-wrap::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(155deg,
-        rgba(42,140,122,0.15) 0%,
-        rgba(28,26,23,0.5) 50%,
-        rgba(249,248,244,1) 100%);
+      rgba(232,112,58,0.16) 0%,
+      rgba(28,26,23,0.52) 52%,
+      rgba(249,248,244,1) 100%);
     }
     .hero-content {
       position: relative; z-index: 1;
@@ -93,25 +93,24 @@
     }
     .hero-icon-wrap {
       width: 72px; height: 72px; margin: 0 auto 28px;
-      border: 1px solid rgba(77,184,164,0.4);
+      border: 1px solid rgba(232,112,58,0.45);
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      background: rgba(42,140,122,0.12);
-      animation: pulseRing 3s ease-in-out infinite;
+      background: rgba(232,112,58,0.1);
+      animation: pulseRing 3.5s ease-in-out infinite;
     }
     @keyframes pulseRing {
-      0%,100% { box-shadow: 0 0 0 0 rgba(77,184,164,0.2), 0 0 0 12px rgba(77,184,164,0.05); }
-      50%      { box-shadow: 0 0 0 12px rgba(77,184,164,0.12), 0 0 0 28px rgba(77,184,164,0); }
+      0%,100% { box-shadow: 0 0 0 0 rgba(232,112,58,0.2), 0 0 0 12px rgba(232,112,58,0.04); }
+      50%      { box-shadow: 0 0 0 12px rgba(232,112,58,0.14), 0 0 0 28px rgba(232,112,58,0); }
     }
-    .hero-icon-wrap i { font-size: 1.8rem; color: var(--teal-light); }
-
+    .hero-icon-wrap i { font-size: 1.8rem; color: var(--orange-light); }
     h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2.5rem,6vw,4.3rem); font-weight: 600; line-height: 1.1;
       color: #fff; margin-bottom: 20px; max-width: 680px;
       text-shadow: 0 2px 28px rgba(0,0,0,0.5);
     }
-    h1 em { font-style: italic; color: #7EDECE; }
-    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.5); max-width: 440px; line-height: 1.7; }
+    h1 em { font-style: italic; color: var(--amber-light); }
+    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.5); max-width: 460px; line-height: 1.7; }
     .scroll-hint {
       position: relative; z-index: 1; padding-bottom: 48px;
       display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -144,200 +143,39 @@
     p { font-size: clamp(1rem,2.2vw,1.12rem); color: #3A3730; line-height: 1.9; }
     p + p { margin-top: 18px; }
 
-    /* ═══ TIME STAMP ═══ */
-    .time-stamp {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 56px; padding-top: 16px;
+    /* ═══ BROWSER CHROME ═══ */
+    .browser-chrome {
+      background: #E8E7E3; border-radius: 8px 8px 0 0;
+      padding: 10px 14px; display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid rgba(28,26,23,0.08);
+    }
+    .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .browser-dot.red   { background: #FF5F56; }
+    .browser-dot.yellow{ background: #FFBD2E; }
+    .browser-dot.green { background: #27C93F; }
+    .browser-url {
+      flex: 1; background: rgba(255,255,255,0.65); border-radius: 4px;
+      padding: 3px 10px; font-size: 10px; letter-spacing: 0.03em; color: var(--muted);
+      margin-left: 8px; font-family: 'DM Mono', monospace;
+    }
+
+    /* ═══ SCREENSHOT FIGURE ═══ */
+    .screenshot-wrap {
+      margin: 32px 0;
       opacity: 0; transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition: opacity 0.88s cubic-bezier(0.22,1,0.36,1), transform 0.88s cubic-bezier(0.22,1,0.36,1);
     }
-    .time-stamp.visible { opacity: 1; transform: translateY(0); }
-    .time-stamp::before {
-      content: ''; flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(42,140,122,0.4));
+    .screenshot-wrap.visible { opacity: 1; transform: translateY(0); }
+    .screenshot-wrap img {
+      width: 100%; display: block; border-radius: 0 0 8px 8px;
+      box-shadow: 0 8px 32px rgba(28,26,23,0.14);
     }
-    .time-stamp::after {
-      content: ''; flex: 1; height: 1px;
-      background: linear-gradient(to left, transparent, rgba(42,140,122,0.4));
-    }
-    .time-stamp-inner {
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
-      padding: 8px 20px;
-      border: 1px solid rgba(42,140,122,0.25); border-radius: 100px;
-      background: rgba(42,140,122,0.04);
-    }
-    .time-stamp-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
-    .time-stamp-text  { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--ink); }
-
-    /* ═══ DASHBOARD INTERACTIU ═══ */
-    .dashboard-wrap {
-      background: var(--dash-bg);
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 36px 0;
-      border: 1px solid var(--dash-border);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
-      opacity: 0; transform: translateY(28px) scale(0.97);
-      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
-    }
-    .dashboard-wrap.visible { opacity: 1; transform: translateY(0) scale(1); }
-
-    /* Barra superior del dashboard */
-    .dash-topbar {
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid var(--dash-border);
-      padding: 12px 20px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot.red   { background: #FF5F57; }
-    .dot.yellow{ background: #FEBC2E; }
-    .dot.green { background: #28C840; }
-    .dash-title { margin-left: 8px; font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
-
-    /* KPI row */
-    .dash-kpi-row {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      border-bottom: 1px solid var(--dash-border);
-    }
-    .dash-kpi {
-      padding: 20px 22px;
-      border-right: 1px solid var(--dash-border);
-      display: flex; flex-direction: column; gap: 4px;
-    }
-    .dash-kpi:last-child { border-right: none; }
-    .kpi-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-    .kpi-value {
-      font-family: 'DM Mono', monospace;
-      font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 500;
-      color: #fff; line-height: 1;
-    }
-    .kpi-delta { font-size: 10px; display: flex; align-items: center; gap: 4px; }
-    .kpi-delta.up   { color: var(--teal-light); }
-    .kpi-delta.warn { color: var(--coral); }
-
-    /* Gràfica de barres */
-    .dash-chart-area {
-      padding: 24px 20px 20px;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .dash-chart-section { display: flex; flex-direction: column; gap: 12px; }
-    .dash-chart-title { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-
-    /* Bar chart */
-    .bar-chart { display: flex; flex-direction: column; gap: 8px; }
-    .bar-row { display: grid; grid-template-columns: 56px 1fr 36px; gap: 8px; align-items: center; }
-    .bar-name { font-size: 10px; color: rgba(255,255,255,0.45); font-family: 'DM Mono', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .bar-track { background: rgba(255,255,255,0.05); border-radius: 2px; height: 6px; overflow: hidden; }
-    .bar-fill {
-      height: 100%; border-radius: 2px;
-      width: 0%;
-      transition: width 1.2s cubic-bezier(0.22,1,0.36,1);
-    }
-    .bar-fill.teal   { background: linear-gradient(to right, var(--teal), var(--teal-light)); }
-    .bar-fill.coral  { background: linear-gradient(to right, #A03828, var(--coral)); }
-    .bar-fill.amber  { background: linear-gradient(to right, #8C6020, var(--amber)); }
-    .bar-val { font-size: 10px; color: rgba(255,255,255,0.4); font-family: 'DM Mono', monospace; text-align: right; }
-
-    /* Activity list */
-    .activity-list { display: flex; flex-direction: column; gap: 0; }
-    .activity-item {
-      display: grid; grid-template-columns: 28px 1fr auto;
-      gap: 10px; align-items: center;
-      padding: 8px 0; border-bottom: 1px solid var(--dash-border);
-      opacity: 0; transform: translateX(12px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .activity-item.visible { opacity: 1; transform: translateX(0); }
-    .activity-item:last-child { border-bottom: none; }
-    .act-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .act-dot.green  { background: var(--teal-light); }
-    .act-dot.orange { background: var(--coral); }
-    .act-dot.yellow { background: var(--amber); }
-    .act-name { font-size: 11px; color: rgba(255,255,255,0.65); }
-    .act-name small { display: block; font-size: 9px; color: rgba(255,255,255,0.25); margin-top: 1px; }
-    .act-badge {
-      font-size: 9px; padding: 2px 8px; border-radius: 100px; white-space: nowrap;
-      font-family: 'DM Mono', monospace;
-    }
-    .act-badge.active  { background: rgba(42,140,122,0.2); color: var(--teal-light); }
-    .act-badge.cold    { background: rgba(217,79,58,0.2);  color: var(--coral); }
-    .act-badge.regular { background: rgba(200,148,58,0.2); color: var(--amber); }
-
-    /* ═══ NOTIFICACIÓ ANIMADA ═══ */
-    .notif-demo {
-      background: var(--dash-bg);
-      border: 1px solid var(--dash-border);
-      border-radius: 10px; padding: 28px;
-      margin: 36px 0;
-      display: flex; flex-direction: column; gap: 16px; align-items: center;
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .notif-demo.visible { opacity: 1; transform: translateY(0); }
-    .notif-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.25); align-self: flex-start; }
-
-    .phone-notif {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 16px 18px;
-      display: flex; gap: 14px; align-items: flex-start;
-      width: 100%; max-width: 360px;
-      position: relative;
-      transform: scale(0.95); opacity: 0;
-      transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.6s ease;
-    }
-    .phone-notif.ping {
-      transform: scale(1); opacity: 1;
-    }
-    .notif-app-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 1rem;
-    }
-    .notif-content { flex: 1; }
-    .notif-app-name { font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; margin-bottom: 3px; }
-    .notif-title    { font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 2px; }
-    .notif-body     { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.5; }
-    .notif-time     { font-size: 9px; color: rgba(255,255,255,0.2); align-self: flex-start; margin-top: 2px; font-family: 'DM Mono', monospace; }
-
-    /* Pulsing dot */
-    .notif-ping-dot {
-      position: absolute; top: -4px; right: -4px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--coral);
-    }
-    .notif-ping-dot::before {
-      content: ''; position: absolute; inset: -4px;
-      border-radius: 50%; background: rgba(217,79,58,0.3);
-      animation: pingAnim 1.5s ease-out infinite;
-    }
-    @keyframes pingAnim { 0% { opacity:1; transform:scale(1); } 100% { opacity:0; transform:scale(2.5); } }
-
-    /* ═══ ESCENA IMATGE ═══ */
-    .scene-image {
-      width: 100%; border-radius: 4px; overflow: hidden; margin: 28px 0;
-      position: relative;
-      opacity: 0; transform: translateY(20px) scale(0.98);
-      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
-    }
-    .scene-image.visible { opacity: 1; transform: translateY(0) scale(1); }
-    .scene-image img {
-      width: 100%; display: block; aspect-ratio: 16/7; object-fit: cover;
-      filter: saturate(0.68) brightness(0.88);
-      transition: filter 0.6s ease, transform 0.6s ease;
-    }
-    .scene-image:hover img { filter: saturate(0.88) brightness(1); transform: scale(1.01); }
-    .scene-image figcaption {
-      position: absolute; bottom: 12px; right: 16px;
-      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+    .screenshot-wrap figcaption {
+      margin-top: 10px; font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); text-align: center;
     }
 
-    /* ═══ CINEMATIC ═══ */
+    /* ═══ CINEMATIC IMAGE ═══ */
     .cinematic-image {
       width: calc(100% + 56px); margin-left: -28px; margin-right: -28px; margin-bottom: 64px;
       position: relative; overflow: hidden;
@@ -351,105 +189,204 @@
     }
     .cinematic-image .cine-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent 30%, rgba(249,248,244,0.95) 100%);
+      background: linear-gradient(to bottom, transparent 30%, rgba(249,248,244,0.96) 100%);
     }
     .cinematic-image .cine-caption {
       position: absolute; bottom: 20px; left: 28px;
       font-family: 'Cormorant Garamond', serif; font-style: italic;
       font-size: clamp(0.95rem,2.5vw,1.2rem); color: rgba(255,255,255,0.9);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 420px; line-height: 1.5;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6); max-width: 480px; line-height: 1.5;
     }
 
-    /* ═══ TIQUET ANIMAT ═══ */
-    .ticket-demo {
-      background: var(--warm-white);
-      border: 1px solid rgba(28,26,23,0.1);
-      border-radius: 4px; padding: 28px 32px;
-      margin: 36px 0;
+    /* ═══ DUAL SCREENSHOTS ═══ */
+    .dual-screens {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.88s cubic-bezier(0.22,1,0.36,1), transform 0.88s cubic-bezier(0.22,1,0.36,1);
+    }
+    .dual-screens.visible { opacity: 1; transform: translateY(0); }
+    .dual-screens figure .browser-chrome { border-radius: 8px 8px 0 0; }
+    .dual-screens figure img { width: 100%; display: block; border-radius: 0 0 8px 8px; box-shadow: 0 6px 24px rgba(28,26,23,0.12); }
+    .dual-screens figure figcaption { margin-top: 8px; font-size: 10px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted); text-align: center; }
+
+    /* ═══ MOBILE PAIR (portrait phone mockups) ═══ */
+    .mobile-pair {
+      display: flex; gap: 24px; justify-content: center; margin: 32px 0;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.88s cubic-bezier(0.22,1,0.36,1), transform 0.88s cubic-bezier(0.22,1,0.36,1);
+    }
+    .mobile-pair.visible { opacity: 1; transform: translateY(0); }
+    .phone-frame {
+      width: 220px; flex-shrink: 0;
+      background: #111; border-radius: 28px;
+      padding: 10px; box-shadow: 0 20px 60px rgba(28,26,23,0.3), 0 0 0 1px rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .phone-frame::before {
+      content: ''; display: block; width: 60px; height: 5px;
+      background: rgba(255,255,255,0.15); border-radius: 3px;
+      margin: 0 auto 8px;
+    }
+    .phone-frame img { width: 100%; border-radius: 18px; display: block; }
+    .phone-frame figcaption {
+      text-align: center; margin-top: 12px; font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ═══ SPLIT BLOCK ═══ */
+    .split-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
+      margin-bottom: 80px;
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .split-block.visible { opacity: 1; transform: translateY(0); }
+    .split-block.reverse { direction: rtl; }
+    .split-block.reverse > * { direction: ltr; }
+    .split-screenshot { border-radius: 8px; overflow: hidden; box-shadow: 0 8px 32px rgba(28,26,23,0.14); }
+    .split-screenshot img { width: 100%; display: block; }
+    .split-text { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+
+    /* ═══ FEATURE GRID ═══ */
+    .feature-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0;
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+    }
+    .feature-grid.visible { opacity: 1; transform: translateY(0); }
+    .feature-card {
+      background: var(--warm-white); border: 1px solid rgba(28,26,23,0.08);
+      border-radius: 8px; padding: 22px 18px;
+    }
+    .feature-card .fc-icon { font-size: 1.3rem; margin-bottom: 10px; }
+    .feature-card .fc-title { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; color: var(--ink); margin-bottom: 7px; }
+    .feature-card .fc-desc { font-size: 0.87rem; color: #6A6560; line-height: 1.6; }
+
+    /* ═══ NAV BAR STRIP (per il·lustrar la nova navegació) ═══ */
+    .nav-strip {
+      background: var(--navy); border-radius: 8px; padding: 12px 20px;
+      display: flex; align-items: center; gap: 0; margin: 20px 0;
+      overflow: hidden;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .nav-strip.visible { opacity: 1; transform: translateY(0); }
+    .nav-item {
+      display: flex; align-items: center; gap: 7px;
+      padding: 8px 16px; border-radius: 20px;
+      font-size: 12px; color: rgba(255,255,255,0.55); white-space: nowrap;
+      transition: background 0.2s, color 0.2s; cursor: default;
+    }
+    .nav-item.active { background: var(--orange); color: #fff; }
+    .nav-logo { font-size: 13px; font-weight: 500; color: #fff; margin-right: 12px; display: flex; align-items: center; gap: 6px; }
+    .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .nav-lang { font-size: 11px; color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.18); border-radius: 4px; padding: 3px 8px; }
+
+    /* ═══ DARK CARD ═══ */
+    .dark-card {
+      background: linear-gradient(135deg, #1C1A17 0%, #2C2820 100%);
+      border-radius: 8px; padding: 44px 40px; margin: 36px 0;
+      opacity: 0; transform: translateY(28px) scale(0.97);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+      position: relative; overflow: hidden;
+    }
+    .dark-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, var(--orange), transparent);
+    }
+    .dark-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .dark-card .dc-kicker { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--orange-light); font-weight: 500; margin-bottom: 14px; }
+    .dark-card .dc-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem,2.8vw,1.55rem); font-weight: 600; color: #fff; line-height: 1.3; margin-bottom: 18px; }
+    .dark-card .dc-body { font-size: clamp(0.85rem,1.8vw,0.96rem); color: rgba(255,255,255,0.52); line-height: 1.7; }
+    .platform-row { display: flex; gap: 16px; margin-top: 22px; flex-wrap: wrap; }
+    .platform-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px; padding: 10px 16px;
+    }
+    .platform-badge i { color: var(--orange-light); font-size: 1rem; }
+    .platform-badge span { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-weight: 500; }
+
+    /* ═══ BEFORE / AFTER ═══ */
+    .before-after {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border-radius: 8px; overflow: hidden; margin: 36px 0;
       opacity: 0; transform: translateY(24px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .ticket-demo.visible { opacity: 1; transform: translateY(0); }
-    .ticket-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px; padding-bottom: 16px;
-      border-bottom: 1px dashed rgba(28,26,23,0.12);
-    }
-    .ticket-title { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
-    .ticket-date  { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); }
+    .before-after.visible { opacity: 1; transform: translateY(0); }
+    .ba-col { padding: 28px 24px; }
+    .ba-col.before { background: rgba(28,26,23,0.05); border: 1px solid rgba(28,26,23,0.1); border-right: none; }
+    .ba-col.after  { background: rgba(232,112,58,0.07); border: 1px solid rgba(232,112,58,0.2); }
+    .ba-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; margin-bottom: 16px; }
+    .ba-col.before .ba-label { color: var(--muted); }
+    .ba-col.after  .ba-label { color: var(--orange); }
+    .ba-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .ba-list li { font-size: 0.9rem; color: #5A5650; display: flex; gap: 8px; align-items: baseline; line-height: 1.5; }
+    .ba-list li::before { content: '—'; color: var(--muted); flex-shrink: 0; }
+    .ba-col.after .ba-list li::before { content: '✓'; color: var(--orange); font-weight: 500; }
+    .ba-col.after .ba-list li { color: var(--ink); }
 
-    .ticket-lines { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-    .ticket-line  { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-    .ticket-item  { font-size: clamp(0.88rem,1.8vw,0.98rem); color: var(--ink); }
-    .ticket-dots  { flex: 1; border-bottom: 1px dotted rgba(28,26,23,0.15); margin-bottom: 3px; }
-    .ticket-price { font-family: 'DM Mono', monospace; font-size: 0.9rem; color: var(--ink); }
-    .ticket-extra { color: var(--teal); font-style: italic; }
-
-    .ticket-footer {
-      border-top: 1px dashed rgba(28,26,23,0.12); padding-top: 16px;
-      display: flex; align-items: baseline; justify-content: space-between;
-    }
-    .ticket-total-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-    .ticket-total-value { font-family: 'DM Mono', monospace; font-size: 1.3rem; font-weight: 500; color: var(--ink); }
-
-    /* Progress bar de punts */
-    .points-progress-wrap { margin-top: 16px; }
-    .pp-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
-    .pp-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-    .pp-count  { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--teal); }
-    .pp-track  { height: 5px; background: rgba(28,26,23,0.08); border-radius: 3px; overflow: hidden; }
-    .pp-fill   { height: 100%; border-radius: 3px; width: 0%; background: linear-gradient(to right, var(--teal), var(--teal-light)); transition: width 1.4s cubic-bezier(0.22,1,0.36,1); }
-    .pp-milestone { font-size: 9px; color: var(--teal); margin-top: 5px; text-align: right; font-style: italic; }
-
-    /* ═══ CALLOUT ═══ */
+    /* ═══ INSIGHT CALLOUT ═══ */
     .insight-callout {
-      border: 1px solid rgba(42,140,122,0.25); border-left: 3px solid var(--teal);
-      background: rgba(42,140,122,0.04);
+      border: 1px solid rgba(232,112,58,0.25);
+      border-left: 3px solid var(--orange);
+      background: rgba(232,112,58,0.05);
       padding: 28px 32px; border-radius: 0 8px 8px 0; margin: 28px 0;
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem,2.5vw,1.3rem);
-      font-style: italic; color: var(--ink); line-height: 1.65; position: relative;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem,2.5vw,1.3rem); font-style: italic;
+      color: var(--ink); line-height: 1.65; position: relative;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
     }
+    .insight-callout.visible { opacity: 1; transform: translateY(0); }
     .insight-callout::before {
       content: '\201C'; position: absolute; top: -14px; left: 24px;
-      font-size: 5rem; color: var(--teal); opacity: 0.1;
+      font-size: 5rem; color: var(--orange); opacity: 0.12;
       font-family: 'Cormorant Garamond', serif; line-height: 1;
     }
 
-    /* ═══ GANXO FINAL ═══ */
+    /* ═══ SECTION LABEL ═══ */
+    .section-label {
+      display: flex; align-items: center; gap: 14px; margin: 60px 0 32px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .section-label.visible { opacity: 1; transform: translateY(0); }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(28,26,23,0.1); }
+    .sl-inner { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--orange); font-weight: 500; white-space: nowrap; }
+
+    /* ═══ GANXO CARD ═══ */
     .ganxo-card {
-      background: var(--ink); border-radius: 8px;
-      padding: 56px 44px; text-align: center;
-      position: relative; overflow: hidden;
+      background: var(--ink); border-radius: 8px; padding: 52px 44px;
+      text-align: center; position: relative; overflow: hidden;
       opacity: 0; transform: translateY(32px);
       transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1);
-      margin: 48px 0;
+      margin: 40px 0;
     }
     .ganxo-card.visible { opacity: 1; transform: translateY(0); }
     .ganxo-card::before {
       content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
       width: 60%; height: 1px;
-      background: linear-gradient(to right, transparent, var(--teal), transparent);
+      background: linear-gradient(to right, transparent, var(--orange), transparent);
     }
     .ganxo-card::after {
       content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
       width: 60%; height: 1px;
-      background: linear-gradient(to right, transparent, var(--teal), transparent);
+      background: linear-gradient(to right, transparent, var(--orange), transparent);
     }
-    /* Decorative grid bg */
     .ganxo-card-bg {
-      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+      position: absolute; inset: 0; opacity: 0.03; pointer-events: none;
     }
-    .ganxo-card-bg svg { width: 100%; height: 100%; opacity: 0.03; }
-
-    .ganxo-label { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 24px; display: block; }
+    .ganxo-label { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--orange); margin-bottom: 24px; display: block; }
     .ganxo-quote {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.2rem,3vw,1.65rem); font-style: italic; font-weight: 400;
-      color: #fff; line-height: 1.6; max-width: 520px; margin: 0 auto 20px;
+      color: #fff; line-height: 1.55; max-width: 520px; margin: 0 auto 20px;
       position: relative; z-index: 1;
     }
-    .ganxo-quote strong { font-style: normal; color: #7EDECE; font-weight: 600; }
-    .ganxo-subtext { font-size: clamp(0.82rem,1.7vw,0.92rem); color: rgba(255,255,255,0.3); position: relative; z-index: 1; }
+    .ganxo-quote strong { font-style: normal; color: var(--amber-light); font-weight: 600; }
+    .ganxo-subtext { font-size: clamp(0.82rem,1.7vw,0.92rem); color: rgba(255,255,255,0.35); letter-spacing: 0.04em; position: relative; z-index: 1; }
 
     /* ═══ DIVIDER ═══ */
     .chapter-divider {
@@ -464,7 +401,7 @@
     }
     .chapter-divider span { font-size: 1.1rem; color: var(--muted); }
 
-    /* ═══ FINAL ═══ */
+    /* ═══ FINAL LINE ═══ */
     .final-line {
       opacity: 0; transform: translateY(24px);
       transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
@@ -475,11 +412,10 @@
     .next-chapter-hint {
       display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
       font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
-      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px; cursor: pointer;
-      transition: border-color 0.3s, color 0.3s;
-      text-decoration: none;
+      border: 1px solid var(--sushi-empty); padding: 12px 24px; border-radius: 100px;
+      transition: border-color 0.3s, color 0.3s; text-decoration: none;
     }
-    .next-chapter-hint:hover { border-color: var(--teal); color: var(--teal); }
+    .next-chapter-hint:hover { border-color: var(--orange); color: var(--orange); }
 
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 640px) {
@@ -488,12 +424,17 @@
       .bar-label { font-size: 9px; }
       #story { padding: 0 20px 120px; }
       .story-block { margin-bottom: 56px; }
-      .dash-kpi-row { grid-template-columns: 1fr 1fr; }
-      .dash-kpi:nth-child(3) { grid-column: span 2; border-right: none; }
-      .dash-chart-area { grid-template-columns: 1fr; }
+      .split-block { grid-template-columns: 1fr; gap: 20px; }
+      .split-block.reverse { direction: ltr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .before-after { grid-template-columns: 1fr; }
+      .ba-col.before { border-right: 1px solid rgba(28,26,23,0.1); border-bottom: none; }
       .cinematic-image { width: calc(100% + 40px); margin-left: -20px; }
+      .dual-screens { grid-template-columns: 1fr; }
+      .mobile-pair { flex-direction: column; align-items: center; }
       .ganxo-card { padding: 36px 24px; }
-      .ticket-demo { padding: 20px 20px; }
+      .dark-card { padding: 28px 20px; }
+      .nav-strip { flex-wrap: wrap; gap: 4px; }
     }
   </style>
 </head>
@@ -508,15 +449,15 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-image-wrap">
-    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&fit=crop&crop=center" alt="Dashboard analytics" loading="eager"/>
+    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&fit=crop&crop=center" alt="Producte digital modern" loading="eager"/>
   </div>
   <div class="hero-content">
     <span class="chapter-badge">Capítol 4 · El Secret del Sukashi</span>
     <div class="hero-icon-wrap">
-      <i class="fa-solid fa-chart-line"></i>
+      <i class="fa-solid fa-mobile-screen-button"></i>
     </div>
-    <h1>L'estratègia<br><em>invisible</em></h1>
-    <p class="hero-subtitle">Quan les dades deixaran de ser números i es convertiran en la manera de cuidar millor cada client.</p>
+    <h1>El Sistema<br><em>Pren Vida</em></h1>
+    <p class="hero-subtitle">Ja no és software. És experiència. El producte surt del codi i arriba a les mans dels usuaris, a qualsevol pantalla, en qualsevol idioma.</p>
   </div>
   <div class="scroll-hint">
     <span>Continua llegint</span>
@@ -526,248 +467,422 @@
 
 <main id="story">
 
-  <!-- TIME STAMP -->
-  <div class="time-stamp" data-reveal>
-    <div class="time-stamp-inner">
-      <span class="time-stamp-label">Tres mesos després</span>
-      <span class="time-stamp-text">El Sukashi ja no suposa. Sap.</span>
-    </div>
-  </div>
-
-  <!-- BLOC 1: De la intuïció a la certesa -->
+  <!-- BLOC 1: El canvi de paradigma -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-magnifying-glass-chart" style="color:var(--teal);font-size:1.2rem;"></i>
-      <span class="icon-label">De la intuïció a la certesa</span>
+      <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">El canvi de paradigma</span>
     </div>
-    <p>Durant anys, l'Alicia ha gestionat el Sukashi a base d'instint. "Sembla que el Joan no ve tant últimament." "Crec que la Maria sempre demana el mateix." "Diria que els dijous anem fluixos."</p>
-    <p>Creia. Suposava. Sentia.</p>
-    <p>Tres mesos després d'implementar el sistema, tot ha canviat. Cada matí, abans de servir el primer cafè, l'Alicia obre el dashboard. I el que veu no és un full de càlcul fred. Veu persones.</p>
+    <p>El Capítol 3 va construir l'esquelet. En el Capítol 4, el sistema adquireix pell, moviment i veu.</p>
+    <p>El Backoffice no ha canviat. La gran evolució passa en un altre lloc: a la <strong style="color:var(--ink);">Web App React</strong>, completament redissenyada, i a la nova <strong style="color:var(--ink);">App Mobile Flutter</strong>, que porta EasyEat fora del navegador per primer cop.</p>
+    <p>El sistema ja no és només funcional. Ara és <em>usable, visual i real.</em></p>
   </div>
 
-  <!-- DASHBOARD INTERACTIU -->
-  <div class="dashboard-wrap" data-reveal id="dashWrap">
-    <div class="dash-topbar">
-      <div class="dot red"></div>
-      <div class="dot yellow"></div>
-      <div class="dot green"></div>
-      <span class="dash-title">Sukashi · Tauler de clients · Avui</span>
-    </div>
-
-    <div class="dash-kpi-row">
-      <div class="dash-kpi">
-        <span class="kpi-label">Clients actius</span>
-        <span class="kpi-value" id="kpiClients">0</span>
-        <span class="kpi-delta up"><i class="fa-solid fa-arrow-trend-up" style="font-size:9px;"></i> +23% vs mes passat</span>
-      </div>
-      <div class="dash-kpi">
-        <span class="kpi-label">Tiquet mitjà</span>
-        <span class="kpi-value">€<span id="kpiTicket">0</span></span>
-        <span class="kpi-delta up"><i class="fa-solid fa-arrow-trend-up" style="font-size:9px;"></i> +8.4 euros</span>
-      </div>
-      <div class="dash-kpi">
-        <span class="kpi-label">En risc de refredar</span>
-        <span class="kpi-value" id="kpiCold">0</span>
-        <span class="kpi-delta warn"><i class="fa-solid fa-triangle-exclamation" style="font-size:9px;"></i> Sense visita &gt;14 dies</span>
-      </div>
-    </div>
-
-    <div class="dash-chart-area">
-      <!-- Bar chart: dies de la setmana -->
-      <div class="dash-chart-section">
-        <span class="dash-chart-title">Visites per dia (últimes 4 setmanes)</span>
-        <div class="bar-chart" id="barChart">
-          <div class="bar-row">
-            <span class="bar-name">Dil.</span>
-            <div class="bar-track"><div class="bar-fill teal" data-width="42"></div></div>
-            <span class="bar-val">42</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-name">Dim.</span>
-            <div class="bar-track"><div class="bar-fill teal" data-width="38"></div></div>
-            <span class="bar-val">38</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-name">Dmc.</span>
-            <div class="bar-track"><div class="bar-fill teal" data-width="55"></div></div>
-            <span class="bar-val">55</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-name">Dij.</span>
-            <div class="bar-track"><div class="bar-fill amber" data-width="31"></div></div>
-            <span class="bar-val">31</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-name">Div.</span>
-            <div class="bar-track"><div class="bar-fill teal" data-width="88"></div></div>
-            <span class="bar-val">88</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-name">Dis.</span>
-            <div class="bar-track"><div class="bar-fill teal" data-width="95"></div></div>
-            <span class="bar-val">95</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-name">Diu.</span>
-            <div class="bar-track"><div class="bar-fill coral" data-width="22"></div></div>
-            <span class="bar-val">22</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Activity list -->
-      <div class="dash-chart-section">
-        <span class="dash-chart-title">Clients · Últim accés</span>
-        <div class="activity-list">
-          <div class="activity-item" data-act-delay="0">
-            <div class="act-dot green"></div>
-            <div class="act-name">Maria R.<small>Salmó + maki · ahir</small></div>
-            <span class="act-badge active">Actiu</span>
-          </div>
-          <div class="activity-item" data-act-delay="120">
-            <div class="act-dot orange"></div>
-            <div class="act-name">Joan M.<small>Última visita fa 15 dies</small></div>
-            <span class="act-badge cold">Risc</span>
-          </div>
-          <div class="activity-item" data-act-delay="240">
-            <div class="act-dot yellow"></div>
-            <div class="act-name">Carles B.<small>Menú omakase · cada dijous</small></div>
-            <span class="act-badge regular">Regular</span>
-          </div>
-          <div class="activity-item" data-act-delay="360">
-            <div class="act-dot green"></div>
-            <div class="act-name">Laia G.<small>Primera visita fa 3 dies</small></div>
-            <span class="act-badge active">Nou</span>
-          </div>
-          <div class="activity-item" data-act-delay="480">
-            <div class="act-dot orange"></div>
-            <div class="act-name">Pau T.<small>Última visita fa 18 dies</small></div>
-            <span class="act-badge cold">Risc</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="story-block" data-reveal>
-    <p>El Joan no ha vingut en 15 dies. Quan l'Alicia ho veu, no pensa "potser ha anat al veí." Pensa: <em>"El Joan hauria de saber que té 180 punts esperant-lo."</em></p>
-  </div>
-
-  <div class="chapter-divider" data-reveal><span>✦</span></div>
-
-  <!-- BLOC 2: L'impuls invisible -->
-  <div class="story-block" data-reveal>
-    <div class="block-icon">
-      <i class="fa-solid fa-mobile-screen-button" style="color:var(--teal);font-size:1.2rem;"></i>
-      <span class="icon-label">L'impuls invisible</span>
-    </div>
-    <p>El dimarts al migdia, el Joan rep un missatge. No és un anunci de publicitat massiva. No és un correu de "oferta especial per a tothom". És un missatge que sembla escrit a mà, perquè en el fons ho és: l'Alicia ha activat la seqüència just per a ell.</p>
-  </div>
-
-  <!-- NOTIFICACIÓ ANIMADA -->
-  <div class="notif-demo" data-reveal id="notifDemo">
-    <span class="notif-label">Missatge rebut · 12:34</span>
-    <div class="phone-notif" id="phoneNotif">
-      <div class="notif-app-icon">🍣</div>
-      <div class="notif-content">
-        <p class="notif-app-name">SUKASHI</p>
-        <p class="notif-title">Joan, et trobem a faltar.</p>
-        <p class="notif-body">Tens 180 punts esperant-te. Suficient per a un Sake de la casa. Quan vols que et reservem taula?</p>
-      </div>
-      <span class="notif-time">ara</span>
-      <div class="notif-ping-dot"></div>
-    </div>
-  </div>
-
-  <div class="story-block" data-reveal>
-    <p>El Joan no ha vist cap anunci. No li han ofert un descompte. Li han recordat que <strong style="color:var(--ink);">té quelcom seu guardant-li</strong> en un lloc on sap que l'aprecien.</p>
-    <div class="insight-callout">
-      L'impuls invisible no és una tàctica de màrqueting. És un gest de cura, activat pel moment exacte en què el client ho necessita.
-    </div>
-  </div>
-
-  <!-- Imatge: parella sopant íntim sushi -->
+  <!-- Cinematic -->
   <figure class="cinematic-image" data-reveal>
-    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&fit=crop&crop=center" alt="Sopar íntim restaurant" loading="lazy"/>
+    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1400&q=80&fit=crop&crop=center" alt="Disseny de producte digital" loading="lazy"/>
     <div class="cine-overlay"></div>
-    <figcaption class="cine-caption">El Joan reserva taula dues hores després de rebre el missatge.</figcaption>
+    <figcaption class="cine-caption">El producte deixa de ser invisible. Comença a ser experimentat.</figcaption>
   </figure>
 
-  <!-- BLOC 3: L'últim esforç / tiquet mitjà -->
+  <!-- SECCIÓ: WEB APP REACT -->
+  <div class="section-label" data-reveal>
+    <span class="sl-inner">Part I — Web App React · Redissenyada</span>
+  </div>
+
+  <!-- BLOC 2: Nova Web App customer -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-chart-line" style="color:var(--teal);font-size:1.2rem;"></i>
-      <span class="icon-label">L'augment del tiquet mitjà</span>
+      <i class="fa-solid fa-house" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Home Page del Customer</span>
     </div>
-    <p>Però el sistema guarda una altra sorpresa. Tres mesos de dades revelen un patró que l'Alicia no havia anticipat.</p>
-    <p>Els clients que estan a punt d'assolir una xifra rodona de punts —una recompensa— gasten de mitjana un 22% més en aquella visita. No perquè els ho hagin demanat. Ho fan per iniciativa pròpia.</p>
+    <p>La Web App de clients rep una transformació radical. On abans hi havia un panell mínim, ara hi ha una <strong style="color:var(--ink);">Home Page completa</strong> amb identitat visual pròpia.</p>
+    <p>Navbar horitzontal amb navegació clara, banner de benvinguda personalitzat, resum de punts, visites, badges i favorits. I un botó prominent per generar el codi QR. Tot en una mateixa pantalla, sense frictions.</p>
   </div>
 
-  <!-- TIQUET SIMULAT -->
-  <div class="ticket-demo" data-reveal id="ticketDemo">
-    <div class="ticket-header">
-      <span class="ticket-title">Comanda · Mesa 4</span>
-      <span class="ticket-date">Divendres 21:47</span>
-    </div>
-    <div class="ticket-lines">
-      <div class="ticket-line">
-        <span class="ticket-item">Omakase 12 peces</span>
-        <span class="ticket-dots"></span>
-        <span class="ticket-price">€28.00</span>
-      </div>
-      <div class="ticket-line">
-        <span class="ticket-item">Cervesa japonesa ×2</span>
-        <span class="ticket-dots"></span>
-        <span class="ticket-price">€9.00</span>
-      </div>
-      <div class="ticket-line">
-        <span class="ticket-item ticket-extra">+ Edamames (afegit)</span>
-        <span class="ticket-dots"></span>
-        <span class="ticket-price ticket-extra">€4.50</span>
-      </div>
-      <div class="ticket-line">
-        <span class="ticket-item ticket-extra">+ Mochi de postres</span>
-        <span class="ticket-dots"></span>
-        <span class="ticket-price ticket-extra">€5.50</span>
-      </div>
-    </div>
-    <div class="ticket-footer">
-      <span class="ticket-total-label">Total</span>
-      <span class="ticket-total-value">€47.00</span>
-    </div>
-    <div class="points-progress-wrap">
-      <div class="pp-header">
-        <span class="pp-label">Punts acumulats avui</span>
-        <span class="pp-count" id="ppCount">0 / 500</span>
-      </div>
-      <div class="pp-track"><div class="pp-fill" id="ppFill"></div></div>
-      <p class="pp-milestone" id="ppMilestone"></p>
+  <!-- Nav strip visual -->
+  <div class="nav-strip" data-reveal>
+    <span class="nav-logo">🍽️ EasyEat</span>
+    <div class="nav-item active"><i class="fa-solid fa-house" style="font-size:0.8rem;"></i> Inici</div>
+    <div class="nav-item"><i class="fa-solid fa-location-dot" style="font-size:0.8rem;"></i> Descobrir</div>
+    <div class="nav-item"><i class="fa-solid fa-qrcode" style="font-size:0.8rem;"></i> El meu QR</div>
+    <div class="nav-item"><i class="fa-solid fa-gift" style="font-size:0.8rem;"></i> Recompenses</div>
+    <div class="nav-item"><i class="fa-solid fa-user" style="font-size:0.8rem;"></i> Perfil</div>
+    <div class="nav-right">
+      <span class="nav-lang">🌐 CA</span>
     </div>
   </div>
 
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:5173/dashboard?tab=home · Customer Home — Maria</span>
+    </div>
+    <img src="capitol4/Captura de pantalla 2026-05-10 150038.png" alt="Customer Home Page React" loading="lazy"/>
+    <figcaption>Home Page · Punts · Visites · Badges · QR · Favorits</figcaption>
+  </figure>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 3: Discover + Mapa -->
   <div class="story-block" data-reveal>
-    <p>"Ja que estem a punt... demanem unes postres i arribem als 500."</p>
-    <p>Els edamames i el mochi de gel no estaven al pla original. Però la lògica dels punts ha convertit un sopar de 37 euros en un de 47. Sense pressió. Sense vendes creuades forçades. <strong style="color:var(--ink);">El client ha volgut gastar més.</strong></p>
+    <div class="block-icon">
+      <i class="fa-solid fa-location-dot" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Discover — Descobrir restaurants</span>
+    </div>
+    <p>S'afegeix una nova secció principal: <strong style="color:var(--ink);">Descobrir</strong>. El customer pot explorar restaurants per categories, buscar per nom o tipus de cuina, i navegar per una galeria de cards visuals.</p>
+    <p>Cada card mostra la imatge del local, el nom, les categories i la puntuació. Un clic porta a una pàgina de detall completa. Tota la informació del restaurant a l'abast del client, sense intermediaris.</p>
+  </div>
+
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:5173/dashboard?tab=discover · Discover Restaurants</span>
+    </div>
+    <img src="capitol4/Captura de pantalla 2026-05-10 150100.png" alt="Discover page restaurants" loading="lazy"/>
+    <figcaption>Discover · Categories · Cerca · 11 restaurants · Mapa disponible</figcaption>
+  </figure>
+
+  <!-- Split: Detall restaurant + mapa interactiu -->
+  <div class="split-block" data-reveal>
+    <div class="split-text">
+      <div class="block-icon">
+        <i class="fa-solid fa-store" style="color:var(--orange);font-size:1.1rem;"></i>
+        <span class="icon-label">Detall del restaurant</span>
+      </div>
+      <p>Cada restaurant té la seva pròpia pàgina de detall: hero fotogràfic, puntuació, categories, punts acumulats del client, horaris setmanals i informació de contacte.</p>
+      <p>El client veu d'un cop d'ull tot el que necessita per decidir si hi vol anar, i quants punts té allà acumulats.</p>
+    </div>
+    <figure class="split-screenshot">
+      <img src="capitol4/Captura de pantalla 2026-05-10 150116.png" alt="Restaurant detail page" loading="lazy"/>
+    </figure>
+  </div>
+
+  <!-- Mapa interactiu screenshot -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-map" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Mapa interactiu</span>
+    </div>
+    <p>La secció Discover incorpora un <strong style="color:var(--ink);">mapa interactiu de Barcelona</strong> amb tots els restaurants del sistema marcats. El customer pot explorar la ciutat visualment, entendre la distribució geogràfica dels locals i descobrir restaurants propers que no coneixia.</p>
+  </div>
+
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:5173/map · Mapa interactiu — 11 restaurants</span>
+    </div>
+    <img src="capitol4/Captura de pantalla 2026-05-10 150239.png" alt="Mapa interactiu Barcelona" loading="lazy"/>
+    <figcaption>Mapa interactiu · Restaurants geolocalitzats · Barcelona</figcaption>
+  </figure>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 4: QR + Recompenses -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-qrcode" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Sistema QR + Punts</span>
+    </div>
+    <p>El flux de fidelització s'activa amb un gest: el customer genera el seu <strong style="color:var(--ink);">codi QR personal</strong> des de la Home Page. L'empleat l'escaneja amb el mòbil. El sistema registra la visita i assigna punts automàticament.</p>
+    <p>Sense paper. Sense targetes. Sense fricció.</p>
+  </div>
+
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:5173/dashboard?tab=home · El teu Codi QR</span>
+    </div>
+    <img src="capitol4/Captura de pantalla 2026-05-10 150139.png" alt="QR Code generator" loading="lazy"/>
+    <figcaption>Codi QR personal · Check-in · Registre automàtic de punts</figcaption>
+  </figure>
+
+  <div class="insight-callout" data-reveal>
+    El QR no és una funcionalitat. És el pont entre el món físic i el digital. Entre el sopar i el punt.
   </div>
 
   <div class="chapter-divider" data-reveal><span>✦</span></div>
 
-  <!-- Imatge: analítica amb llum càlida -->
-  <figure class="scene-image" data-reveal>
-    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80&fit=crop&crop=center" alt="Revisió de dades equip" loading="lazy"/>
-    <figcaption>Les dades no menteixen. Però tampoc expliquen tota la història soles.</figcaption>
-  </figure>
+  <!-- SECCIÓ: EMPLOYEE WEB APP -->
+  <div class="section-label" data-reveal>
+    <span class="sl-inner">Part II — Employee Web App · Gestió completa</span>
+  </div>
 
-  <!-- BLOC 4: Humanitzar la tecnologia -->
+  <!-- BLOC 5: Employee App -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
-      <i class="fa-solid fa-heart" style="color:var(--teal);font-size:1.2rem;"></i>
-      <span class="icon-label">Humanitzar la tecnologia</span>
+      <i class="fa-solid fa-chart-line" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Dashboard de l'empleat</span>
     </div>
-    <p>Algú podria pensar que tot això és fred. Que reduir les persones a patrons de consum és deshumanitzador. Que el Joan no és un "client en risc de refredar-se", és una persona.</p>
-    <p>I té raó. Precisament per això funciona.</p>
-    <p>L'Alicia no utilitza les dades per manipular. Les utilitza per <strong style="color:var(--ink);">recordar</strong>. Perquè quan el Joan entra i ella li diu "Joan, he guardat el teu Sake preferit", no ho sap per màgia. Ho sap perquè s'ha pres la molèstia d'escoltar, de registrar, de recordar.</p>
-    <p>La tecnologia fa possible allò que la memòria humana no pot sostenir sola: <em>conèixer de veritat cada persona que seu a la teva taula.</em></p>
+    <p>La part employee evoluciona completament. Ara és una <strong style="color:var(--ink);">aplicació de gestió professional</strong> amb sidebar de navegació, dashboard de KPIs, gràfics en temps real i navegació entre totes les seccions del restaurant.</p>
+    <p>Tot en català, amb selector d'idioma integrat, i amb una estètica fosca i moderna que el distingeix clarament de la Web App de clients.</p>
+  </div>
+
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:5173/dashboard · Employee Dashboard — Carlos Martínez</span>
+    </div>
+    <img src="capitol4/Captura de pantalla 2026-05-10 150013.png" alt="Employee dashboard amb gràfics" loading="lazy"/>
+    <figcaption>Dashboard · KPIs · Gràfic de ressenyes · Hores punta · Sidebar de navegació</figcaption>
+  </figure>
+
+  <!-- Dual: Perfil empleat + Clients -->
+  <div class="dual-screens" data-reveal>
+    <figure>
+      <div class="browser-chrome">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <span class="browser-url">Perfil empleat</span>
+      </div>
+      <img src="capitol4/Captura de pantalla 2026-05-10 145924.png" alt="Perfil empleat" loading="lazy"/>
+      <figcaption>El meu Perfil · Dades personals · Context del restaurant</figcaption>
+    </figure>
+    <figure>
+      <div class="browser-chrome">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <span class="browser-url">Clients del restaurant</span>
+      </div>
+      <img src="capitol4/Captura de pantalla 2026-05-10 145933.png" alt="Vista de clients" loading="lazy"/>
+      <figcaption>Clients · Cards visuals · Cerca · Estat actiu</figcaption>
+    </figure>
+  </div>
+
+  <!-- Feature grid de seccions employee -->
+  <div class="feature-grid" data-reveal>
+    <div class="feature-card">
+      <div class="fc-icon">🍜</div>
+      <div class="fc-title">Carta / Plats</div>
+      <div class="fc-desc">Gestió visual de la carta amb imatges, categories, preus i etiquetes de servei. Afegir i eliminar plats en temps real.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">👥</div>
+      <div class="fc-title">Empleats</div>
+      <div class="fc-desc">Cards d'empleats amb visites, ingressos generats i rating. Filtres i cerca integrats. Gestió de l'equip des d'una sola vista.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🎁</div>
+      <div class="fc-title">Recompenses</div>
+      <div class="fc-desc">Cards de recompenses amb cost en punts, bescanvis realitzats i data d'expiració. Crear i gestionar des de la mateixa pantalla.</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">⚙️</div>
+      <div class="fc-title">Configuració</div>
+      <div class="fc-desc">Perfil del restaurant, horari comercial, notificacions i sistema de punts configurable des d'un panell unificat d'ajustos.</div>
+    </div>
+  </div>
+
+  <!-- Dual: Carta/plats + Empleats -->
+  <div class="dual-screens" data-reveal>
+    <figure>
+      <div class="browser-chrome">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <span class="browser-url">Carta / Plats</span>
+      </div>
+      <img src="capitol4/Captura de pantalla 2026-05-10 145941.png" alt="Carta de plats" loading="lazy"/>
+      <figcaption>Carta · Imatge · Preu · Etiquetes · CRUD complet</figcaption>
+    </figure>
+    <figure>
+      <div class="browser-chrome">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <span class="browser-url">Empleats</span>
+      </div>
+      <img src="capitol4/Captura de pantalla 2026-05-10 145950.png" alt="Gestió d'empleats" loading="lazy"/>
+      <figcaption>Empleats · Visites · Ingressos · Rating</figcaption>
+    </figure>
+  </div>
+
+  <!-- Split: Recompenses + Estadístiques -->
+  <div class="split-block" data-reveal>
+    <figure class="split-screenshot">
+      <img src="capitol4/Captura de pantalla 2026-05-10 145957.png" alt="Gestió de recompenses" loading="lazy"/>
+    </figure>
+    <div class="split-text">
+      <div class="block-icon">
+        <i class="fa-solid fa-gift" style="color:var(--orange);font-size:1.1rem;"></i>
+        <span class="icon-label">Gestió de Recompenses</span>
+      </div>
+      <p>Les recompenses ja no són simples línies de text. Són <strong style="color:var(--ink);">cards visuals</strong> amb estat (actiu/inactiu), cost en punts, nombre de bescanvis realitzats i data d'expiració.</p>
+      <p>El propietari pot crear recompenses atractives que motivin el retorn dels clients.</p>
+    </div>
+  </div>
+
+  <!-- Screenshot Estadístiques / Anàlisi -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-chart-bar" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Estadístiques — Panell d'anàlisi</span>
+    </div>
+    <p>La secció d'estadístiques mostra KPIs estratègics en temps real: taxa de retenció, clients actius, ingressos estimats i ROI de fidelització. Inclou gràfics de tendències, prediccions de visites i <strong style="color:var(--ink);">alertes intel·ligents</strong> automàtiques.</p>
+    <p>Fins i tot inclou la funció d'exportar dades per a anàlisis externs.</p>
+  </div>
+
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">localhost:5173/dashboard · Estadístiques — Anàlisi complet</span>
+    </div>
+    <img src="capitol4/Captura de pantalla 2026-05-10 150013.png" alt="Panell d'estadístiques i anàlisi" loading="lazy"/>
+    <figcaption>Anàlisi · KPIs · Gràfics · Prediccions · Alertes intel·ligents</figcaption>
+  </figure>
+
+  <!-- Screenshot configuració -->
+  <figure class="screenshot-wrap" data-reveal>
+    <div class="browser-chrome">
+      <span class="browser-dot red"></span>
+      <span class="browser-dot yellow"></span>
+      <span class="browser-dot green"></span>
+      <span class="browser-url">Configuració del restaurant — Ajustos</span>
+    </div>
+    <img src="capitol4/Captura de pantalla 2026-05-10 150155.png" alt="Configuració del restaurant" loading="lazy"/>
+    <figcaption>Configuració · Perfil del restaurant · Horari · Notificacions · Sistema de punts</figcaption>
+  </figure>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- SECCIÓ: MULTIIDIOMA -->
+  <div class="section-label" data-reveal>
+    <span class="sl-inner">Part III — Multiidioma · Internacionalització</span>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-globe" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Multiidioma integrat</span>
+    </div>
+    <p>Tant la Web App com l'App Flutter incorporen un <strong style="color:var(--ink);">selector d'idioma</strong> persistent. L'usuari pot canviar entre anglès, espanyol i català en qualsevol moment, i tota la interfície s'adapta instantàniament.</p>
+    <p>EasyEat no és un producte local. És un producte que pot créixer en qualsevol mercat.</p>
+  </div>
+
+  <figure class="screenshot-wrap" data-reveal>
+    <img src="capitol4/Captura de pantalla 2026-05-10 150214.png" alt="Selector de multiidioma" loading="lazy" style="border-radius:8px; box-shadow: 0 8px 32px rgba(28,26,23,0.14);"/>
+    <figcaption>Multiidioma · Inglés (en) · Español (es) · Català (ca)</figcaption>
+  </figure>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- SECCIÓ: FLUTTER MOBILE -->
+  <div class="section-label" data-reveal>
+    <span class="sl-inner">Part IV — Flutter · L'App Mobile arriba</span>
+  </div>
+
+  <!-- BLOC 6: Flutter -->
+  <div class="dark-card" data-reveal>
+    <div class="dc-kicker">📱 Flutter · App Mobile multiplataforma</div>
+    <div class="dc-headline">EasyEat surt del navegador.<br>Ara viu a la teva butxaca.</div>
+    <div class="dc-body">L'App Mobile construïda amb Flutter porta tota la funcionalitat del sistema a iOS i Android. Mateixa lògica, nova experiència. El sistema es converteix en autènticament multiplataforma.</div>
+    <div class="platform-row">
+      <div class="platform-badge">
+        <i class="fa-brands fa-react"></i>
+        <span>Web App React</span>
+      </div>
+      <div class="platform-badge">
+        <i class="fa-solid fa-mobile-screen-button"></i>
+        <span>Flutter Mobile</span>
+      </div>
+      <div class="platform-badge">
+        <i class="fa-solid fa-desktop"></i>
+        <span>Backoffice Angular</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-mobile-screen" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Flutter — Employee App Mobile</span>
+    </div>
+    <p>L'App Flutter de l'empleat ofereix el dashboard del restaurant en format mòbil: resum del restaurant, KPIs, clients atesos, ingressos generats i navegació per les seccions principals des del telèfon.</p>
+    <p>El propietari pot gestionar el seu local des de qualsevol lloc, sense necessitat d'obrir un ordinador.</p>
+  </div>
+
+  <!-- Mobile pair: Flutter employee + Restaurant detail -->
+  <div class="mobile-pair" data-reveal>
+    <figure class="phone-frame">
+      <img src="capitol4/Captura de pantalla 2026-05-10 150300.png" alt="Flutter Employee Dashboard" loading="lazy"/>
+      <figcaption>Employee Flutter · Dashboard · KPIs</figcaption>
+    </figure>
+    <figure class="phone-frame">
+      <img src="capitol4/Captura de pantalla 2026-05-10 150336.png" alt="Flutter Restaurant Detail" loading="lazy"/>
+      <figcaption>Flutter · Detall restaurant · Informació</figcaption>
+    </figure>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-qrcode" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Flutter — Escàner QR</span>
+    </div>
+    <p>L'App Flutter de l'empleat incorpora un <strong style="color:var(--ink);">escàner de codi QR</strong> natiu. L'empleat obre l'app, apunta la càmera al QR del client, i el sistema registra la visita i assigna els punts automàticament.</p>
+    <p>El flux físic de fidelització, completat en dos gestos.</p>
+  </div>
+
+  <!-- Mobile: QR Scanner Flutter -->
+  <div class="mobile-pair" data-reveal style="justify-content:center;">
+    <figure class="phone-frame">
+      <img src="capitol4/Captura de pantalla 2026-05-10 150313.png" alt="Flutter QR Scanner" loading="lazy"/>
+      <figcaption>Flutter Employee · Scan QR Customer</figcaption>
+    </figure>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- BLOC 7: Abans i ara -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-arrows-left-right" style="color:var(--orange);font-size:1.2rem;"></i>
+      <span class="icon-label">Transformació total</span>
+    </div>
+    <p>En aquest capítol, el sistema no evoluciona. Es transforma. La distància entre el punt de partida i el punt d'arribada no es mesura en funcionalitats, sinó en sensació de producte.</p>
+  </div>
+
+  <!-- Before / After -->
+  <div class="before-after" data-reveal>
+    <div class="ba-col before">
+      <div class="ba-label">❌ Abans</div>
+      <ul class="ba-list">
+        <li>Interfícies simples i funcionals</li>
+        <li>Una sola plataforma (web)</li>
+        <li>Sense mapa interactiu</li>
+        <li>QR inexistent</li>
+        <li>Dashboards bàsics</li>
+        <li>Sense gestió visual de plats</li>
+        <li>Un sol idioma</li>
+        <li>Experiència mínima</li>
+      </ul>
+    </div>
+    <div class="ba-col after">
+      <div class="ba-label">✅ Ara</div>
+      <ul class="ba-list">
+        <li>UX/UI moderna i visual</li>
+        <li>Web React + App Flutter</li>
+        <li>Mapa interactiu de Barcelona</li>
+        <li>QR + check-in + punts automàtics</li>
+        <li>Dashboards amb KPIs i gràfics</li>
+        <li>Carta visual amb imatges i preus</li>
+        <li>Multiidioma (CA / ES / EN)</li>
+        <li>Experiència de producte real</li>
+      </ul>
+    </div>
   </div>
 
   <!-- GANXO FINAL -->
@@ -778,24 +893,24 @@
         <rect width="700" height="280" fill="url(#grid)"/>
       </svg>
     </div>
-    <span class="ganxo-label">✦ La clau del capítol</span>
+    <span class="ganxo-label">✦ El Clímax del Capítol</span>
     <p class="ganxo-quote">
-      "La tecnologia no ha de ser freda;<br>ha de servir per <strong>conèixer millor</strong><br>qui seu a la teva taula."
+      "El sistema deixa de ser<br><strong>software</strong><br>i es converteix en<br><strong>experiència."</strong>
     </p>
-    <p class="ganxo-subtext">Les dades no substitueixen l'afecte. L'amplifiquen.</p>
+    <p class="ganxo-subtext">Els usuaris interactuen, descobreixen, gestionen i es mouen dins l'ecosistema. EasyEat ja no és backend i control. És producte digital viu.</p>
   </div>
 
   <div class="final-line" data-reveal>
-    <p>Però conèixer el client no és el final del camí.<br>El repte és convertir aquest coneixement en una experiència que no es pugui trobar enlloc més.</p>
+    <p>El producte finalment comença a sentir-se real.<br>Ara cal que es converteixi en la millor versió de si mateix.</p>
     <div style="display: flex; justify-content: center; gap: 16px; align-items: center; margin-top: 40px; flex-wrap: wrap;">
-        <a href="sukashi-capitol3.html" class="next-chapter-hint">
-            <i class="fa-solid fa-chevron-left" style="font-size:0.8rem;"></i>
-            Capítol 3
-        </a>
-        <a href="sukashi-capitol5.html" class="next-chapter-hint">
-            Capítol 5
-            <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
-        </a>
+      <a href="sukashi-capitol3.html" class="next-chapter-hint">
+        <i class="fa-solid fa-chevron-left" style="font-size:0.8rem;"></i>
+        Capítol 3
+      </a>
+      <a href="sukashi-capitol5.html" class="next-chapter-hint">
+        Capítol 5
+        <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
+      </a>
     </div>
   </div>
 
@@ -820,86 +935,13 @@
     progressLabel.textContent = Math.round(pct * 100) + '%';
   }
 
-  /* COUNTER ANIMATION */
-  function animCount(id, to, duration, prefix) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var start = null;
-    function step(ts) {
-      if (!start) start = ts;
-      var p = Math.min((ts - start) / duration, 1);
-      var e = 1 - Math.pow(1 - p, 3);
-      el.textContent = (prefix || '') + Math.round(to * e);
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
   /* INTERSECTION OBSERVER */
-  var triggered = {};
-  var allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line, .time-stamp, .ganxo-card, .notif-demo, .ticket-demo');
-
-  var io = new IntersectionObserver(function(entries) {
+  const allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line, .ganxo-card, .dark-card, .before-after, .feature-grid, .screenshot-wrap, .dual-screens, .split-block, .insight-callout, .section-label, .nav-strip, .mobile-pair');
+  const io = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (!e.isIntersecting) return;
-      var el = e.target;
-      el.classList.add('visible');
-      var id = el.id || el.className;
-
-      /* Dashboard */
-      if (el.id === 'dashWrap' && !triggered.dash) {
-        triggered.dash = true;
-        animCount('kpiClients', 247, 1400);
-        animCount('kpiTicket', 47, 1400);
-        animCount('kpiCold', 12, 1200);
-        /* Bars */
-        setTimeout(function() {
-          el.querySelectorAll('.bar-fill').forEach(function(b) {
-            b.style.width = b.getAttribute('data-width') + '%';
-          });
-        }, 300);
-        /* Activity items */
-        el.querySelectorAll('[data-act-delay]').forEach(function(item) {
-          var delay = parseInt(item.getAttribute('data-act-delay'));
-          setTimeout(function() { item.classList.add('visible'); }, 600 + delay);
-        });
-      }
-
-      /* Notification ping */
-      if (el.id === 'notifDemo' && !triggered.notif) {
-        triggered.notif = true;
-        setTimeout(function() {
-          document.getElementById('phoneNotif').classList.add('ping');
-        }, 500);
-      }
-
-      /* Ticket */
-      if (el.id === 'ticketDemo' && !triggered.ticket) {
-        triggered.ticket = true;
-        setTimeout(function() {
-          var fill = document.getElementById('ppFill');
-          var count = document.getElementById('ppCount');
-          var milestone = document.getElementById('ppMilestone');
-          var val = 0;
-          var target = 470;
-          var dur = 1600;
-          var start = null;
-          function step(ts) {
-            if (!start) start = ts;
-            var p = Math.min((ts - start) / dur, 1);
-            var e = 1 - Math.pow(1 - p, 3);
-            val = Math.round(target * e);
-            fill.style.width = (val / 500 * 100) + '%';
-            count.textContent = val + ' / 500';
-            if (val >= 440 && !milestone.textContent) milestone.textContent = 'Quasi! Afegeix unes postres i arribes al premi.';
-            if (p < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-        }, 400);
-      }
+      if (e.isIntersecting) e.target.classList.add('visible');
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
+  }, { threshold: 0.07, rootMargin: '0px 0px -50px 0px' });
   allReveal.forEach(function(el) { io.observe(el); });
 
   window.addEventListener('scroll', updateProgress, { passive: true });
