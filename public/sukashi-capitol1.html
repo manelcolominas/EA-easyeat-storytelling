@@ -34,7 +34,7 @@
       pointer-events: none; z-index: 999; opacity: 0.6;
     }
 
-    /* SUSHI BAR */
+    /* ── SUSHI BAR ── */
     #sushi-bar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(249,248,244,0.92);
@@ -55,7 +55,7 @@
     .sushi-piece.filled .nori    { fill: #2C2820; }
     .sushi-piece.filled .topping { fill: var(--sushi-fill); }
 
-    /* HERO */
+    /* ── HERO ── */
     #hero {
       min-height: 100vh;
       display: grid; grid-template-rows: 1fr auto;
@@ -64,20 +64,23 @@
     .hero-image-wrap { position: absolute; inset: 0; z-index: 0; }
     .hero-image-wrap img {
       width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
-      filter: brightness(0.42) saturate(0.65);
+      filter: brightness(0.38) saturate(0.55);
     }
     .hero-image-wrap::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(28,26,23,0.1) 0%, rgba(28,26,23,0.3) 50%, rgba(249,248,244,1) 100%);
+      background: linear-gradient(to bottom,
+        rgba(28,26,23,0.08) 0%,
+        rgba(28,26,23,0.25) 45%,
+        rgba(249,248,244,1) 100%);
     }
     .hero-content {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 120px 28px 60px;
+      text-align: center; padding: 130px 28px 60px;
     }
     .chapter-badge {
       display: inline-block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25);
       padding: 6px 18px; border-radius: 100px; margin-bottom: 36px;
       font-weight: 500; backdrop-filter: blur(4px);
     }
@@ -91,16 +94,20 @@
     }
     h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.6rem,6vw,4.4rem); font-weight: 600; line-height: 1.12;
-      color: #fff; margin-bottom: 20px; max-width: 680px;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+      font-size: clamp(2.8rem,6.5vw,4.8rem); font-weight: 600; line-height: 1.1;
+      color: #fff; margin-bottom: 22px; max-width: 700px;
+      text-shadow: 0 2px 28px rgba(0,0,0,0.45);
     }
     h1 em { font-style: italic; color: #F5A58C; }
-    .hero-subtitle { font-size: clamp(0.9rem,2vw,1.05rem); color: rgba(255,255,255,0.6); max-width: 440px; line-height: 1.7; }
+    .hero-subtitle {
+      font-size: clamp(0.9rem,2vw,1.05rem);
+      color: rgba(255,255,255,0.55);
+      max-width: 460px; line-height: 1.75;
+    }
     .scroll-hint {
       position: relative; z-index: 1; padding-bottom: 48px;
       display: flex; flex-direction: column; align-items: center; gap: 8px;
-      color: rgba(255,255,255,0.45); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
     }
     .scroll-arrow {
       width: 1px; height: 48px;
@@ -109,16 +116,17 @@
     }
     @keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-    /* STORY */
+    /* ── STORY CONTAINER ── */
     #story { max-width: 700px; margin: 0 auto; padding: 0 28px 160px; }
 
-    /* STORY BLOCK */
+    /* ── STORY BLOCK ── */
     .story-block {
       margin-bottom: 80px;
       opacity: 0; transform: translateY(36px);
       transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
     }
     .story-block.visible { opacity: 1; transform: translateY(0); }
+    .story-block p + p { margin-top: 18px; }
 
     .block-icon {
       font-size: 1.4rem; margin-bottom: 18px;
@@ -129,7 +137,7 @@
 
     p { font-size: clamp(1rem,2.2vw,1.12rem); color: #3A3730; line-height: 1.9; }
 
-    /* SCENE IMAGE */
+    /* ── SCENE IMAGE ── */
     .scene-image {
       width: 100%; border-radius: 4px; overflow: hidden; margin: 28px 0;
       position: relative;
@@ -139,17 +147,17 @@
     .scene-image.visible { opacity: 1; transform: translateY(0) scale(1); }
     .scene-image img {
       width: 100%; display: block; aspect-ratio: 16/7; object-fit: cover;
-      filter: saturate(0.75) brightness(0.92);
+      filter: saturate(0.72) brightness(0.9);
       transition: filter 0.6s ease, transform 0.6s ease;
     }
-    .scene-image:hover img { filter: saturate(0.9) brightness(1); transform: scale(1.01); }
+    .scene-image:hover img { filter: saturate(0.92) brightness(1.02); transform: scale(1.01); }
     .scene-image figcaption {
       position: absolute; bottom: 12px; right: 16px;
       font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.58);
     }
 
-    /* CINEMATIC */
+    /* ── CINEMATIC ── */
     .cinematic-image {
       width: calc(100% + 56px); margin-left: -28px; margin-right: -28px; margin-bottom: 64px;
       position: relative; overflow: hidden;
@@ -159,20 +167,20 @@
     .cinematic-image.visible { opacity: 1; transform: translateY(0); }
     .cinematic-image img {
       width: 100%; display: block; aspect-ratio: 21/9; object-fit: cover;
-      filter: saturate(0.55) brightness(0.75);
+      filter: saturate(0.45) brightness(0.65);
     }
     .cinematic-image .cine-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent 35%, rgba(249,248,244,0.95) 100%);
+      background: linear-gradient(to bottom, transparent 30%, rgba(249,248,244,0.97) 100%);
     }
     .cinematic-image .cine-caption {
-      position: absolute; bottom: 20px; left: 28px;
+      position: absolute; bottom: 22px; left: 28px;
       font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(0.95rem,2.5vw,1.2rem); color: rgba(255,255,255,0.85);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.5); max-width: 380px; line-height: 1.5;
+      font-size: clamp(0.95rem,2.5vw,1.25rem); color: rgba(255,255,255,0.85);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5); max-width: 420px; line-height: 1.5;
     }
 
-    /* SPLIT BLOCK */
+    /* ── SPLIT BLOCK ── */
     .split-block {
       display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center;
       margin-bottom: 80px;
@@ -185,49 +193,99 @@
     .split-image { border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; }
     .split-image img {
       width: 100%; height: 100%; object-fit: cover; display: block;
-      filter: saturate(0.75) brightness(0.9);
+      filter: saturate(0.72) brightness(0.88);
       transition: transform 0.6s ease, filter 0.6s ease;
     }
     .split-image:hover img { transform: scale(1.03); filter: saturate(0.9) brightness(1); }
     .split-text { display: flex; flex-direction: column; gap: 16px; }
+    .split-text p + p { margin-top: 0; }
 
-    /* COMPARISON */
-    .comparison-list { list-style: none; margin: 24px 0; padding: 0; border-left: 2px solid var(--sushi-empty); padding-left: 24px; }
-    .comparison-list li { font-size: clamp(0.95rem,2vw,1.05rem); color: #3A3730; padding: 10px 0; border-bottom: 1px solid rgba(28,26,23,0.06); display: flex; align-items: center; gap: 12px; }
-    .comparison-list li:last-child { border-bottom: none; }
-    .comparison-list li::before { content: 'B7'; color: var(--coral); font-size: 1.4rem; line-height: 1; }
-
-    /* QUESTION */
+    /* ── QUESTION CALLOUT ── */
     .question-callout {
-      background: var(--warm-white); border: 1px solid rgba(217,79,58,0.2); border-left: 3px solid var(--coral);
+      background: var(--warm-white); border: 1px solid rgba(217,79,58,0.18); border-left: 3px solid var(--coral);
       padding: 28px 32px; border-radius: 0 8px 8px 0; margin: 28px 0;
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem,2.5vw,1.35rem);
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem,2.5vw,1.38rem);
       font-style: italic; color: var(--ink); line-height: 1.6; position: relative;
     }
     .question-callout::before {
       content: '\201C'; position: absolute; top: -14px; left: 24px;
-      font-size: 5rem; color: var(--coral); opacity: 0.12;
+      font-size: 5rem; color: var(--coral); opacity: 0.1;
       font-family: 'Cormorant Garamond', serif; line-height: 1;
     }
 
-    /* REVELATION */
+    /* ── REVELATION TEXT ── */
     .revelation-text {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.15rem,2.8vw,1.45rem);
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.18rem,2.8vw,1.48rem);
       font-style: italic; color: var(--ink); line-height: 1.65; margin: 24px 0;
     }
     .revelation-text strong { font-style: normal; color: var(--coral); font-weight: 600; }
 
-    /* DIVIDER */
+    /* ── GHOST CLIENTS ── */
+    .ghost-list {
+      margin: 32px 0;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .ghost-list.visible { opacity: 1; transform: translateY(0); }
+    .ghost-item {
+      display: flex; align-items: flex-start; gap: 20px;
+      padding: 22px 0; border-bottom: 1px solid rgba(28,26,23,0.06);
+    }
+    .ghost-item:first-child { border-top: 1px solid rgba(28,26,23,0.06); }
+    .ghost-avatar {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      background: var(--warm-white); border: 1px solid var(--sushi-empty);
+    }
+    .ghost-info { flex: 1; }
+    .ghost-name { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+    .ghost-detail { font-size: 0.84rem; color: var(--muted); line-height: 1.55; }
+    .ghost-since {
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--coral); opacity: 0.75; white-space: nowrap; margin-top: 4px;
+      font-style: italic;
+    }
+
+    /* ── COMPARISON STRIP ── */
+    .comparison-strip {
+      background: var(--warm-white); border: 1px solid rgba(28,26,23,0.08);
+      border-radius: 8px; padding: 32px 28px; margin: 28px 0;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .comparison-strip.visible { opacity: 1; transform: translateY(0); }
+    .comparison-strip-title {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 22px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .comparison-strip-title::after { content: ''; flex: 1; height: 1px; background: var(--sushi-empty); }
+    .comparison-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 11px 0; border-bottom: 1px solid rgba(28,26,23,0.05);
+      font-size: 0.92rem; color: #3A3730; line-height: 1.5;
+    }
+    .comparison-row:last-child { border-bottom: none; }
+    .comparison-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--coral); flex-shrink: 0; opacity: 0.55;
+    }
+
+    /* ── DIVIDER ── */
     .chapter-divider {
       display: flex; align-items: center; gap: 16px; margin: 48px 0;
       opacity: 0; transform: scaleX(0.5);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .chapter-divider.visible { opacity: 1; transform: scaleX(1); }
-    .chapter-divider::before, .chapter-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right,transparent,var(--muted),transparent); opacity: 0.25; }
+    .chapter-divider::before, .chapter-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right,transparent,var(--muted),transparent); opacity: 0.22;
+    }
     .chapter-divider span { font-size: 1.1rem; color: var(--muted); }
 
-    /* ENDING */
+    /* ── ENDING ── */
     .blank-page-section {
       opacity: 0; transform: translateY(40px);
       transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
@@ -237,14 +295,14 @@
     .ending-image { width: 100%; border-radius: 4px; overflow: hidden; margin-bottom: 40px; }
     .ending-image img {
       width: 100%; display: block; aspect-ratio: 16/6; object-fit: cover; object-position: center 30%;
-      filter: saturate(0.45) brightness(0.82);
+      filter: saturate(0.4) brightness(0.78);
     }
     .blank-page-card {
       display: inline-block; background: var(--warm-white);
       border: 1px solid rgba(28,26,23,0.1); border-radius: 4px;
       padding: 52px 48px;
       box-shadow: 0 2px 8px rgba(28,26,23,0.05), 0 20px 60px rgba(28,26,23,0.06), 4px 4px 0 rgba(28,26,23,0.03);
-      position: relative; max-width: 400px; width: 100%;
+      position: relative; max-width: 460px; width: 100%;
     }
     .blank-page-card::before {
       content: ''; position: absolute; top: 8px; left: 8px; right: -8px; bottom: -8px;
@@ -254,20 +312,23 @@
     .page-line { height: 1px; background: rgba(28,26,23,0.1); border-radius: 1px; }
     .page-line:nth-child(even) { opacity: 0.5; }
     .page-question {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(0.95rem,2.5vw,1.1rem);
-      font-style: italic; color: var(--ink); line-height: 1.7;
-      border-top: 1px solid rgba(217,79,58,0.3); padding-top: 20px; margin-top: 12px;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(0.98rem,2.5vw,1.15rem);
+      font-style: italic; color: var(--ink); line-height: 1.75;
+      border-top: 1px solid rgba(217,79,58,0.28); padding-top: 22px; margin-top: 12px;
     }
     .page-caption { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 20px; }
 
-    /* FINAL */
+    /* ── FINAL LINE ── */
     .final-line {
       opacity: 0; transform: translateY(24px);
       transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
       text-align: center; margin-top: 64px; padding: 0 16px;
     }
     .final-line.visible { opacity: 1; transform: translateY(0); }
-    .final-line p { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem,2.4vw,1.25rem); font-style: italic; color: var(--muted); }
+    .final-line p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem,2.4vw,1.25rem); font-style: italic; color: var(--muted);
+    }
     .next-chapter-hint {
       display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
       font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
@@ -276,6 +337,7 @@
     }
     .next-chapter-hint:hover { border-color: var(--coral); color: var(--coral); }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       #sushi-bar { padding: 12px 16px; }
       .sushi-piece { width: 30px; height: 18px; }
@@ -299,15 +361,18 @@
   <span class="bar-label" id="progressLabel">0%</span>
 </div>
 
+<!-- ═══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-image-wrap">
-    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=1600&q=80&fit=crop" alt="Sushi restaurant interior" loading="eager"/>
+    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=1600&q=80&fit=crop" alt="Interior restaurant Sukashi" loading="eager"/>
   </div>
   <div class="hero-content">
-    <span class="chapter-badge">Capítol 1</span>
+    <span class="chapter-badge">Capítol 1 · El problema</span>
     <span class="hero-emoji">🍣</span>
-    <h1>La síndrome<br>del <em>mirall</em></h1>
-    <p class="hero-subtitle">Una història sobre diferenciació, identitat i la pregunta que canvia un negoci per sempre.</p>
+    <h1>Venen una vegada.<br>Després<br><em>desapareixen.</em></h1>
+    <p class="hero-subtitle">El Sukashi rep clients cada dia. Però gairebé cap torna. Aquesta és la història del problema que va fer néixer un projecte.</p>
   </div>
   <div class="scroll-hint">
     <span>Continua llegint</span>
@@ -315,97 +380,161 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════
+     STORY
+══════════════════════════════════════════════════ -->
 <main id="story">
 
+  <!-- ── 1. PRESENTACIÓ ── -->
   <div class="story-block" data-reveal>
     <div class="block-icon">
       <i class="fa-solid fa-mug-hot" style="color:var(--coral);font-size:1.2rem;"></i>
-      <span class="icon-label">El matí</span>
+      <span class="icon-label">El principi</span>
     </div>
-    <p>L'Alicia ha obert el Sukashi, el seu restaurant de sushi, com cada matí. Cafè a la mà, repassa les reserves i, inevitablement, la mirada se li n'escapa per la finestra.</p>
+    <p>L'Alicia va obrir el Sukashi amb una idea clara: fer un restaurant de sushi que valgués la pena. No el millor del món, no una estrella Michelin, però sí un lloc on el peix fos fresc de debò, on el servei fos atent de debò, on els clients volguessin tornar.</p>
+    <p>Aquesta última part, ha resultat ser la més difícil de totes.</p>
   </div>
 
   <figure class="scene-image" data-reveal>
-    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80&fit=crop&crop=center" alt="Cafè fumejant al matí" loading="lazy"/>
+    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80&fit=crop&crop=center" alt="Cafè al matí, ritual diari" loading="lazy"/>
     <figcaption>Cada matí, el mateix ritual</figcaption>
   </figure>
 
   <div class="chapter-divider" data-reveal><span>✦</span></div>
 
+  <!-- ── 2. EL PROBLEMA DE FIDELITZACIÓ ── -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-person-walking-arrow-right" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">El problema</span>
+    </div>
+    <p>El Sukashi no és un restaurant buit. Els caps de setmana s'omple. Les ressenyes a Google són positives. Hi ha qui arriba per recomanació d'un amic, hi ha qui troba el local per casualitat passejant pel barri, hi ha qui reserva amb antelació perquè ja ha mirat la carta online i té ganes.</p>
+    <p>Venen. Mengen. Surten contents.</p>
+    <p>I no tornen.</p>
+    <div class="question-callout">
+      No tot, és clar. Molts clients gaudeixen d'una bona experiència, però molts pocs tornen.
+    </div>
+    <p>L'Alicia ho sap perquè ho nota. Ho nota en la cara de clients que reconeix d'un sopar de mesos enrere i que avui arriben com si fos la primera vegada. Ho nota en les taules de dimecres, quietes i mig buides. Ho nota en la sensació —difícil de definir però impossible d'ignorar— que el restaurant viu en un bucle constant de cares noves que no duren.</p>
+  </div>
+
+  <!-- ── 3. ELS CLIENTS FANTASMA ── -->
+  <div class="ghost-list" data-reveal>
+    <div class="ghost-item">
+      <div class="ghost-avatar">👨‍💼</div>
+      <div class="ghost-info">
+        <div class="ghost-name">Marc</div>
+        <div class="ghost-detail">Va venir amb clients de feina. Va demanar el menú de degustació. Va dir que tornaria aviat amb la seva parella.</div>
+        <div class="ghost-since">Fa 4 mesos que no apareix</div>
+      </div>
+    </div>
+    <div class="ghost-item">
+      <div class="ghost-avatar">👩</div>
+      <div class="ghost-info">
+        <div class="ghost-name">La Marta</div>
+        <div class="ghost-detail">Venia cada dijous. Niguiri de salmó, edamame, sake fred. L'Alicia la reconeixia quan entrava.</div>
+        <div class="ghost-since">Fa 2 mesos que ha desaparegut</div>
+      </div>
+    </div>
+    <div class="ghost-item">
+      <div class="ghost-avatar">👫</div>
+      <div class="ghost-info">
+        <div class="ghost-name">La parella del barri</div>
+        <div class="ghost-detail">Van venir tres divendres seguits. Semblaven tenir-ho com un ritual. Van deixar bona propina les tres vegades.</div>
+        <div class="ghost-since">Fa 6 setmanes sense senyal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-block" data-reveal>
+    <p class="revelation-text"><strong>No és que el Sukashi els hagi decebut.</strong> És que no ha fet res perquè tinguessin un motiu real per tornar.</p>
+    <p>Entre el primer sopar i el segon, no hi ha hagut res. Cap gest. Cap record. Cap raó concreta que els digués: <em>aquí val la pena tornar.</em></p>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- ── 4. LA COMPETÈNCIA INTERCANVIABLE ── -->
   <div class="split-block" data-reveal>
     <div class="split-text">
       <div class="block-icon">
-        <i class="fa-solid fa-bowl-rice" style="color:var(--coral);font-size:1.2rem;"></i>
-        <span class="icon-label">La comparació</span>
+        <i class="fa-solid fa-store" style="color:var(--coral);font-size:1.2rem;"></i>
+        <span class="icon-label">La competència</span>
       </div>
-      <p>Just davant, a l'altra banda del carrer, hi ha l'altre sushi del barri.</p>
-      <ul class="comparison-list">
-        <li>Mateix tipus de carta.</li>
-        <li>Preus gairebé calcats.</li>
-        <li>Qualitat molt semblant.</li>
-        <li>Fins i tot el fil musical sembla el mateix.</li>
-      </ul>
+      <p>Just davant del Sukashi, a l'altra banda del carrer, hi ha un altre restaurant de sushi. Mateixa franja de preus. Mateixa carta de peix fresc. Mateixa promesa implícita de qualitat.</p>
+      <p>Per a un client que visita el barri per primera vegada, els dos restaurants semblen gairebé idèntics des de fora. Tria l'un o l'altre per intuïció, per casualitat, per quin té la porta més oberta en aquell moment.</p>
+      <p>I la setmana vinent, quan torni, podrà triar de nou. Sense cap raó especial per preferir cap dels dos.</p>
     </div>
     <div class="split-image">
-      <img src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=800&q=80&fit=crop&crop=center" alt="Sushi nigiri elegant" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&fit=crop&crop=center" alt="Restaurant elegant de nit" loading="lazy"/>
     </div>
   </div>
 
-  <div class="chapter-divider" data-reveal><span>✦</span></div>
-
-  <div class="story-block" data-reveal>
-    <div class="block-icon">
-      <i class="fa-solid fa-circle-question" style="color:var(--coral);font-size:1.2rem;"></i>
-      <span class="icon-label">La crisi</span>
-    </div>
-    <p>I aquí arriba la pregunta que li crema per dins:</p>
-    <div class="question-callout">
-      Si oferim pràcticament el mateix... per què haurien de triar-nos a nosaltres?
-    </div>
-    <p>L'Alicia sap que competir només en preu és una sentència de mort. Si ella abaixa un euro, el veí n'abaixarà dos demà. Acabaran treballant més hores per guanyar menys diners, sacrificant la qualitat que tant li ha costat aconseguir.</p>
+  <div class="comparison-strip" data-reveal>
+    <div class="comparison-strip-title">Per a un client nou, el Sukashi i la competència s'assemblen en</div>
+    <div class="comparison-row"><div class="comparison-dot"></div>Tipus de carta i oferta gastronòmica</div>
+    <div class="comparison-row"><div class="comparison-dot"></div>Rang de preus per persona</div>
+    <div class="comparison-row"><div class="comparison-dot"></div>Ambient i decoració</div>
+    <div class="comparison-row"><div class="comparison-dot"></div>Qualitat percebuda del producte</div>
+    <div class="comparison-row"><div class="comparison-dot"></div>Temps d'espera i servei</div>
+    <div class="comparison-row"><div class="comparison-dot"></div>Valoració mitjana a Google Maps</div>
   </div>
 
   <figure class="cinematic-image" data-reveal>
-    <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=1600&q=80&fit=crop&crop=center" alt="Carrer japonès nocturn" loading="lazy"/>
+    <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=1600&q=80&fit=crop&crop=center" alt="Carrer nocturn buit" loading="lazy"/>
     <div class="cine-overlay"></div>
-    <figcaption class="cine-caption">A l'altra banda del carrer, el competidor espera.</figcaption>
+    <figcaption class="cine-caption">Quan tots els restaurants semblen iguals, l'elecció del client és una moneda a l'aire.</figcaption>
   </figure>
 
-  <div class="story-block" data-reveal>
-    <div class="block-icon">
-      <i class="fa-solid fa-eye" style="color:var(--coral);font-size:1.2rem;"></i>
-      <span class="icon-label">La revelació</span>
-    </div>
-    <p>Mentre observa com els primers clients entren al local del davant, té una revelació dolorosa:</p>
-    <p class="revelation-text"><strong>Ser bo ja no és suficient.</strong> Avui dia, ser bo és el mínim que s'espera.</p>
-    <p>Si el Sukashi tanqués demà, aquells clients simplement creuarien el carrer. No hi ha res que els lligui a ella, a part de la gana d'aquell moment.</p>
-  </div>
-
-  <div class="chapter-divider" data-reveal><span>✦</span></div>
-
+  <!-- ── 5. LA IMPOTÈNCIA ── -->
   <div class="split-block reverse" data-reveal>
     <div class="split-text">
       <div class="block-icon">
-        <i class="fa-solid fa-fire-flame-curved" style="color:var(--coral);font-size:1.2rem;"></i>
-        <span class="icon-label">La decisió</span>
+        <i class="fa-solid fa-hand-holding-heart" style="color:var(--coral);font-size:1.2rem;"></i>
+        <span class="icon-label">La impotència</span>
       </div>
-      <p>L'Alicia s'ha cansat de ser una opció intercanviable. Vol ser <em>la única opció</em>.</p>
-      <p>Però, com es passa de ser "un bon restaurant" a ser "un restaurant necessari"?</p>
+      <p>L'Alicia sap que el seu restaurant és bo. I sap que bo no és suficient per crear lleialtat.</p>
+      <p>La qualitat és el mínim que s'espera. El servei amable és el mínim que s'espera. La carta variada és el mínim que s'espera.</p>
+      <p>Tot allò que ha construït amb tant d'esforç és, simplement, el punt de partida que comparteix amb tota la competència. Perquè la qualitat sola no lliga ningú a un restaurant. La qualitat sola no és una raó per tornar.</p>
+      <p>Cal alguna cosa més.</p>
     </div>
     <div class="split-image">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&fit=crop&crop=center" alt="Restaurant elegant nit" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=800&q=80&fit=crop&crop=center" alt="Sushi preparat amb cura" loading="lazy"/>
     </div>
   </div>
 
   <div class="chapter-divider" data-reveal><span>✦</span></div>
 
-  <div class="blank-page-section" data-reveal>
-    <div class="block-icon" style="justify-content:center; margin-bottom:28px;">
-      <i class="fa-regular fa-file-lines" style="color:var(--muted);font-size:1.2rem;"></i>
-      <span class="icon-label" style="color:var(--muted);">Aquella nit</span>
+  <!-- ── 6. CAP RELACIÓ CONTÍNUA ── -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-link-slash" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">El buit</span>
     </div>
+    <p>Cada vegada que un client surt per la porta del Sukashi, la relació s'interromp. No hi ha cap fil que els connecti amb el restaurant fins a la propera visita. No hi ha cap motiu concret, cap incentiu, cap record que els digui: <em>torna aviat, val la pena.</em></p>
+    <p>El Sukashi espera. Confia que l'experiència va ser prou bona. Confia que el client recordarà el nom, el carrer, la sensació d'aquella nit. Confia que, quan torni a tenir gana de sushi, pensarà en ells primer.</p>
+    <p>Però la confiança sola no és una estratègia. <em>Esperem que tornin</em> no és un model de negoci.</p>
+    <div class="question-callout">
+      Entre visita i visita, el Sukashi és completament invisible per als seus propis clients.
+    </div>
+    <p>No és culpa de ningú. És simplement que no existeix cap mecanisme, cap sistema, cap eina que mantingui viva aquella relació quan el client ja ha marxat a casa.</p>
+  </div>
+
+  <div class="chapter-divider" data-reveal><span>✦</span></div>
+
+  <!-- ── 7. LA REVELACIÓ FINAL ── -->
+  <div class="story-block" data-reveal>
+    <div class="block-icon">
+      <i class="fa-solid fa-lightbulb" style="color:var(--coral);font-size:1.2rem;"></i>
+      <span class="icon-label">La necessitat</span>
+    </div>
+    <p>L'Alicia no necessita que el Sukashi es converteixi en un altre lloc. No necessita canviar la carta ni reformar el local. Necessita quelcom que el restaurant no té i que cap dels competidors del voltant té tampoc.</p>
+    <p>Necessita una manera de crear un lligam real amb els seus clients. Una manera de donar-los un motiu concret per triar el Sukashi <em>una altra vegada</em>. I una altra. I una altra.</p>
+    <p class="revelation-text"><strong>No n'hi ha prou amb ser bon restaurant.</strong> Cal ser el restaurant que els clients senten com a seu.</p>
+    <p>Aquella nit, sola a l'oficina amb la llum baixa, l'Alicia escriu una sola línia en un quadern. No és un pla. No és una solució. És el nom del problema.</p>
+  </div>
+
+  <div class="blank-page-section" data-reveal>
     <div class="ending-image">
-      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80&fit=crop&crop=top" alt="Full en blanc i bolígraf" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80&fit=crop&crop=top" alt="Quadern i bolígraf sobre taula" loading="lazy"/>
     </div>
     <div class="blank-page-card">
       <div class="page-lines">
@@ -416,13 +545,13 @@
         <div class="page-line"></div>
         <div class="page-line"></div>
       </div>
-      <p class="page-question">Per què hauria de tornar el client a aquest restaurant?</p>
-      <p class="page-caption">Sukashi · Nit del 3 de març</p>
+      <p class="page-question">Necessitem construir una eina que doni als clients una raó per tornar al Sukashi.</p>
+      <p class="page-caption">Sukashi · Primera anotació del projecte</p>
     </div>
   </div>
 
   <div class="final-line" data-reveal>
-    <p>Quan tothom marxa, l'Alicia es queda sola<br>amb un full en blanc i una sola frase escrita al mig.</p>
+    <p>Aquesta frase és el punt de partida.<br>El projecte comença aquí.</p>
     <div class="next-chapter-hint" onclick="window.location.href='sukashi-capitol2.html'">
       <i class="fa-solid fa-chevron-right" style="font-size:0.8rem;"></i>
       Capítol 2
@@ -432,13 +561,19 @@
 </main>
 
 <script>
+  // ── Sushi progress bar ──
   const TOTAL = 6;
   const piecesEl = document.getElementById('sushiPieces');
   for (let i = 0; i < TOTAL; i++) {
     const d = document.createElement('div');
     d.className = 'sushi-piece';
     d.id = 'sp-' + i;
-    d.innerHTML = '<svg viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg"><ellipse class="rice" cx="19" cy="16" rx="17" ry="6"/><rect class="nori" x="5" y="12" width="28" height="5" rx="1"/><ellipse class="topping" cx="19" cy="10" rx="14" ry="5"/><ellipse fill="rgba(255,255,255,0.15)" cx="15" cy="8" rx="5" ry="2"/></svg>';
+    d.innerHTML = '<svg viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse class="rice" cx="19" cy="16" rx="17" ry="6"/>' +
+      '<rect class="nori" x="5" y="12" width="28" height="5" rx="1"/>' +
+      '<ellipse class="topping" cx="19" cy="10" rx="14" ry="5"/>' +
+      '<ellipse fill="rgba(255,255,255,0.15)" cx="15" cy="8" rx="5" ry="2"/>' +
+      '</svg>';
     piecesEl.appendChild(d);
   }
 
@@ -454,10 +589,15 @@
     progressLabel.textContent = Math.round(pct * 100) + '%';
   }
 
-  const allReveal = document.querySelectorAll('[data-reveal], .chapter-divider, .final-line');
+  // ── Intersection observer (reveal) ──
+  const allReveal = document.querySelectorAll(
+    '[data-reveal], .chapter-divider, .final-line, .ghost-list, .comparison-strip'
+  );
   const io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   allReveal.forEach(function(el) { io.observe(el); });
 
   window.addEventListener('scroll', updateProgress, { passive: true });
